@@ -1,0 +1,36 @@
+@import "../utils/variables";
+
+$fonts:  (
+//  fontName    fontType   fontWeight  fontStyle
+    $fontMardoto 'Regular' normal normal,
+    $fontMontserrat 'BlackItalic' 900 italic,
+    $fontMontserrat 'Black' 900 normal,
+    $fontMontserrat 'ExtraBoldItalic' 800 italic,
+    $fontMontserrat 'ExtraBold' 800 normal,
+    $fontMontserrat 'BoldItalic' bold italic,
+    $fontMontserrat 'Bold' bold normal,
+    $fontMontserrat 'SemiBoldItalic' 600 italic,
+    $fontMontserrat 'SemiBold' 600 normal,
+    $fontMontserrat 'MediumItalic' 500 italic,
+    $fontMontserrat 'Medium' 500 normal,
+    $fontMontserrat 'Italic' normal italic,
+    $fontMontserrat 'Regular' normal normal,
+    $fontMontserrat 'LightItalic' 300 italic,
+    $fontMontserrat 'Light' 300 normal,
+    $fontMontserrat 'ExtraLightItalic' 200 italic,
+    $fontMontserrat 'ExtraLight' 200 normal,
+    $fontMontserrat 'ThinItalic' 100 italic,
+    $fontMontserrat 'Thin' 100 normal,
+);
+
+@each $type in $fonts {
+    @font-face {
+        font-family: '#{nth($type, 1)}';
+        src: local('#{nth($type, 1)} #{nth($type, 2)}'), local('#{nth($type, 1)}-#{nth($type, 2)}'),
+        url('assets/fonts/#{nth($type, 1)}-#{nth($type, 2)}.woff2') format('woff2'),
+        url('assets/fonts/#{nth($type, 1)}-#{nth($type, 2)}.woff') format('woff');
+        font-weight: #{nth($type, 3)};
+        font-style: #{nth($type, 4)};
+        font-display: swap;
+    }
+}

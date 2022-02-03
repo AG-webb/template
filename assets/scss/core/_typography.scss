@@ -1,0 +1,39 @@
+.h1-font {
+    @include font(600, 40, 1.1, inherit, 0);
+
+    @media (max-width: $media-lg) {
+        font-size: rem(30);
+    }
+}
+
+.h2-font {
+    @include font(600, 30, 1, inherit, 0);
+
+    @media (max-width: $media-lg) {
+        font-size: rem(25);
+    }
+}
+
+.h3-font {
+    @include font(600, 26, 1, inherit, 0);
+
+    @media (max-width: $media-lg) {
+        font-size: rem(22);
+    }
+}
+
+.h4-font {
+    @include font(600, 22, 1, inherit, 0);
+
+    @media (max-width: $media-lg) {
+        font-size: rem(18);
+    }
+}
+
+.button-font {
+    @include font(600, 18, 1, 0, 0);
+
+    @media (max-width: $media-lg) {
+        font-size: rem(15);
+    }
+}

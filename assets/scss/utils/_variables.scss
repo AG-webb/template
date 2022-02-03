@@ -1,0 +1,36 @@
+/*colors*/
+$color-main: #000000;
+$color-secondary: #ffffff;
+
+$color-text--dark: #2D3539;
+
+/* font */
+$defaultHtmlFont: "Tahoma", sans-serif;
+$fontMardoto: 'Mardoto';
+$fontMontserrat: 'Montserrat';
+$baseFontFamily: $fontMontserrat;
+
+/*grid dimensions*/
+$mediaXxlLarge: 1366px;
+$mediaXlLarge: 1280px;
+$mediaLarge: 1024px;
+$mediaMedium: 768px;
+
+/*font settings*/
+$baseFontSize : 16;
+
+/* grid settings */
+$columnsSize: 12; //count of columns
+$columnSpace: rem(12);
+$columnSpaceSm: rem(16);
+$rowWidth: 1400px + ($columnsSize * 2);
+
+/*screenSises*/
+$media-xxl: 1439px;
+$media-xl: 1365px;
+$media-lg: 1279px;
+$media-md: 1023px;
+$media-sm: 767px;
+$media-xs: 450px;
+
+
