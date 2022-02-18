@@ -4,19 +4,19 @@
     padding: 4px;
     @extend %inline-flex;
     @extend %align-middle;
+    @extend %align-center;
     @extend %user-cursor;
-    @include transition(all,0.3s,ease);
+    @extend %primary-transition;
     max-width: 100%;
 
     & > span {
-        @include font(600, 18, 1, 0, 0);
-        @include fluid-font(100px, 1200px, 16px, 18px);
-        @include transition(all,0.3s,ease);
+        @include font(600, 18, 1, inherit, 0);
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
-    & > img, & > .icon {
+    & > img,& > svg, & > .icon {
         &:last-child {
             margin-left: 10px;
         }
@@ -31,17 +31,11 @@
     &_stroke {
         border: 1px solid $color-main;
         background-color: transparent;
-
-        & > span {
-            color: $color-main;
-        }
+        color: $color-main;
 
         &:hover {
             background-color: $color-main;
-
-            & > span {
-                color: #fff;
-            }
+            color: #fff;
 
             & > img {
                 filter: brightness(0) invert(1);
@@ -51,6 +45,7 @@
 
     // sizes ***************************
     &_sm {
-        height: 32px;
+        height: rem(32);
+        padding: 12px;
     }
 }

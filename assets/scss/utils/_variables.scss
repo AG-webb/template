@@ -1,13 +1,27 @@
 /*colors*/
-$color-main: #000000;
-$color-secondary: #ffffff;
+$color-scheme: (
+    // Blue
+    'blue': #273670,
+    // Green
+    'green': #52B289,
+    // Grey
+    'grey': #4A4A4A,
+);
 
-$color-text--dark: #2D3539;
+$color-main: map-get($color-scheme, 'blue');
+$color-secondary: map-get($color-scheme, 'green');
+
+// Z-index Order (From Hight To Low)
+$z-indexes: (
+    'popup',
+    'header',
+    'sticky-element',
+    'dropdowns',
+);
 
 /* font */
-$defaultHtmlFont: "Tahoma", sans-serif;
-$fontMardoto: 'Mardoto';
-$fontMontserrat: 'Montserrat';
+$fontMardoto: 'Mardoto', "Tahoma", sans-serif;
+$fontMontserrat: 'Montserrat', "Tahoma", sans-serif;
 $baseFontFamily: $fontMontserrat;
 
 /*grid dimensions*/
@@ -23,7 +37,6 @@ $baseFontSize : 16;
 $columnsSize: 12; //count of columns
 $columnSpace: rem(12);
 $columnSpaceSm: rem(16);
-$rowWidth: 1400px + ($columnsSize * 2);
 
 /*screenSises*/
 $media-xxl: 1439px;

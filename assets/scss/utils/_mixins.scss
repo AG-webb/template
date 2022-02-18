@@ -2,49 +2,58 @@
 
 @mixin font($weight, $sizeValue, $line, $color, $textTransform, $fontFamily: $baseFontFamily) {
     @if $textTransform != 0 and $weight != 0 and $color != 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight ($sizeValue / 16) + rem/$line $fontFamily;
         color: $color;
         text-transform: $textTransform;
     } @else if $textTransform == 0 and $weight != 0 and $color == 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight ($sizeValue / 16) + rem/$line $fontFamily;
     } @else if $textTransform != 0 and $weight == 0 and $color == 0 {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: ($sizeValue / 16) + rem/$line $fontFamily;
         text-transform: $textTransform;
     } @else if $textTransform == 0 and $weight == 0 and $color != 0 {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: ($sizeValue / 16) + rem/$line $fontFamily;
         color: $color;
     } @else if $textTransform != 0 and $weight != 0 and $color == 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight ($sizeValue / 16) + rem/$line $fontFamily;
         text-transform: $textTransform;
     } @else if $textTransform != 0 and $weight == 0 and $color != 0 {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: ($sizeValue / 16) + rem/$line $fontFamily;
         color: $color;
         text-transform: $textTransform;
     } @else if $textTransform == 0 and $weight != 0 and $color != 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight ($sizeValue / 16) + rem/$line $fontFamily;
         color: $color;
     } @else {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: ($sizeValue / 16) + rem/$line $fontFamily;
     }
 }
 
-@mixin fluid-font($min-vw, $max-vw, $min-font-size, $max-font-size) {
-    $u1: unit($min-vw);
-    $u2: unit($max-vw);
-    $u3: unit($min-font-size);
-    $u4: unit($max-font-size);
+// @mixin fluid-font($min-vw, $max-vw, $min-font-size, $max-font-size) {
+//     $u1: unit($min-vw);
+//     $u2: unit($max-vw);
+//     $u3: unit($min-font-size);
+//     $u4: unit($max-font-size);
 
-    @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
-        & {
-            @media screen and (min-width: $min-vw) {
-                font-size: calc(
-                    #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
-                        ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
-                );
-            }
-            @media screen and (min-width: $max-vw) {
-                font-size: $max-font-size;
-            }
+//     @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+//         & {
+//             @media screen and (min-width: $min-vw) {
+//                 font-size: calc(
+//                     #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+//                         ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+//                 );
+//             }
+//             @media screen and (min-width: $max-vw) {
+//                 font-size: $max-font-size;
+//             }
+//         }
+//     }
+// }
+
+@mixin font-media($screenSize, $font-size, $lineHeight) {
+    @media (max-width: $screenSize) {
+        font-size: $font-size;
+        @if $lineHeight != 0 {
+            line-height: $lineHeight;
         }
     }
 }
@@ -131,6 +140,12 @@
 
 @mixin background($bg_image, $position: center, $bg_size: cover, $bg_repeat: no-repeat, $bg_color: transparent) {
     background: $bg_color url($bg_image) $position/$bg_size $bg_repeat;
+}
+
+@mixin animation($name, $duration, $timing, $delay: 0s, $iteration: 1, $fillMode: forwards) {
+    animation: $name $duration $timing $delay $iteration $fillMode;
+    -webkit-animation: $name $duration $timing $delay $iteration $fillMode;
+    -moz-animation: $name $duration $timing $delay $iteration $fillMode;
 }
 
 @mixin column-count($count) {
