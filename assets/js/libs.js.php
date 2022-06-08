@@ -3,5 +3,5 @@
     header("Cache-Control: max-age=300");
     require("libs/swiper-bundle.min.js");
     echo "\n";
-    // require("libs/jquery.fancybox.min.js");
+    require("libs/combobox.js");
 ?>

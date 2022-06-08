@@ -35,7 +35,7 @@ html {
 }
 
 body {
-    font-family: $baseFontFamily;
+    font-family: $baseFontFamily, $defaultHtmlFont;
 }
 
 a {

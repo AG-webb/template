@@ -27,8 +27,8 @@ $fonts:  (
     @font-face {
         font-family: '#{nth($type, 1)}';
         src: local('#{nth($type, 1)} #{nth($type, 2)}'), local('#{nth($type, 1)}-#{nth($type, 2)}'),
-        url('assets/fonts/#{nth($type, 1)}-#{nth($type, 2)}.woff2') format('woff2'),
-        url('assets/fonts/#{nth($type, 1)}-#{nth($type, 2)}.woff') format('woff');
+        url('../fonts/#{nth($type, 1)}-#{nth($type, 2)}.woff2') format('woff2'),
+        url('../fonts/#{nth($type, 1)}-#{nth($type, 2)}.woff') format('woff');
         font-weight: #{nth($type, 3)};
         font-style: #{nth($type, 4)};
         font-display: swap;

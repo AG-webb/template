@@ -1,0 +1,1 @@
+.upload-input{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer}.upload-input{position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;width:100%;z-index:1}.upload-input::-webkit-file-upload-button{display:none}

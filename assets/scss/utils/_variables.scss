@@ -1,27 +1,37 @@
 /*colors*/
 $color-scheme: (
-    // Blue
-    'blue': #273670,
-    // Green
-    'green': #52B289,
-    // Grey
-    'grey': #4A4A4A,
+    'main': #273670,
+    'primary': #52B289,
+    'secondary': #4A4A4A,
+    'error': #C3161C,
+    'success': #198754,
+    'white': #ffffff,
+    'black': #000000,
 );
 
-$color-main: map-get($color-scheme, 'blue');
-$color-secondary: map-get($color-scheme, 'green');
+$shadows: (
+    'xs': 0 .5rem 1rem rgba(#000, .15),
+    'sm': 0 .125rem .25rem rgba(#000, .075),
+    'md': 0 1rem 3rem rgba(#000, .175),
+);
+
+$color-main: map-get($color-scheme, 'main');
+$color-primary: map-get($color-scheme, 'primary');
+$color-secondary: map-get($color-scheme, 'secondary');
 
 // Z-index Order (From Hight To Low)
 $z-indexes: (
-    'popup',
+    'toast',
+    'modal',
     'header',
     'sticky-element',
-    'dropdowns',
+    'dropdown',
 );
 
 /* font */
-$fontMardoto: 'Mardoto', "Tahoma", sans-serif;
-$fontMontserrat: 'Montserrat', "Tahoma", sans-serif;
+$defaultHtmlFont: "Tahoma", sans-serif;
+$fontMardoto: 'Mardoto';
+$fontMontserrat: 'Montserrat';
 $baseFontFamily: $fontMontserrat;
 
 /*grid dimensions*/

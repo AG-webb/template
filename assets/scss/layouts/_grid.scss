@@ -39,20 +39,18 @@ $gridBreakpoints: (
     max-width: none;
 }
 
-.column, .columns {
+.column {
     -ms-flex: 1 1 0px;
     flex: 1 1 0px;
     padding-right: $columnSpaceSm;
     padding-left: $columnSpaceSm;
 }
 
-.column.row,
-.columns.row {
+.column.row {
     display: block;
 }
 
-.row .column.row,
-.row .row.columns {
+.row .column.row {
     margin-right: 0;
     margin-left: 0;
     padding-right: 0;
@@ -62,19 +60,29 @@ $gridBreakpoints: (
 @media print, screen and (min-width: 768px) {
     .row {
         // (100% - (size * 2) - ($columnSpace * 2))
-        max-width: calc(100% - 32px);
+        max-width: calc(100% - #{rem(96)});
     }
 }
 
 @media print, screen and (min-width: 1024px) {
     .row {
-        max-width: calc(100% - 64px);
+        max-width: calc(100% - #{rem(140)});
+
+        .row {
+            margin-right: -$columnSpace;
+            margin-left: -$columnSpace;
+        }
+    }
+
+    .column, .columns {
+        padding-right: $columnSpace;
+        padding-left: $columnSpace;
     }
 }
 
 @media print, screen and (min-width: 1440px) {
     .row {
-        max-width: calc(100% - 208px);
+        max-width: calc(100% - #{rem(300)});
     }
 }
 
@@ -90,14 +98,11 @@ $gridBreakpoints: (
             .#{nth($type, 1)}-offset-#{$i} {
                 margin-left: calc(#{100% / $columnsSize * $i});
             }
+            .#{nth($type, 1)}-offset-0 {
+                margin-left: 0;
+            }
         }
     }
-}
-
-.shrink {
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-    max-width: 100%;
 }
 
 .align-right {
@@ -110,7 +115,7 @@ $gridBreakpoints: (
     justify-content: center;
 }
 
-.align-justify {
+.align-between {
     -ms-flex-pack: justify;
     justify-content: space-between;
 }
@@ -173,12 +178,6 @@ $gridBreakpoints: (
 
 @each $type in $gridBreakpoints {
     @media print, screen and (min-width: #{nth($type, 2)}) {
-        .#{nth($type, 1)}-shrink {
-            -ms-flex: 0 0 auto;
-            flex: 0 0 auto;
-            max-width: 100%;
-        }
-
         .#{nth($type, 1)}-align-right {
             -ms-flex-pack: end;
             justify-content: flex-end;
@@ -302,84 +301,101 @@ $gridBreakpoints: (
     }
 }
 
-.flex-container {
+.flex {
     display: -ms-flexbox;
     display: flex;
 }
 
-.flex-child-auto {
+.inline-flex {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
+.flex-auto {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
 }
 
-.flex-child-grow {
+.flex-grow {
     -ms-flex: 1 0 auto;
     flex: 1 0 auto;
 }
 
-.flex-child-shrink {
+.flex-shrink {
     -ms-flex: 0 1 auto;
     flex: 0 1 auto;
 }
 
-.flex-dir-row {
+.shrink {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    max-width: 100%;
+}
+
+.flex-row {
     -ms-flex-direction: row;
     flex-direction: row;
 }
 
-.flex-dir-row-reverse {
+.flex-row-reverse {
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
 }
 
-.flex-dir-column {
+.flex-column {
     -ms-flex-direction: column;
     flex-direction: column;
 }
 
-.flex-dir-column-reverse {
+.flex-column-reverse {
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
 }
 
 @each $type in $gridBreakpoints {
     @media print, screen and (min-width: #{nth($type, 2)}) {
-        .#{nth($type, 1)}-flex-container {
+        .#{nth($type, 1)}-flex {
             display: -ms-flexbox;
             display: flex;
         }
 
-        .#{nth($type, 1)}-flex-child-auto {
+        .#{nth($type, 1)}-flex-auto {
             -ms-flex: 1 1 auto;
             flex: 1 1 auto;
         }
 
-        .#{nth($type, 1)}-flex-child-grow {
+        .#{nth($type, 1)}-flex-grow {
             -ms-flex: 1 0 auto;
             flex: 1 0 auto;
         }
 
-        .#{nth($type, 1)}-flex-child-shrink {
+        .#{nth($type, 1)}-flex-shrink {
             -ms-flex: 0 1 auto;
             flex: 0 1 auto;
         }
 
-        .#{nth($type, 1)}-flex-dir-row {
+        .#{nth($type, 1)}-shrink {
+            -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+            max-width: 100%;
+        }
+
+        .#{nth($type, 1)}-flex-row {
             -ms-flex-direction: row;
             flex-direction: row;
         }
 
-        .#{nth($type, 1)}-flex-dir-row-reverse {
+        .#{nth($type, 1)}-flex-row-reverse {
             -ms-flex-direction: row-reverse;
             flex-direction: row-reverse;
         }
 
-        .#{nth($type, 1)}-flex-dir-column {
+        .#{nth($type, 1)}-flex-column {
             -ms-flex-direction: column;
             flex-direction: column;
         }
 
-        .#{nth($type, 1)}-flex-dir-column-reverse {
+        .#{nth($type, 1)}-flex-column-reverse {
             -ms-flex-direction: column-reverse;
             flex-direction: column-reverse;
         }

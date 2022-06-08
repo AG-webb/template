@@ -1,23 +1,35 @@
 $(document).ready(function () {
     headerFixed();
 
-    // all popups show func
-    $(".popup-target").click(function () {
-        let targetPopup = $(`.${$(this).attr("data-popup")}`);
-        targetPopup.addClass("active");
+    // MODAL ****************
+    $("[data-modal]").on("click", function () {
+        let targetModal = $(`.${$(this).attr("data-modal")}`);
+        targetModal.addClass("active");
 
         ScrollNone();
     });
 
-    $(".popup-close").click(function () {
-        $(this).closest(".popup").removeClass("active");
+    $(".modal-close").on("click", function () {
+        $(this).closest(".modal").removeClass("active");
 
         ScrollNone();
+    });
+
+    // *************************
+
+    $(".toast-trigger").on("click", function () {
+        toastMessage("Toast Message", "default");
+    });
+
+    // Switch Active Class
+    $(".switcher__item").on("click", function() {
+        $(this).closest(".switcher").find(".switcher__item").removeClass("active");
+        $(this).addClass("active");
     });
 
     // accordion
     $(".accordion__content").slideUp(300);
-    $(".accordion__toggle").click(function (e) {
+    $(".accordion__toggle").on("click", function (e) {
         if (!$(this).hasClass("active")) {
             $(".accordion__toggle").removeClass("active");
             $(".accordion__wrap").removeClass("open");
@@ -35,10 +47,15 @@ $(document).ready(function () {
 
     // remove all active classes
     $(document).on('click', function (e) {
-        if (!$(e.target).closest(".lang-switcher").length) {
+        if (!$(e.target).closest(".lang-switcher, .modal-trigger, .modal__wrapper").length) {
             $(".lang-switcher").removeClass("active");
-
+            $(".modal").removeClass("active");
+            
             ScrollNone();
+        }
+
+        if($(e.target).closest(".toast-message-close").length) {
+            removeToast($(e.target));
         }
 
         e.stopPropagation();
@@ -78,6 +95,68 @@ function makeSticky(selector) {
     });
 }
 
+let _toastCounter = 0;
+// Toast function
+function toastMessage(message, type = "default") { 
+    let toastContainer = `<div class="toast-messages"></div>`;
+
+    let toastBody = `
+    <div class="toast-message toast-message_${_toastCounter} ${type}">
+        <div class="toast-message-icon">
+            <img src="assets/img/icons/success.svg" alt="success">
+        </div>
+        <span class="helvetica-65">${message}</span>
+        <div class="toast-message-close">
+            <img src="assets/img/icons/close-white.svg" alt="close">
+        </div>
+    </div>`;
+
+    if(!$(".toast-messages").length) {
+        $("main").append(toastContainer);
+    }
+    $(".toast-messages").append(toastBody);
+    _toastCounter += 1;
+
+    autoRemoveToast(_toastCounter);
+}
+
+function autoRemoveToast(index) {
+    new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            $(`.toast-message_${index - 1}`).addClass("toast-message_hidden");
+            resolve();
+        }, 4000);
+    }).then(function() {
+        setTimeout(function() {
+            $(`.toast-message_${index - 1}`).remove();
+            
+            if($(".toast-message").length == 0) {
+                $(".toast-messages").remove();
+            }
+        }, 500);
+    });
+}
+
+function removeToast(closeElement, index) {
+    if(!index) {
+        let toast = closeElement.closest(".toast-message");
+
+        toast.addClass("toast-message_hidden");
+    
+        setTimeout(function() {
+            toast.remove();
+        }, 500);
+    } else {
+        $(`.toast-message_${index - 1}`).addClass("toast-message_hidden");
+    
+        setTimeout(function() {
+            $(`.toast-message_${index - 1}`).remove();
+        }, 500);
+    }
+}
+
+// =========================>
+
 function headerFixed() {
     let st = $(this).scrollTop();
 
@@ -91,7 +170,7 @@ function headerFixed() {
 
 function ScrollNone() {
     if ($(window).width() <= 768) {
-        if ($(".popup, .filter-popup").hasClass("active")) {
+        if ($(".modal").hasClass("active")) {
             $("body").css({ "overflow-y": "hidden", "-webkit-overflow-scrolling": "touch" });
         }
         else {
@@ -99,7 +178,7 @@ function ScrollNone() {
         }
     }
     else {
-        if ($(".popup, .filter-popup").hasClass("active")) {
+        if ($(".modal").hasClass("active")) {
             $("body").css({ "overflow-y": "hidden" });
         }
         else {

@@ -102,6 +102,19 @@
     }
 }
 
+// Shadows
+.shadow {
+    @each $name, $shadow in $shadows {
+        &-#{$name} {
+            box-shadow: $shadow;
+        }
+    }
+
+    &-inherit {
+        color: inherit;
+    }
+}
+
 
 @media (max-width: $media-xl) {
     .hide-xl {

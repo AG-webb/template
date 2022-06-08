@@ -1,0 +1,44 @@
+@import "../utils/_module";
+@import "../components/_file-upload";
+@import "../components/_toast";
+@import "../components/_combobox";
+@import "../components/_modal";
+
+.components {
+    padding: rem(25) 0;
+}
+
+.component {
+    margin-top: rem(50);
+    padding-bottom: rem(25);
+    border-bottom: rem(2) solid #000;
+    padding: rem(25);
+
+    .h1-font {
+        margin-bottom: rem(32);
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.switcher {
+    @extend %flex;
+    @extend %align-middle;
+    margin-top: rem(32);
+
+    &__item {
+        margin-right: rem(16);
+        
+        @extend %user-cursor;
+
+        &.active {
+            background-color: #000;
+            color: #fff;
+        }
+    }
+}
+
+
+@import "_home.media";

@@ -1,7 +1,6 @@
 .btn {
     position: relative;
-    border-radius: 10px;
-    padding: 4px;
+    padding: rem(4);
     @extend %inline-flex;
     @extend %align-middle;
     @extend %align-center;
@@ -18,18 +17,18 @@
 
     & > img,& > svg, & > .icon {
         &:last-child {
-            margin-left: 10px;
+            margin-left: rem(10);
         }
 
         &:first-child {
-            margin-right: 10px;
+            margin-right: rem(10);
         }
     }
 
 
     // types ******************************
-    &_stroke {
-        border: 1px solid $color-main;
+    &_main {
+        border: rem(1) solid $color-main;
         background-color: transparent;
         color: $color-main;
 
@@ -43,9 +42,20 @@
         }
     }
 
+    &_test {
+        border: rem(1) solid #000;
+        padding: rem(16);
+
+        &:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    }
+
     // sizes ***************************
     &_sm {
         height: rem(32);
-        padding: 12px;
+        padding-left: rem(12);
+        padding-right: rem(12);
     }
 }

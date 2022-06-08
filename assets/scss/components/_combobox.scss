@@ -1,0 +1,143 @@
+.combo-box {
+    position: relative;
+    display: block;
+    color: #fff;
+    @include font(600, 18, 1, #000, 0);
+}
+  
+.combo-box-selected {
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+    height: rem(56);
+    line-height: rem(56);
+    border-radius: rem(30);
+    border: rem(1) solid #000;
+    background: #fff;
+    padding: 0 rem(50) 0 rem(24);
+    @extend %flex;
+    @extend %align-middle;
+
+    &:after {
+        content: "\e904";
+        position: absolute;
+        font-family: 'icomoon';
+        font-size: rem(20);
+        cursor: pointer;
+        display: inline-block;
+        margin-left: rem(4);
+        top:  0;
+        right: rem(24);
+        @extend %primary-transition;
+    }
+
+    & > img {
+        display: inline-block;
+        // vertical-align: -4px;
+        margin-right: 5px;
+    }
+
+    &.active {
+        &:after {
+            transform: rotate(180deg);
+        }
+    }
+}
+  
+.combo-option {
+    position: relative;
+    display: block;
+    width: 100%;
+    line-height: rem(20);
+    padding: rem(10) rem(24);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #000;
+    z-index: 1;
+    cursor: pointer;
+
+    & > img {
+        display: inline-block;
+        // vertical-align: -4px;
+        margin-right: rem(5);
+    }
+
+    &.selected {
+        background: #000;
+        color: #fff;
+    }
+
+    &:hover {
+        background: #000;
+        color: #fff;
+    }
+}
+  
+.combo-box-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100%;
+    border-bottom-right-radius: rem(5);
+    border-bottom-left-radius: rem(5);
+    overflow: hidden;
+    background: #fff;
+    z-index: z(dropdown);
+    box-shadow: map-get($shadows, 'sm');
+    transform: translateY(rem(10));
+    @extend %hidden;
+    @extend %primary-transition;
+
+    &.opened {
+        transform: translateY(0);
+        @extend %show;
+    }
+}
+  
+.multiple .combo-option {
+    display: inline-block;
+    vertical-align: middle;
+
+    &:hover {
+        background: transparent;
+        color: inherit;
+    }
+
+    &:before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        width: rem(15);
+        height: rem(15);
+        margin-right: rem(5);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+}
+  
+.multiSpan {
+    background-color: #68e91e;
+    color: #f6f6f6;
+}
+  
+.multiSelected {
+    &:before {
+        content: "";
+        // background-image: url("../img/success.svg");
+    }
+}
+
+.disabled {
+    background-color:#fff;
+    color: #888;
+    pointer-events: none;
+}
+
+.disabled:hover {
+    background-color:#fff !important;
+    color: #888 !important;
+}
