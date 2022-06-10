@@ -98,8 +98,8 @@
         }
 
         .modal__close {
-            top: rem(43);
-            right: rem(72);
+            top: rem(42);
+            right: rem(24);
         }
     }
     &_lg {
@@ -131,6 +131,9 @@
         .modal__wrapper {
             @include translate(-100%, 0);
         }
+    }
+    &.center-modal {
+        @extend %align-center;
     }
 
     // Classes ===========

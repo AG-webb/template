@@ -1,11 +1,11 @@
 .h1-font {
-    @include font(600, 40, 1.1, inherit, 0);
+    @include font(900, 40, 1.1, inherit, 0);
     @include font-media($media-lg, rem(30), 0);
     @include font-media($media-sm, rem(25), 150%);
 }
 
 .h2-font {
-    @include font(600, 30, 1, inherit, 0);
+    @include font(700, 30, 1, inherit, 0);
     @include font-media($media-lg, rem(25), 0);
 }
 

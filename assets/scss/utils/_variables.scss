@@ -3,15 +3,16 @@ $color-scheme: (
     'main': #273670,
     'primary': #52B289,
     'secondary': #4A4A4A,
-    'error': #C3161C,
+    'empty': #dddddd,
+    'error': #f3131a,
     'success': #198754,
     'white': #ffffff,
     'black': #000000,
 );
 
 $shadows: (
-    'xs': 0 .5rem 1rem rgba(#000, .15),
-    'sm': 0 .125rem .25rem rgba(#000, .075),
+    'xs': 0 .125rem .25rem rgba(#000, .075),
+    'sm': 0 .5rem 1rem rgba(#000, .15),
     'md': 0 1rem 3rem rgba(#000, .175),
 );
 

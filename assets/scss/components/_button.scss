@@ -9,7 +9,7 @@
     max-width: 100%;
 
     & > span {
-        @include font(600, 18, 1, inherit, 0);
+        @include font(600, 18, 120%, inherit, 0);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -44,7 +44,6 @@
 
     &_test {
         border: rem(1) solid #000;
-        padding: rem(16);
 
         &:hover {
             background-color: #000;
@@ -57,5 +56,31 @@
         height: rem(32);
         padding-left: rem(12);
         padding-right: rem(12);
+
+        & > span {
+            font-size: rem(16);
+        }
+    }
+
+    &_md {
+        height: rem(48);
+        padding-left: rem(16);
+        padding-right: rem(16);
+    }
+
+    &_lg {
+        height: rem(56);
+        padding-left: rem(20);
+        padding-right: rem(20);
+    }
+
+    &_xl {
+        height: rem(64);
+        padding-left: rem(24);
+        padding-right: rem(24);
+
+        & > span {
+            font-size: rem(20);
+        }
     }
 }

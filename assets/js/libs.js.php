@@ -4,4 +4,3 @@
     require("libs/swiper-bundle.min.js");
     echo "\n";
     require("libs/combobox.js");
-?>
