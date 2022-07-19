@@ -1,19 +1,16 @@
-// VALIDATIONS ************************
 function isEmailValid(email) {
     var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return emailRegex.test(email);
 }
 
-// DINAMIC APPEND **********************
 function dinamicAppend() {
     if ($(window).width() < 1280) {
-        $(".about-heading__gallery").insertAfter(".about-heading__title");
+        !$(".about-heading__title").children(".about-heading__gallery").length && $(".about-heading__gallery").appendTo(".about-heading__title");
     } else {
-        $(".about-heading__gallery").appendTo(".about-heading__col");
+        !$(".about-heading__col").children(".about-heading__gallery").length && $(".about-heading__gallery").appendTo(".about-heading__col");
     }
 }
 
-// STICKY *************************** 
 function makeSticky(selector) {
     let element = $(selector);
     let elementOffsetTop = element.offset().top;
@@ -30,7 +27,18 @@ function makeSticky(selector) {
     });
 }
 
-// TOAST *******************************
+function tabsInit() {
+    $(".tab").on("click", function() {
+        let contentId = $(this).attr("data-tab");
+
+        $(this).closest(".tabs__control").find(".tab").removeClass("active");
+        $(this).addClass("active");
+
+        $(this).closest(".tabs").find(".tab-content").removeClass("active");
+        $("#" + contentId).addClass("active");
+    });
+}
+
 let _toastCounter = 0;
 function toastMessage(message, type = "default") { 
     let toastContainer = `<div class="toast-messages"></div>`;
@@ -41,7 +49,7 @@ function toastMessage(message, type = "default") {
             <img src="assets/img/icons/success.svg" alt="success">
         </div>
         <span class="helvetica-65">${message}</span>
-        <div class="toast-message-close">
+        <div class="toast-message__close toast-close">
             <img src="assets/img/icons/close-white.svg" alt="close">
         </div>
     </div>`;
@@ -90,7 +98,6 @@ function removeToast(closeElement, index) {
     }
 }
 
-// HEADER **********************************
 function headerFixed() {
     let st = $(this).scrollTop();
 
@@ -101,22 +108,10 @@ function headerFixed() {
     }
 }
 
-// SCROLL ******************************
 function ScrollNone() {
-    if ($(window).width() <= 768) {
-        if ($(".modal").hasClass("active")) {
-            $("body").css({ "overflow-y": "hidden", "-webkit-overflow-scrolling": "touch" });
-        }
-        else {
-            $("body").css({ "overflow-y": "scroll", "-webkit-overflow-scrolling": "auto" });
-        }
-    }
-    else {
-        if ($(".modal").hasClass("active")) {
-            $("body").css({ "overflow-y": "hidden" });
-        }
-        else {
-            $("body").css({ "overflow-y": "auto" });
-        }
+    if ($(".modal").hasClass("active")) {
+        $("body").addClass("locked");
+    } else {
+        $("body").removeClass("locked");
     }
 }

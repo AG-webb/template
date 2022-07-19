@@ -249,11 +249,6 @@
         /* Internet Explorer 10-11 */
         @content;
     }
-
-    &::-ms-input-placeholder {
-        /* Microsoft Edge */
-        @content;
-    }
 }
 
 @mixin max-lines($lines) {
@@ -265,6 +260,7 @@
 
 
 @mixin font-icon($content) {
+    content: $content;
     font-family: "icomoon" !important;
     speak: never;
     font-style: normal;
@@ -272,7 +268,6 @@
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-    content: $content;
 }
 
 

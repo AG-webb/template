@@ -4,6 +4,8 @@
 @import "../components/_combobox";
 @import "../components/_modal";
 @import "../components/_form-items";
+@import "../components/_accordion";
+@import "../components/_tabs";
 
 .components {
     padding: rem(25) 0;
@@ -76,5 +78,3 @@
         margin-right: rem(24);
     }
 }
-
-@import "_home.media";

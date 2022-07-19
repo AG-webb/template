@@ -59,6 +59,10 @@
     display: none !important;
 }
 
+.dn {
+    display: none;
+}
+
 .hidden {
     @extend %hidden;
 }

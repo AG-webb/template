@@ -36,11 +36,16 @@ html {
 
 body {
     font-family: $baseFontFamily, $defaultHtmlFont;
+    color: #000;
+
+    &.locked {
+        overflow: hidden;
+    }
 }
 
 a {
     text-decoration: none;
-    color: #000;
+    color: inherit;
 }
 
 img, svg {

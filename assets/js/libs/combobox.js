@@ -1,9 +1,11 @@
 function changeSelectbox(){
 	// Classnames
-	var selectbox = ".combo-box",
+	let selectbox = ".combo-box",
 			selectboxSelected = ".combo-box-selected",
 			selectboxDropdown = ".combo-box-dropdown",
 			selectboxOption = ".combo-option";
+			selectboxSearch = ".combo-box-search input";
+    
 
 	// Other functions
 	$('html').on("click",function() {
@@ -16,22 +18,22 @@ function changeSelectbox(){
 	});
 
 	$(selectbox).each(function(){
-		var selectDiv = $(this),
+		let selectDiv = $(this),
 				selectboxName = $(this).attr("data-combo-name"),
 				selectOption = $(this).find(selectboxOption),
-				defaultTxt = $(this).find(selectboxSelected).text();
+				defaultTxt = $(this).find(selectboxSelected).html();
 
 		// Specific options
 		$(document).on('keydown', selectDiv, function (e) {
-		  	var keyCode = e.keyCode || e.which;
-		    var arrow = {tab: 9, up: 38, down: 40 };
+		  	let keyCode = e.keyCode || e.which;
+		    let arrow = {tab: 9, up: 38, down: 40 };
 
 		    if(keyCode === arrow.tab && !selectDiv.children(selectboxSelected).hasClass("active")){
 		    	selectDiv.children(selectboxSelected).addClass("active");
 		    	selectDiv.children(selectboxDropdown).addClass('opened');
 		    }
 
-		    var c = 0;
+		    let c = 0;
 
 			if (keyCode === arrow.up && selectDiv.children(selectboxSelected).hasClass("active")) {
 				selectOption.addClass('multiSpan');
@@ -45,7 +47,7 @@ function changeSelectbox(){
 		$(this).append("<select name='"+selectboxName+"' style='display:none'><option></option></select>");
 
 		selectOption.each(function(){
-			var selectCurrent = $(this),
+			let selectCurrent = $(this),
 					selectOptionVal = $(this).text(),
 					selectOptionData = $(this).attr("data-combo-value");
 
@@ -53,7 +55,7 @@ function changeSelectbox(){
 
 			// Disabled,selected options
 			selectDiv.find("option").each(function(){
-				var optionCurrent = $(this);
+				let optionCurrent = $(this);
 
 				if(selectCurrent.hasClass("disabled") && optionCurrent.attr("value") === selectCurrent.attr("data-combo-value")){
 					optionCurrent.attr("disabled", true);
@@ -88,17 +90,21 @@ function changeSelectbox(){
 			if($(this).siblings(selectboxOption).hasClass("selected")){
 				$(this).siblings(selectboxOption).removeClass("selected");
 				$(this).addClass("selected");
-			}
+			} else {
+                if(!selectDiv.hasClass("multiple")) {
+                    $(this).addClass("selected");
+                }
+            }
 
-			$(this).parent().removeClass('opened');
-			$(this).parents(selectbox).find(selectboxSelected).removeClass("active");
+			$(this).closest(selectboxDropdown).removeClass('opened');
+			$(this).closest(selectbox).find(selectboxSelected).removeClass("active");
 			$(this).closest(selectbox).attr('data-combo-value',$(this).attr("data-combo-value"));
 			$(this).closest(selectbox).find("select").val($(this).attr("data-combo-value")).change();
-			$(this).parent().siblings(selectboxSelected).html($(this).html());
+			$(this).closest(selectbox).find(selectboxSelected).html($(this).html());
 		});
 
 		// Multiple(default) select with its parametres
-		var multiselectDatas = [],
+		let multiselectDatas = [],
 				multiselectValues = [];
 
 		if(selectDiv.hasClass("multiple-default")){
@@ -106,13 +112,13 @@ function changeSelectbox(){
 
 			selectDiv.find(selectOption).on("click",function(event){
 				if (event.ctrlKey){
-					$(this).parent(selectboxDropdown).addClass('opened');
-					$(this).parents(selectbox).find(selectboxSelected).addClass('active');
+					$(this).closest(selectboxDropdown).addClass('opened');
+					$(this).closest(selectbox).find(selectboxSelected).addClass('active');
 
 					if($(this).hasClass('multiSpan')){
 						$(this).removeClass('multiSpan');
 
-						var pos = multiselectValues.indexOf($(this).text());
+						let pos = multiselectValues.indexOf($(this).text());
 
 						multiselectValues.splice(pos,1);
 
@@ -120,12 +126,12 @@ function changeSelectbox(){
 
 						if(multiselectValues.length){
 							if(multiselectValues.length > 2){
-								$(this).parent().siblings(selectboxSelected).text(multiselectValues.length + " selected");
+								$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.length + " selected");
 							}else{
-								$(this).parent().siblings(selectboxSelected).text(multiselectValues.join(','));
+								$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.join(','));
 							}
 						}else{
-							$(this).parent().siblings(selectboxSelected).text(defaultTxt);
+							$(this).closest(selectbox).find(selectboxSelected).html(defaultTxt);
 						}
 					}else{
 						$(this).addClass('multiSpan');
@@ -133,15 +139,15 @@ function changeSelectbox(){
 						multiselectValues.push($(this).text());
 						$(this).closest(selectbox).attr('value',multiselectValues.join(','));
 						$(this).closest(selectbox).find("select").val(multiselectDatas).change();
-						$(this).parent().siblings(selectboxSelected).text(multiselectValues.join(','));
+						$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.join(','));
 
 						if(multiselectValues.length > 2){
-							$(this).parent().siblings(selectboxSelected).text(multiselectValues.length + " selected");
+							$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.length + " selected");
 						}
 
-						if(multiselectValues.length == selectDiv.find(selectOption).length){
-							$(this).parent().siblings(selectboxSelected).text("All selected!");
-						}
+						// if(multiselectValues.length == selectDiv.find(selectOption).length){
+						// 	$(this).closest(selectbox).find(selectboxSelected).text("All selected!");
+						// }
 					}
 				}
 
@@ -150,12 +156,12 @@ function changeSelectbox(){
 				}
 			});
 
-			var selectedAttrOptions = [];
+			let selectedAttrOptions = [];
 
 			if(selectDiv.find('.selected').length > 1){
-				var selectedValue = selectDiv.find('.selected');
+				let selectedValue = selectDiv.find('.selected');
 
-				for(var i = 0;i < selectedValue.length;i++ ){
+				for(let i = 0;i < selectedValue.length;i++ ){
 					selectedAttrOptions.push($(selectedValue[i]).attr("data-combo-value"));
 				}
 
@@ -165,82 +171,108 @@ function changeSelectbox(){
 					selectDiv.find(selectboxSelected).text(selectedAttrOptions.length + " selected");
 				}
 
-				if(selectedAttrOptions.length == selectDiv.find(selectOption).length){
-					selectDiv.find(selectboxSelected).text("All selected!");
-				}
+				// if(selectedAttrOptions.length == selectDiv.find(selectOption).length){
+				// 	selectDiv.find(selectboxSelected).text("All selected!");
+				// }
 				selectDiv.find("select").val(selectedAttrOptions).change();
 			}
 		}
 
 
 		// Multiple(with checks) select with its parametres
-		var multiselectChecksDatas = [],
+		let multiselectChecksDatas = [],
 				multiselectChecksValues = [];
 
 		if(selectDiv.hasClass("multiple")){
 			selectDiv.children('select').attr("multiple", true);
 
 			selectDiv.find(selectOption).on("click",function(event){
-				$(this).parent(selectboxDropdown).addClass('opened');
-				$(this).parents(selectbox).find(selectboxSelected).addClass('active');
+				$(this).closest(selectboxDropdown).addClass('opened');
+				$(this).closest(selectbox).find(selectboxSelected).addClass('active');
 
 				if($(this).hasClass('multiSelected')){
 					$(this).removeClass('multiSelected');
 
-					var arrayMulti = multiselectChecksValues.indexOf($(this).text());
+					let arrayMulti = multiselectChecksDatas.indexOf($(this).attr("data-combo-value"));
+					let arrayMultiValues = multiselectChecksValues.indexOf($(this).text());
 
-					multiselectChecksValues.splice(arrayMulti,1);
+					multiselectChecksDatas.splice(arrayMulti,1);
+					multiselectChecksValues.splice(arrayMultiValues,1);
 
-					$(this).closest(selectbox).find("select").val(multiselectChecksValues);
+					$(this).closest(selectbox).find("select").val(multiselectChecksDatas).change();
+                    $(this).closest(selectbox).attr('value',multiselectChecksDatas.join(','));
 
 					if(multiselectChecksValues.length){
-						if(multiselectChecksValues.length > 2){
-							$(this).parent().siblings(selectboxSelected).text(multiselectChecksValues.length + " selected");
+						if(multiselectChecksValues.length > 3){
+							$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksValues.length + " selected");
 						}else{
-							$(this).parent().siblings(selectboxSelected).text(multiselectChecksValues.join(','));
+							$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksValues.join(', '));
 						}
 					}else{
-						$(this).parent().siblings(selectboxSelected).text(defaultTxt);
+						$(this).closest(selectbox).find(selectboxSelected).html(defaultTxt);
+                        $(this).closest(selectbox).removeAttr('value');
 					}
-				}else{
+				} else{
 					$(this).addClass('multiSelected');
 					multiselectChecksDatas.push($(this).attr("data-combo-value"));
 					multiselectChecksValues.push($(this).text());
 
-					$(this).closest(selectbox).attr('value',multiselectChecksValues.join(','));
+					$(this).closest(selectbox).attr('value',multiselectChecksDatas.join(','));
 					$(this).closest(selectbox).find("select").val(multiselectChecksDatas).change();
-					$(this).parent().siblings(selectboxSelected).text(multiselectChecksValues.join(','));
+					$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksValues.join(', '));
 
-					if(multiselectChecksValues.length > 2){
-						$(this).parent().siblings(selectboxSelected).text(multiselectChecksValues.length + " selected");
+					if(multiselectChecksValues.length > 3){
+						$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksDatas.length + " selected");
 					}
-
-					if(multiselectChecksValues.length == selectDiv.find(selectOption).length){
-						$(this).parent().siblings(selectboxSelected).text("All selected!");
-					}
+					// if(multiselectChecksValues.length == selectDiv.find(selectOption).length){
+					// 	$(this).closest(selectbox).find(selectboxSelected).text("All selected!");
+					// }
 				}
 			});
 
-			var selectedAttrOptionsMultiple = new Array();
+			let selectedAttrOptionsMultiple = new Array();
 			if(selectDiv.find('.selected').length > 1){
-				var selectedValue = selectDiv.find('.selected');
+				let selectedValue = selectDiv.find('.selected');
 
-				for(var i = 0;i < selectedValue.length;i++ ){
+				for(let i = 0;i < selectedValue.length;i++ ){
 					selectedAttrOptionsMultiple.push($(selectedValue[i]).attr("data-combo-value"));
 				}
 				
 				selectDiv.find(selectboxSelected).text(selectedAttrOptionsMultiple.join(','));
 
-				if(selectedAttrOptionsMultiple.length > 2){
+				if(selectedAttrOptionsMultiple.length > 3){
 					selectDiv.find(selectboxSelected).text(selectedAttrOptionsMultiple.length + " selected");
 				}
 
-				if(selectedAttrOptionsMultiple.length == selectDiv.find(selectOption).length){
-					selectDiv.find(selectboxSelected).text("All selected!");
-				}
+				// if(selectedAttrOptionsMultiple.length == selectDiv.find(selectOption).length){
+				// 	selectDiv.find(selectboxSelected).text("All selected!");
+				// }
 
 				selectDiv.find("select").val(selectedAttrOptionsMultiple).change();
 			}
+
+            // Search Functionallity
+            if(selectDiv.hasClass("searchable")) {
+                selectDiv.find(selectboxSearch).on("input", function() {
+                    let val = $(this).val();
+
+                    if(val.trim().length) {
+                        val = val.toUpperCase();
+
+                        selectDiv.find(selectOption).each(function() {
+                            let optionVal = $(this).text();
+
+                            if (optionVal.toUpperCase().indexOf(val) > -1) {
+                                $(this).removeClass("hide");
+                            } else {
+                                $(this).addClass("hide");
+                            }
+                        });
+                    } else {
+                        selectDiv.find(selectOption).removeClass("hide");
+                    }
+                });
+            }
 		}
 	});
 }

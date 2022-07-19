@@ -1,5 +1,6 @@
 $(document).ready(function () {
     headerFixed();
+    tabsInit();
 
     // MODAL ***************************
     $("[data-modal]").on("click", function () {
@@ -31,24 +32,26 @@ $(document).ready(function () {
     });
 
     // ACCORDION ************************
-    $(".accordion__content").slideUp(300);
-    $(".accordion__toggle").on("click", function (e) {
-        if (!$(this).hasClass("active")) {
-            $(".accordion__toggle").removeClass("active");
-            $(".accordion__wrap").removeClass("open");
-        }
+    $(".accordion__header").on("click", function (e) {
+        let accordion = $(this).closest(".accordion");
+        let thisItem = $(this).closest(".accordion__item");
+        let openItem = accordion.find(".accordion__item.open");
+        let thisBody = thisItem.find(".accordion__body");
+        let openBody = openItem.find(".accordion__body");
 
-        $(".accordion__content").slideUp(300);
-        $(this).toggleClass("active");
-        $(this).closest(".accordion__wrap").toggleClass("open");
-
-        if ($(this).closest(".accordion__wrap").hasClass("open")) {
-            $(this).next(".accordion__content").slideDown(300);
+        if (thisItem.hasClass("open")) {
+            thisItem.removeClass("open");
+            thisBody.slideUp(300);
+        } else {
+            openItem.removeClass("open");
+            openBody.slideUp(300);
+            thisItem.addClass("open");
+            thisBody.slideDown(300);
         }
     });
 
     // FORM ITEMS *********************
-    $(".form-field input").on("keyup", function() {
+    $(".form-field__input").on("keyup", function() {
         let val = $(this).val().trim();
         
         if(val.length) {
@@ -58,26 +61,28 @@ $(document).ready(function () {
         }
     });
 
-    $(".form-field input").on("focus", function() {
+    $(".form-field__input").on("focus", function() {
         $(this).closest(".form-field").addClass("focused");
     });
-    $(".form-field input").on("focusout", function() {
+    $(".form-field__input").on("focusout", function() {
         $(this).closest(".form-field").removeClass("focused");
     });
 
-    // Form Validation
+    // Form Validation ***************************
     $(".with-validation").on("submit", function(e) {
         let isValid = true;
-        let email = $(this).find(".email-validation").length && $(this).find(".email-validation").val();
+        let email = $(this).find(".email-validation");
         let errorHtml = `<div class="form-field__message error">Wrong email, please set correct email address</div>`;
 
         $(this).find(".form-field__message.error").remove();
 
-        if(!isEmailValid(email)) {
-            $(".email-validation").closest(".form-field").append(errorHtml);
-            isValid = false;
+        if(email.length) {
+            if(!isEmailValid(email.val())) {
+                $(".email-validation").closest(".form-field").append(errorHtml);
+                isValid = false;
+            }
         }
-
+        
         if(!isValid) {
             e.preventDefault();
         }
@@ -92,7 +97,7 @@ $(document).ready(function () {
             ScrollNone();
         }
 
-        if($(e.target).closest(".toast-message-close").length) {
+        if($(e.target).closest(".toast-close").length) {
             removeToast($(e.target));
         }
 
