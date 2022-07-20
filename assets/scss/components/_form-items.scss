@@ -26,6 +26,7 @@
         @extend %align-middle;
         @extend %align-center;
         @extend %not-selectible;
+        color: inherit;
     }
 
     &__input {
@@ -33,6 +34,7 @@
         box-shadow: map-get($shadows, 'sm');
         border-radius: rem(4);
         font-weight: 600;
+        color: inherit
     }
 
     &__message {
@@ -168,6 +170,17 @@
             }
         }
 
+        &.invalid {
+            .form-field {
+                &__target {
+                    color: map-get($color-scheme, 'error');
+                }
+
+                &__input {
+                    outline: 1px solid map-get($color-scheme, 'error');
+                }
+            }
+        }
     }
 
     &_underline {

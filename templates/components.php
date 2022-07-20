@@ -306,6 +306,20 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Dinamic Append -->
+            <div class="component">
+                <h1 class="h1-font">Dinamic Append (resize window less than 1280px for result)</h1>
+                <div class="desktop-append-container">
+                    <span>When window width >= 1280px</span>
+                    <button class="append-button btn btn_sm btn_test" data-append="1280, .tablet-append-container">
+                        <span>Append Element</span>
+                    </button>
+                </div>
+                <div class="tablet-append-container">
+                    <span>When window width < 1280px</span>
+                </div>
+            </div>
         </div>
 
     </div>

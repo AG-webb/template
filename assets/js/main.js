@@ -1,6 +1,7 @@
 $(document).ready(function () {
     headerFixed();
     tabsInit();
+    dinamicAppendInit();
 
     // MODAL ***************************
     $("[data-modal]").on("click", function () {
@@ -75,10 +76,11 @@ $(document).ready(function () {
         let errorHtml = `<div class="form-field__message error">Wrong email, please set correct email address</div>`;
 
         $(this).find(".form-field__message.error").remove();
+        $(this).find(".form-field.invalid").removeClass("invalid");
 
         if(email.length) {
             if(!isEmailValid(email.val())) {
-                $(".email-validation").closest(".form-field").append(errorHtml);
+                $(".email-validation").closest(".form-field").addClass("invalid").append(errorHtml);
                 isValid = false;
             }
         }

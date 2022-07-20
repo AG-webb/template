@@ -3,12 +3,14 @@ function isEmailValid(email) {
     return emailRegex.test(email);
 }
 
-function dinamicAppend() {
-    if ($(window).width() < 1280) {
-        !$(".about-heading__title").children(".about-heading__gallery").length && $(".about-heading__gallery").appendTo(".about-heading__title");
-    } else {
-        !$(".about-heading__col").children(".about-heading__gallery").length && $(".about-heading__gallery").appendTo(".about-heading__col");
-    }
+function dinamicAppendInit() {
+    $("[data-append]").each(function() {
+        let [mediaSize, appendBlockClass] = $(this).attr("data-append").split(", ");
+
+        if ($(window).width() < mediaSize) {
+            !$(appendBlockClass).children($(this).attr("class")).length && $(this).appendTo(appendBlockClass);
+        }
+    });
 }
 
 function makeSticky(selector) {
