@@ -152,6 +152,7 @@
     
             <!-- Select -->
             <div class="component">
+                <!-- Single -->
                 <h1 class="h1-font">Custom Select</h1>
                 <div class="component__wrap">
                     <h2 class="h2-font">Single</h2>
@@ -180,6 +181,7 @@
                     </div>
                 </div>
                 <div class="component__wrap">
+                    <!-- Multiple -->
                     <h2 class="h2-font">Multiple</h2>
                     <div class="custom-select">
                         <div class="combo-box multiple" data-combo-name="multiselect">
@@ -198,6 +200,7 @@
                     </div>
                 </div>
                 <div class="component__wrap">
+                    <!-- Multiple With Search -->
                     <h2 class="h2-font">Multiple With Search</h2>
                     <div class="custom-select">
                         <div class="combo-box multiple searchable" data-combo-name="multiselect">
@@ -309,7 +312,7 @@
 
             <!-- Dinamic Append -->
             <div class="component">
-                <h1 class="h1-font">Dinamic Append (resize window less than 1280px for result)</h1>
+                <h1 class="h1-font">Dinamic Append (resize window less than 1280px and reload page for result)</h1>
                 <div class="desktop-append-container">
                     <span>When window width >= 1280px</span>
                     <button class="append-button btn btn_sm btn_test" data-append="1280, .tablet-append-container">
@@ -318,6 +321,20 @@
                 </div>
                 <div class="tablet-append-container">
                     <span>When window width < 1280px</span>
+                </div>
+            </div>
+
+            <!-- Skeleton -->
+            <div class="component">
+                <h1 class="h1-font">Skeleton</h1>
+                <div class="skeleton">
+                    <div class="skeleton__element skeleton__element_image"></div>
+                    <div class="skeleton__element skeleton__element_avatar"></div>
+                    <div class="skeleton__element skeleton__element_title"></div>
+                    <div class="skeleton__element skeleton__element_text"></div>
+                    <div class="skeleton__element skeleton__element_text"></div>
+                    <div class="skeleton__element skeleton__element_text"></div>
+                    <div class="skeleton__element skeleton__element_text"></div>
                 </div>
             </div>
         </div>

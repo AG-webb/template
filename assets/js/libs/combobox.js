@@ -5,6 +5,7 @@ function changeSelectbox(){
 			selectboxDropdown = ".combo-box-dropdown",
 			selectboxOption = ".combo-option";
 			selectboxSearch = ".combo-box-search input";
+			maxItemsShow = 3;
     
 
 	// Other functions
@@ -125,7 +126,7 @@ function changeSelectbox(){
 						$(this).closest(selectbox).find("select").val(multiselectValues).change();
 
 						if(multiselectValues.length){
-							if(multiselectValues.length > 2){
+							if(multiselectValues.length > maxItemsShow){
 								$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.length + " selected");
 							}else{
 								$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.join(','));
@@ -141,7 +142,7 @@ function changeSelectbox(){
 						$(this).closest(selectbox).find("select").val(multiselectDatas).change();
 						$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.join(','));
 
-						if(multiselectValues.length > 2){
+						if(multiselectValues.length > maxItemsShow){
 							$(this).closest(selectbox).find(selectboxSelected).text(multiselectValues.length + " selected");
 						}
 
@@ -167,7 +168,7 @@ function changeSelectbox(){
 
 				selectDiv.find(selectboxSelected).text(selectedAttrOptions.join(','));
 
-				if(selectedAttrOptions.length > 2){
+				if(selectedAttrOptions.length > maxItemsShow){
 					selectDiv.find(selectboxSelected).text(selectedAttrOptions.length + " selected");
 				}
 
@@ -203,7 +204,7 @@ function changeSelectbox(){
                     $(this).closest(selectbox).attr('value',multiselectChecksDatas.join(','));
 
 					if(multiselectChecksValues.length){
-						if(multiselectChecksValues.length > 3){
+						if(multiselectChecksValues.length > maxItemsShow){
 							$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksValues.length + " selected");
 						}else{
 							$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksValues.join(', '));
@@ -221,7 +222,7 @@ function changeSelectbox(){
 					$(this).closest(selectbox).find("select").val(multiselectChecksDatas).change();
 					$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksValues.join(', '));
 
-					if(multiselectChecksValues.length > 3){
+					if(multiselectChecksValues.length > maxItemsShow){
 						$(this).closest(selectbox).find(selectboxSelected).text(multiselectChecksDatas.length + " selected");
 					}
 					// if(multiselectChecksValues.length == selectDiv.find(selectOption).length){
@@ -240,7 +241,7 @@ function changeSelectbox(){
 				
 				selectDiv.find(selectboxSelected).text(selectedAttrOptionsMultiple.join(','));
 
-				if(selectedAttrOptionsMultiple.length > 3){
+				if(selectedAttrOptionsMultiple.length > maxItemsShow){
 					selectDiv.find(selectboxSelected).text(selectedAttrOptionsMultiple.length + " selected");
 				}
 
