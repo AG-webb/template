@@ -152,8 +152,8 @@
     
             <!-- Select -->
             <div class="component">
-                <!-- Single -->
                 <h1 class="h1-font">Custom Select</h1>
+                <!-- Single -->
                 <div class="component__wrap">
                     <h2 class="h2-font">Single</h2>
                     <div class="custom-select">
@@ -163,16 +163,16 @@
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
-                                    <div class="combo-option selected" data-combo-value="all">
+                                    <div class="combo-option selected" data-option-value="all">
                                         <span>all</span>
                                     </div>
-                                    <div class="combo-option" data-combo-value="1">
+                                    <div class="combo-option" data-option-value="1">
                                         <span>1</span>
                                     </div>
-                                    <div class="combo-option" data-combo-value="2">
+                                    <div class="combo-option" data-option-value="2">
                                         <span>2</span>
                                     </div>
-                                    <div class="combo-option" data-combo-value="3">
+                                    <div class="combo-option" data-option-value="3">
                                         <span>3</span>
                                     </div>
                                 </div>
@@ -180,8 +180,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- Multiple -->
                 <div class="component__wrap">
-                    <!-- Multiple -->
                     <h2 class="h2-font">Multiple</h2>
                     <div class="custom-select">
                         <div class="combo-box multiple" data-combo-name="multiselect">
@@ -190,20 +190,20 @@
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
-                                    <div class="combo-option" data-combo-value="1">Item 1</div>
-                                    <div class="combo-option" data-combo-value="2">Item 2</div>
-                                    <div class="combo-option" data-combo-value="3">Item 3</div>
-                                    <div class="combo-option" data-combo-value="4">Item 4</div>
+                                    <div class="combo-option" data-option-value="1">Item 1</div>
+                                    <div class="combo-option" data-option-value="2">Item 2</div>
+                                    <div class="combo-option" data-option-value="3">Item 3</div>
+                                    <div class="combo-option" data-option-value="4">Item 4</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Multiple With Search -->
                 <div class="component__wrap">
-                    <!-- Multiple With Search -->
                     <h2 class="h2-font">Multiple With Search</h2>
                     <div class="custom-select">
-                        <div class="combo-box multiple searchable" data-combo-name="multiselect">
+                        <div class="combo-box multiple searchable" data-combo-name="multiselectSearch">
                             <div class="combo-box-selected">
                                 <span class="combo-box-placeholder">Multiple Select Placeholder</span>          
                             </div>
@@ -212,13 +212,32 @@
                                     <input type="text" placeholder="Find option">
                                 </div>
                                 <div class="combo-box-options">
-                                    <div class="combo-option" data-combo-value="1">Bmw</div>
-                                    <div class="combo-option" data-combo-value="2">Mercedes</div>
-                                    <div class="combo-option" data-combo-value="3">Volvo</div>
-                                    <div class="combo-option" data-combo-value="4">Wolksvagen</div>
-                                    <div class="combo-option" data-combo-value="5">Opel</div>
-                                    <div class="combo-option" data-combo-value="6">Nissan</div>
-                                    <div class="combo-option" data-combo-value="7">Toyota</div>
+                                    <div class="combo-option" data-option-value="1">Bmw</div>
+                                    <div class="combo-option" data-option-value="2">Mercedes</div>
+                                    <div class="combo-option" data-option-value="3">Volvo</div>
+                                    <div class="combo-option" data-option-value="4">Wolksvagen</div>
+                                    <div class="combo-option" data-option-value="5">Opel</div>
+                                    <div class="combo-option" data-option-value="6">Nissan</div>
+                                    <div class="combo-option" data-option-value="7">Toyota</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tags -->
+                <div class="component__wrap">
+                    <h2 class="h2-font">Tags</h2>
+                    <div class="custom-select">
+                        <div class="combo-box multiple tag-mode" data-combo-name="tagsSelect">
+                            <div class="combo-box-selected">
+                                <span class="combo-box-placeholder">Tags Select Placeholder</span>          
+                            </div>
+                            <div class="combo-box-dropdown">
+                                <div class="combo-box-options">
+                                    <div class="combo-option" data-option-value="1">Item 1</div>
+                                    <div class="combo-option" data-option-value="2">Item 2</div>
+                                    <div class="combo-option" data-option-value="3">Item 3</div>
+                                    <div class="combo-option" data-option-value="4">Item 4</div>
                                 </div>
                             </div>
                         </div>
