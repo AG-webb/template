@@ -3,6 +3,7 @@ function changeSelectbox() {
 	let selectbox = ".combo-box",
 		selectboxSelected = ".combo-box-selected",
 		selectboxDropdown = ".combo-box-dropdown",
+		selectboxOptions = ".combo-box-options";
 		selectboxOption = ".combo-option";
 	selectboxSearch = ".combo-box-search input";
 	maxItemsShow = 3;
@@ -26,25 +27,39 @@ function changeSelectbox() {
 			selectboxName = $(this).attr("data-combo-name"),
 			selectOption = $(this).find(selectboxOption),
 			defaultTxt = $(this).find(selectboxSelected).html();
+			currentTabIndex = -1;
 
 		// Specific options
-		$(document).on('keydown', selectDiv, function (e) {
+		$(selectDiv).on('keydown', function (e) {
 			let keyCode = e.keyCode || e.which;
-			let arrow = { tab: 9, up: 38, down: 40 };
-
-			if (keyCode === arrow.tab && !selectDiv.children(selectboxSelected).hasClass("active")) {
-				selectDiv.children(selectboxSelected).addClass("active");
-				selectDiv.children(selectboxDropdown).addClass('opened');
-			}
-
-			let c = 0;
+			let arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27 };
+			
+			// if (keyCode === arrow.tab && !selectDiv.children(selectboxSelected).hasClass("active")) {
+			// 	selectDiv.children(selectboxSelected).addClass("active");
+			// 	selectDiv.children(selectboxDropdown).addClass('opened');
+			// }
 
 			if (keyCode === arrow.up && selectDiv.children(selectboxSelected).hasClass("active")) {
-				selectOption.addClass('multiSpan');
+				if (currentTabIndex > 0) {
+					currentTabIndex--;
+				}
+			} else if (keyCode === arrow.enter && selectDiv.children(selectboxSelected).hasClass("active")) {
+				$(".combo-option_focused").click();
+			} else if (keyCode === arrow.esc && selectDiv.children(selectboxSelected).hasClass("active")) {
+				selectDiv.find(selectboxDropdown).removeClass('opened');
+				selectDiv.find(selectboxSelected).removeClass("active");
 			} else if (keyCode === arrow.down && selectDiv.children(selectboxSelected).hasClass("active")) {
-				selectOption.removeClass('multiSpan');
+				if (currentTabIndex < selectOption.length - 1) {
+					currentTabIndex++;
+				}
+				if (currentTabIndex >= 5) {
+					console.log($(selectboxOptions).scrollTop());
+					$(selectboxOptions).scrollTop(selectOption.eq(0).innerHeight());
+				}
 			}
 
+			selectOption.removeClass("combo-option_focused");
+			selectOption.not('.hide').eq(currentTabIndex).addClass("combo-option_focused");
 		});
 
 		// Create a 'select' tag with 'option's and its values, and append it in Selectbox
@@ -77,20 +92,21 @@ function changeSelectbox() {
 		selectDiv.children(selectboxSelected).on("click", function (e) {
 			e.stopPropagation();
 
-			$(selectboxDropdown).removeClass('opened');
-
-			if ($(this).hasClass("active")) {
-				$(selectboxSelected).removeClass("active");
-				$(this).parent().children(selectboxDropdown).removeClass('opened');
-			} else {
-				$(selectboxSelected).removeClass("active");
-				$(this).addClass("active");
-				$(this).parent().children(selectboxDropdown).addClass('opened');
+			if (!e.target.closest("." + tagElementClass)) {
+				$(selectboxDropdown).removeClass('opened');
+	
+				if ($(this).hasClass("active")) {
+					$(selectboxSelected).removeClass("active");
+					$(this).parent().children(selectboxDropdown).removeClass('opened');
+				} else {
+					$(selectboxSelected).removeClass("active");
+					$(this).addClass("active");
+					$(this).parent().children(selectboxDropdown).addClass('opened');
+				}
 			}
 
 			// Remove tag
 			if (e.target.closest("." + tagElementClass + "__remove")) {
-				e.stopPropagation();
 				let value = $(e.target).closest("." + tagElementClass).attr("data-tag-value");
 
 				multiData = [...multiData.filter(data => data.value !== value)];
@@ -214,29 +230,29 @@ function changeSelectbox() {
 
 				selectDiv.find("select").val(selectedAttrOptionsMultiple).change();
 			}
+		}
 
-			// Search Functionallity
-			if (selectDiv.hasClass("searchable")) {
-				selectDiv.find(selectboxSearch).on("input", function () {
-					let val = $(this).val();
+		// Search Functionallity
+		if (selectDiv.hasClass("searchable")) {
+			selectDiv.find(selectboxSearch).on("input", function () {
+				let val = $(this).val();
 
-					if (val.trim().length) {
-						val = val.toUpperCase();
+				if (val.trim().length) {
+					val = val.toUpperCase();
 
-						selectDiv.find(selectOption).each(function () {
-							let optionVal = $(this).text();
+					selectDiv.find(selectOption).each(function () {
+						let optionVal = $(this).text();
 
-							if (optionVal.toUpperCase().indexOf(val) > -1) {
-								$(this).removeClass("hide");
-							} else {
-								$(this).addClass("hide");
-							}
-						});
-					} else {
-						selectDiv.find(selectOption).removeClass("hide");
-					}
-				});
-			}
+						if (optionVal.toUpperCase().indexOf(val) > -1) {
+							$(this).removeClass("hide");
+						} else {
+							$(this).addClass("hide");
+						}
+					});
+				} else {
+					selectDiv.find(selectOption).removeClass("hide");
+				}
+			});
 		}
 	});
 }
