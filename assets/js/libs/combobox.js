@@ -1,21 +1,22 @@
 function changeSelectbox() {
 	// Classnames
-	let selectbox = ".combo-box",
-		selectboxSelected = ".combo-box-selected",
-		selectboxDropdown = ".combo-box-dropdown",
-		selectboxOptions = ".combo-box-options";
-		selectboxOption = ".combo-option";
-	selectboxSearch = ".combo-box-search input";
-	maxItemsShow = 3;
-	tagModeClass = "tag-mode";
-	tagWrappertClass = "combo-box-tags";
-	tagElementClass = "combo-box-tag";
+	const selectbox = ".combo-box";
+	const selectboxSelected = ".combo-box-selected";
+	const selectboxDropdown = ".combo-box-dropdown";
+	const selectboxOptions = ".combo-box-options";
+	const selectboxOption = ".combo-option";
+	const selectboxSearch = ".combo-box-search input";
+	const tagModeClass = "tag-mode";
+	const tagWrappertClass = "combo-box-tags";
+	const tagElementClass = "combo-box-tag";
+	const maxItemsShow = 3;
 
 
 	// Other functions
 	$('html').on("click", function () {
 		$(selectboxSelected).removeClass("active");
 		$(selectboxDropdown).removeClass('opened');
+		$(selectboxOption).removeClass("combo-option_focused");
 	});
 
 	$(selectboxDropdown).on("click", function (e) {
@@ -23,39 +24,38 @@ function changeSelectbox() {
 	});
 
 	$(selectbox).each(function () {
-		let selectDiv = $(this),
-			selectboxName = $(this).attr("data-combo-name"),
-			selectOption = $(this).find(selectboxOption),
-			defaultTxt = $(this).find(selectboxSelected).html();
-			currentTabIndex = -1;
+		const selectDiv = $(this);
+		const selectboxName = $(this).attr("data-combo-name");
+		const selectOption = $(this).find(selectboxOption);
+		const defaultTxt = $(this).find(selectboxSelected).html();
+		let currentTabIndex = -1;
 
-		// Specific options
 		$(selectDiv).on('keydown', function (e) {
 			let keyCode = e.keyCode || e.which;
-			let arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27 };
-			
-			// if (keyCode === arrow.tab && !selectDiv.children(selectboxSelected).hasClass("active")) {
-			// 	selectDiv.children(selectboxSelected).addClass("active");
-			// 	selectDiv.children(selectboxDropdown).addClass('opened');
-			// }
+			const arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27 };
 
 			if (keyCode === arrow.up && selectDiv.children(selectboxSelected).hasClass("active")) {
+				// Arrow Up
 				if (currentTabIndex > 0) {
 					currentTabIndex--;
 				}
-			} else if (keyCode === arrow.enter && selectDiv.children(selectboxSelected).hasClass("active")) {
-				$(".combo-option_focused").click();
-			} else if (keyCode === arrow.esc && selectDiv.children(selectboxSelected).hasClass("active")) {
-				selectDiv.find(selectboxDropdown).removeClass('opened');
-				selectDiv.find(selectboxSelected).removeClass("active");
 			} else if (keyCode === arrow.down && selectDiv.children(selectboxSelected).hasClass("active")) {
-				if (currentTabIndex < selectOption.length - 1) {
+				// Arrow Down
+				if (currentTabIndex < selectOption.not('.hide').length - 1) {
 					currentTabIndex++;
 				}
+
 				if (currentTabIndex >= 5) {
-					console.log($(selectboxOptions).scrollTop());
-					$(selectboxOptions).scrollTop(selectOption.eq(0).innerHeight());
+					selectDiv.find(selectboxOptions).scrollTop(selectDiv.find(selectboxOptions).scrollTop() + selectOption.eq(0).innerHeight());
 				}
+			} else if (keyCode === arrow.enter && selectDiv.children(selectboxSelected).hasClass("active")) {
+				// Enter
+				$(".combo-option_focused").click();
+			} else if (keyCode === arrow.esc && selectDiv.children(selectboxSelected).hasClass("active")) {
+				// Escape
+				selectDiv.find(selectboxDropdown).removeClass('opened');
+				selectDiv.find(selectboxSelected).removeClass("active");
+				selectOption.removeClass("combo-option_focused");
 			}
 
 			selectOption.removeClass("combo-option_focused");
@@ -94,7 +94,7 @@ function changeSelectbox() {
 
 			if (!e.target.closest("." + tagElementClass)) {
 				$(selectboxDropdown).removeClass('opened');
-	
+
 				if ($(this).hasClass("active")) {
 					$(selectboxSelected).removeClass("active");
 					$(this).parent().children(selectboxDropdown).removeClass('opened');
@@ -255,40 +255,45 @@ function changeSelectbox() {
 			});
 		}
 	});
+
+	function getMultiVars(array) {
+		let multiValues = "";
+		let multiValuesArray = [];
+		let multiTexts = "";
+
+		array.map((data, index) => {
+			if (index === array.length - 1) {
+				multiValues += data.value;
+			} else {
+				multiValues += data.value + ", ";
+			}
+			multiValuesArray = [...multiValuesArray, data.value];
+			multiTexts += data.text + ", ";
+		});
+
+		return [multiValues, multiValuesArray, multiTexts];
+	}
+
+	function getTagsTemplate(array, elementClass = tagElementClass) {
+		let selectedTags = `<div class="${tagWrappertClass}">`;
+
+		array.map(({ value, text }) => {
+			selectedTags = selectedTags +
+				`<div class="${elementClass}" data-tag-value="${value}">
+				<div class="${elementClass}__value">
+					${text}
+				</div>
+				<div class="${elementClass}__remove">
+					<img src="assets/img/icons/close-white.svg" alt="close">
+				</div>
+			</div>`
+		});
+		selectedTags += "</div>";
+
+		return selectedTags;
+	}
 }
 
-function getMultiVars(array) {
-	let multiValues = "";
-	let multiValuesArray = [];
-	let multiTexts = "";
-
-	array.map(data => {
-		multiValues += data.value + ", ";
-		multiValuesArray = [...multiValuesArray, data.value];
-		multiTexts += data.text + ", ";
-	});
-
-	return [multiValues, multiValuesArray, multiTexts];
-}
-
-function getTagsTemplate(array, elementClass = tagElementClass) {
-	let selectedTags = `<div class="${tagWrappertClass}">`;
-
-	array.map(({ value, text }) => {
-		selectedTags = selectedTags +
-			`<div class="${elementClass}" data-tag-value="${value}">
-			<div class="${elementClass}__value">
-				${text}
-			</div>
-			<div class="${elementClass}__remove">
-				<img src="assets/img/icons/close-white.svg" alt="close">
-			</div>
-		</div>`
-	});
-	selectedTags += "</div>";
-
-	return selectedTags;
-}
 
 document.addEventListener("DOMContentLoaded", function () {
 	changeSelectbox();
