@@ -39,6 +39,12 @@ function changeSelectbox() {
 				if (currentTabIndex > 0) {
 					currentTabIndex--;
 				}
+
+				let optionTop = selectOption.not('.hide').eq(currentTabIndex).position().top;
+				let optionsPaddingTop = parseInt($(selectboxOptions).css('padding-top'));
+				if(optionTop < optionsPaddingTop) {
+					selectDiv.find(selectboxOptions).scrollTop(selectDiv.find(selectboxOptions).scrollTop() - selectOption.eq(0).innerHeight());
+				}
 			} else if (keyCode === arrow.down && selectDiv.children(selectboxSelected).hasClass("active")) {
 				// Arrow Down
 				if (currentTabIndex < selectOption.not('.hide').length - 1) {
