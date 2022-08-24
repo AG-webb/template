@@ -1,4 +1,4 @@
-function changeSelectbox() {
+function initCombobox() {
 	// Classnames
 	const selectbox = ".combo-box";
 	const selectboxSelected = ".combo-box-selected";
@@ -302,5 +302,5 @@ function changeSelectbox() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-	changeSelectbox();
+	initCombobox();
 });

@@ -1,5 +1,5 @@
-function changeSelectbox() {
-	// Classnames
+function initCombobox() {
+	// constants
 	const selectbox = ".combo-box";
 	const selectboxSelected = ".combo-box-selected";
 	const selectboxSelectedWrap = ".combo-box-selected-wrap";
@@ -7,22 +7,22 @@ function changeSelectbox() {
 	const selectboxDropdown = ".combo-box-dropdown";
 	const selectboxOptions = ".combo-box-options";
 	const selectboxOption = ".combo-option";
+	const selectboxOptionHidden = "combo-option_hidden";
 	const selectboxOptionFocused = ".combo-option_focused";
 	const selectboxSearch = ".combo-box-search";
 	const tagModeClass = "tag-mode";
 	const tagWrappertClass = "combo-box-tags";
 	const tagElementClass = "combo-box-tag";
+	const userAddedOptionClass = "user-added-option";
+	const attrName = "data-combo-name";
+	const attrValue = "data-combo-value";
+	const optionAttrValue = "data-option-value";
+	const tagAttrValue = "data-tag-value";
 	const maxItemsShow = 3;
+	const maxOptionsShow = 5;
 
-
-	// Other functions
-	$('html').on("click", function () {
-		$(selectboxSelected).removeClass("active");
-		$(selectboxDropdown).removeClass('opened');
-		$(selectboxOption).removeClass(selectboxOptionFocused.replace(".", ""));
-		if ($(selectbox).hasClass("searchable")) {
-			$(selectbox).find(selectboxSearch).remove();
-		}
+	$('html').on("click", function (e) {
+		closeDropdown();
 	});
 
 	$(selectboxDropdown).on("click", function (e) {
@@ -31,235 +31,103 @@ function changeSelectbox() {
 
 	$(selectbox).each(function () {
 		const selectDiv = $(this);
-		const selectboxName = $(this).attr("data-combo-name");
+		const selectDivSelected = selectDiv.children(selectboxSelected);
+		const selectboxName = $(this).attr(attrName);
 		const selectOption = $(this).find(selectboxOption);
 		const placeholderElement = $(this).find(selectboxPlaceholder);
 		let currentTabIndex = -1;
+		let multiData = [];
 
+		createSelectelement($(this), selectboxName, selectOption);
+
+		// Keyboard Control
 		$(selectDiv).on('keydown', function (e) {
 			let keyCode = e.keyCode || e.which;
 			const arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27, backspace: 8 };
 
 			if (keyCode === arrow.up && selectDiv.children(selectboxSelected).hasClass("active")) {
 				// Arrow Up
-				if (currentTabIndex > 0) {
-					currentTabIndex--;
-				}
-
-				let optionTop = selectOption.not('.hide').eq(currentTabIndex).position().top;
-				let optionsPaddingTop = parseInt($(selectboxOptions).css('padding-top'));
-				if(optionTop < optionsPaddingTop) {
-					selectDiv.find(selectboxOptions).scrollTop(selectDiv.find(selectboxOptions).scrollTop() - selectOption.eq(0).innerHeight());
-				}
+				decreaseTabIndex();
 			} else if (keyCode === arrow.down && selectDiv.children(selectboxSelected).hasClass("active")) {
 				// Arrow Down
-				if (currentTabIndex < selectOption.not('.hide').length - 1) {
-					currentTabIndex++;
-				}
-
-				if (currentTabIndex >= 5) {
-					selectDiv.find(selectboxOptions).scrollTop(selectDiv.find(selectboxOptions).scrollTop() + selectOption.eq(0).innerHeight());
-				}
+				increaseTabIndex();
 			} else if (keyCode === arrow.enter && selectDiv.children(selectboxSelected).hasClass("active")) {
 				// Enter
-				if($(selectboxOptionFocused).length) {
+				if ($(selectboxOptionFocused).length) {
 					$(selectboxOptionFocused).click();
 				} else {
-					selectDiv.find(selectboxSelectedWrap).text(selectDiv.find(selectboxSelectedWrap).text() + $(selectboxSearch).val());
+					addUserOption();
 				}
-				$(selectboxSearch).val("");
-				$(selectOption).removeClass("hide");
+
+				resetSearchInput();
 			} else if (keyCode === arrow.esc && selectDiv.children(selectboxSelected).hasClass("active")) {
 				// Escape
-				selectDiv.find(selectboxDropdown).removeClass('opened');
-				selectDiv.find(selectboxSelected).removeClass("active");
-				selectOption.removeClass(selectboxOptionFocused.replace(".", ""));
+				closeDropdown();
 			} else if (keyCode === arrow.backspace && selectDiv.children(selectboxSelected).hasClass("active")) {
 				// Backspace
-				if(selectDiv.find(selectboxSearch).val() === "" && selectDiv.attr("data-combo-value")) {
-					let lastSelectedValue = getLastSelectedValue(selectDiv.attr("data-combo-value"));
-					selectDiv.find(`${selectboxOption}[data-option-value="${lastSelectedValue}"]`).click();
+				if (selectDiv.find(selectboxSearch).val() === "" && selectDiv.attr(attrValue)) {
+					let lastSelectedValue = getLastSelectedValue(selectDiv.attr(attrValue));
+
+					removeMultiOption($(this), lastSelectedValue);
 				}
 			}
 
-			selectOption.removeClass(selectboxOptionFocused.replace(".", ""));
-			selectOption.not('.hide').eq(currentTabIndex).addClass(selectboxOptionFocused.replace(".", ""));
+			moveFocus();
 		});
-
-		// Create a 'select' tag with 'option's and its values, and append it in Selectbox
-		$(this).append("<select name='" + selectboxName + "' style='display:none'><option></option></select>");
-
-		selectOption.each(function () {
-			let selectCurrent = $(this),
-				selectOptionVal = $(this).text(),
-				selectOptionData = $(this).attr("data-option-value");
-
-			selectDiv.children('select').append("<option value='" + selectOptionData + "'>" + selectOptionVal + "</option>");
-
-			// Disabled,selected options
-			selectDiv.find("option").each(function () {
-				let optionCurrent = $(this);
-
-				if (selectCurrent.hasClass("disabled") && optionCurrent.attr("value") === selectCurrent.attr("data-option-value")) {
-					optionCurrent.attr("disabled", true);
-				}
-
-				if (selectCurrent.hasClass("selected") && optionCurrent.attr("value") === selectCurrent.attr("data-option-value")) {
-					optionCurrent.attr("selected", true);
-					selectDiv.find('select').val(optionCurrent.val()).change();
-					selectDiv.find(selectboxSelectedWrap).html(selectCurrent.html());
-				}
-			});
-		});
-
+		
 		// Dropdown function
-		selectDiv.children(selectboxSelected).on("click", function (e) {
+		selectDivSelected.on("click", function (e) {
 			e.stopPropagation();
 			currentTabIndex = -1;
 
 			if (!e.target.closest("." + tagElementClass) && !e.target.closest(selectboxSearch)) {
-				$(selectboxDropdown).removeClass('opened');
-				$(selectbox).find(selectboxSearch).remove();
-
-				if ($(this).hasClass("active")) {
-					$(selectboxSelected).removeClass("active");
-					$(this).parent().children(selectboxDropdown).removeClass('opened');
-				} else {
-					$(selectboxSelected).removeClass("active");
-					$(this).addClass("active");
-					$(this).parent().children(selectboxDropdown).addClass('opened');
-
-					if (selectDiv.hasClass("searchable")) {
-						$(this).append(`<input type="text" class="${selectboxSearch.replace(".", "")}" />`).find(selectboxSearch).focus();
-					}
-				}
+				toggleDropdown($(this));
 			}
 
 			// Remove tag
 			if (e.target.closest("." + tagElementClass + "__remove")) {
-				let value = $(e.target).closest("." + tagElementClass).attr("data-tag-value");
+				let value = $(e.target).closest("." + tagElementClass).attr(tagAttrValue);
 
-				multiData = [...multiData.filter(data => data.value !== value)];
-				let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
-
-				$(this).closest(selectbox).find("select").val(multiValuesArray).change();
-				$(this).closest(selectbox).attr('value', multiValues);
-				selectDiv.find(selectboxOption + `[data-option-value="${value}"]`).removeClass('multiSelected');
-
-				if (multiData.length) {
-					let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
-					$(this).closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
-				} else {
-					$(this).closest(selectbox).find(selectboxSelectedWrap).html(placeholderElement);
-					$(this).closest(selectbox).removeAttr('value');
-				}
+				removeMultiOption($(this), value);
 			}
 		});
 
-		// Value selecting
-		selectDiv.find(selectboxOption).on("click", function () {
-			if ($(this).siblings(selectboxOption).hasClass("selected")) {
-				$(this).siblings(selectboxOption).removeClass("selected");
-				$(this).addClass("selected");
-			} else {
-				if (!selectDiv.hasClass("multiple")) {
+		// Single
+		if (!selectDiv.hasClass("multiple")) {
+			selectDiv.find(selectboxOption).on("click", function () {
+				if ($(this).siblings(selectboxOption).hasClass("selected")) {
+					$(this).siblings(selectboxOption).removeClass("selected");
+					$(this).addClass("selected");
+				} else {
 					$(this).addClass("selected");
 				}
-			}
 
-			$(this).closest(selectboxDropdown).removeClass('opened');
-			$(this).closest(selectbox).find(selectboxSelected).removeClass("active");
-			if (!selectDiv.hasClass("multiple")) {
-				$(this).closest(selectbox).attr('data-combo-value', $(this).attr("data-option-value"));
-				$(this).closest(selectbox).find("select").val($(this).attr("data-option-value")).change();
+				closeDropdown();
+				$(this).closest(selectbox).attr('data-combo-value', $(this).attr(optionAttrValue));
+				$(this).closest(selectbox).find("select").val($(this).attr(optionAttrValue)).change();
 				$(this).closest(selectbox).find(selectboxSelectedWrap).html($(this).html());
-			}
-		});
+			});
+		}
 
-		// Multiple select with its parametres
-		let multiData = [];
-
+		// Multiple
 		if (selectDiv.hasClass("multiple")) {
-			selectDiv.children('select').attr("multiple", true);
-
 			selectDiv.find(selectOption).on("click", function (event) {
-				$(this).closest(selectboxDropdown).addClass('opened');
-				$(this).closest(selectbox).find(selectboxSelected).addClass('active');
+				// VALUE UNSELECTING
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+					let value = $(this).attr(optionAttrValue);
 
-				// Value Unselecting func.
-				if ($(this).hasClass('multiSelected')) {
-					$(this).removeClass('multiSelected');
-					let value = $(this).attr("data-option-value");
-
-					multiData = [...multiData.filter(data => data.value !== value)];
-					let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
-
-					$(this).closest(selectbox).find("select").val(multiValuesArray).change();
-					$(this).closest(selectbox).attr('data-combo-value', multiValues);
-
-					if (multiData.length) {
-						if (multiData.length > maxItemsShow && !$(this).closest(selectbox).hasClass(tagModeClass)) {
-							$(this).closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
-						} else {
-							if ($(this).closest(selectbox).hasClass(tagModeClass)) {
-								let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
-								$(this).closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
-							} else {
-								$(this).closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
-							}
-						}
-					} else {
-						$(this).closest(selectbox).find(selectboxSelectedWrap).html(placeholderElement);
-						$(this).closest(selectbox).removeAttr('data-combo-value');
-					}
-				} else {
-					// Value Selecting func.
-					$(this).addClass('multiSelected');
-					let value = $(this).attr("data-option-value");
+					removeMultiOption($(this), value);
+				}
+				// VALUE SELECTING
+				else {
+					$(this).addClass('selected');
+					let value = $(this).attr(optionAttrValue);
 					let text = $(this).text();
 
-					multiData = [...multiData, { value, text }];
-					let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
-
-					$(this).closest(selectbox).find("select").val(multiValuesArray).change();
-					$(this).closest(selectbox).attr('data-combo-value', multiValues);
-					if ($(this).closest(selectbox).hasClass(tagModeClass)) {
-						let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
-						$(this).closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
-					} else {
-						$(this).closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
-
-						if (multiData.length > maxItemsShow) {
-							$(this).closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
-						}
-					}
-
-					// if(multiData.length == selectDiv.find(selectOption).length){
-					// 	$(this).closest(selectbox).find(selectboxSelectedWrap).text("All selected!");
-					// }
+					addMultiOption($(this), { value, text });
 				}
 			});
-
-			let selectedAttrOptionsMultiple = new Array();
-			if (selectDiv.find('.selected').length > 1) {
-				let selectedValue = selectDiv.find('.selected');
-
-				for (let i = 0; i < selectedValue.length; i++) {
-					selectedAttrOptionsMultiple.push($(selectedValue[i]).attr("data-option-value"));
-				}
-
-				selectDiv.find(selectboxSelectedWrap).text(selectedAttrOptionsMultiple.join(','));
-
-				if (selectedAttrOptionsMultiple.length > maxItemsShow) {
-					selectDiv.find(selectboxSelectedWrap).text(selectedAttrOptionsMultiple.length + " selected");
-				}
-
-				// if(selectedAttrOptionsMultiple.length == selectDiv.find(selectOption).length){
-				// 	selectDiv.find(selectboxSelectedWrap).text("All selected!");
-				// }
-
-				selectDiv.find("select").val(selectedAttrOptionsMultiple).change();
-			}
 		}
 
 		// Search Functionallity
@@ -274,17 +142,187 @@ function changeSelectbox() {
 						let optionVal = $(this).text();
 
 						if (optionVal.toUpperCase().indexOf(val) > -1) {
-							$(this).removeClass("hide");
+							$(this).removeClass(selectboxOptionHidden);
 						} else {
-							$(this).addClass("hide");
+							$(this).addClass(selectboxOptionHidden);
 						}
 					});
 				} else {
-					selectDiv.find(selectOption).removeClass("hide");
+					selectDiv.find(selectOption).removeClass(selectboxOptionHidden);
 				}
 			});
 		}
+
+		const addMultiOption = (target, newOption) => {
+			multiData = [...multiData, newOption];
+			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
+
+			target.closest(selectbox).find("select").val(multiValuesArray).change();
+			target.closest(selectbox).attr('data-combo-value', multiValues);
+
+			if (target.closest(selectbox).hasClass(tagModeClass)) {
+				let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
+				target.closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
+			} else {
+				target.closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
+
+				if (multiData.length > maxItemsShow) {
+					target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
+				}
+			}
+
+			// if(multiData.length == selectDiv.find(selectOption).length){
+			// 	$(this).closest(selectbox).find(selectboxSelectedWrap).text("All selected!");
+			// }
+		}
+
+		const removeMultiOption = (target, value) => {
+			multiData = [...multiData.filter(data => data.value !== value)];
+			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
+
+			target.closest(selectbox).find("select").val(multiValuesArray).change();
+			target.closest(selectbox).attr('data-combo-value', multiValues);
+			target.closest(selectbox).find(selectboxOption + `[data-option-value="${value}"]`).removeClass('selected');
+
+			if (multiData.length) {
+				if (multiData.length > maxItemsShow && !target.closest(selectbox).hasClass(tagModeClass)) {
+					target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
+				} else {
+					if (target.closest(selectbox).hasClass(tagModeClass)) {
+						let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
+						target.closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
+						target.closest(selectbox).find(selectboxOption + `[data-option-value="${value}"]`).removeClass('selected');
+					} else {
+						target.closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
+					}
+				}
+			} else {
+				target.closest(selectbox).find(selectboxSelectedWrap).html(placeholderElement);
+				target.closest(selectbox).removeAttr('data-combo-value');
+				target.closest(selectbox).find(selectboxSearch).focus();
+			}
+
+			let selectOption = target.closest(selectbox).find(`option[value="${value}"]`);
+			if (selectOption.hasClass(userAddedOptionClass)) {
+				selectOption.remove();
+			}
+		}
+
+		const addUserOption = () => {
+			let value = $(selectboxSearch).val();
+			let containsValue = false;
+			multiData.map(data => data.text === value ? containsValue = true : null);
+
+			if (!containsValue) {
+				selectDiv.find("select").append(`<option class="${userAddedOptionClass}" value="${value}">${value}</option>`);
+				addMultiOption(selectDiv, { value, text: value });
+			}
+		}
+
+		const decreaseTabIndex = () => {
+			if (currentTabIndex > 0) {
+				currentTabIndex--;
+			}
+
+			let optionTop = selectOption.not('.hide').eq(currentTabIndex).position().top;
+			let optionsPaddingTop = parseInt($(selectboxOptions).css('padding-top'));
+
+			if (optionTop < optionsPaddingTop) {
+				scrollToFocusedOption(selectDiv, "up");
+			}
+		}
+
+		const increaseTabIndex = () => {
+			if (currentTabIndex < selectOption.not('.hide').length - 1) {
+				currentTabIndex++;
+			}
+
+			if (currentTabIndex >= maxOptionsShow) {
+				scrollToFocusedOption(selectDiv, "down");
+			}
+		}
+
+		const resetSearchInput = () => {
+			$(selectboxSearch).val("");
+			$(selectOption).removeClass(selectboxOptionHidden);
+		}
+
+		const moveFocus = () => {
+			selectOption.removeClass(selectboxOptionFocused.replace(".", ""));
+			if (currentTabIndex !== -1 || selectOption.not('.' + selectboxOptionHidden).length === 1) {
+				selectOption.not('.' + selectboxOptionHidden).eq(currentTabIndex).addClass(selectboxOptionFocused.replace(".", ""));
+			}
+		}
 	});
+
+	function scrollToFocusedOption(target, position) {
+		let thisOptionsWrapper = target.closest(selectbox).find(selectboxOptions);
+
+		if (position === "down") {
+			thisOptionsWrapper.scrollTop(thisOptionsWrapper.scrollTop() + target.find(selectboxOption).eq(0).innerHeight());
+		} else {
+			thisOptionsWrapper.scrollTop(thisOptionsWrapper.scrollTop() - target.find(selectboxOption).eq(0).innerHeight());
+		}
+	}
+
+	function closeDropdown() {
+		$(selectboxSelected).removeClass("active");
+		$(selectboxDropdown).removeClass('opened');
+		$(selectboxOption).removeClass(selectboxOptionFocused.replace(".", ""));
+		if ($(selectbox).hasClass("searchable")) {
+			$(selectbox).find(selectboxSearch).remove();
+		}
+	}
+
+	function toggleDropdown(target) {
+		$(selectboxDropdown).removeClass('opened');
+		$(selectbox).find(selectboxSearch).remove();
+
+		if (target.hasClass("active")) {
+			$(selectboxSelected).removeClass("active");
+			target.closest(selectbox).find(selectboxDropdown).removeClass('opened');
+		} else {
+			$(selectboxSelected).removeClass("active");
+			target.addClass("active");
+			target.closest(selectbox).find(selectboxDropdown).addClass('opened');
+
+			if (target.closest(selectbox).hasClass("searchable")) {
+				target.append(`<input type="text" class="${selectboxSearch.replace(".", "")}" />`).find(selectboxSearch).focus();
+			}
+		}
+	}
+
+	function createSelectelement(target, name, options) {
+		let multiple = false;
+		if(target.hasClass("multiple")) {
+			multiple = true;
+		}
+
+		target.append(`<select name="${name}" style='display:none' ${multiple ? "multiple='multiple'" : null}></select>`);
+
+		options.each(function () {
+			let selectCurrent = $(this),
+				selectOptionVal = $(this).text(),
+				selectOptionData = $(this).attr(optionAttrValue);
+
+			$(this).closest(selectbox).children('select').append("<option value='" + selectOptionData + "'>" + selectOptionVal + "</option>");
+
+			// Disabled,selected options
+			$(this).closest(selectbox).find("option").each(function () {
+				let optionCurrent = $(this);
+
+				if (selectCurrent.hasClass("disabled") && optionCurrent.attr("value") === selectCurrent.attr(optionAttrValue)) {
+					optionCurrent.attr("disabled", true);
+				}
+
+				if (selectCurrent.hasClass("selected") && optionCurrent.attr("value") === selectCurrent.attr(optionAttrValue)) {
+					optionCurrent.attr("selected", true);
+					$(this).closest(selectbox).find('select').val(optionCurrent.val()).change();
+					$(this).closest(selectbox).find(selectboxSelectedWrap).html(selectCurrent.html());
+				}
+			});
+		});
+	}
 
 	function getLastSelectedValue(values) {
 		let selectedValues = values.split(", ");
@@ -316,7 +354,7 @@ function changeSelectbox() {
 
 		array.map(({ value, text }) => {
 			selectedTags = selectedTags +
-				`<div class="${elementClass}" data-tag-value="${value}">
+				`<div class="${elementClass}" ${tagAttrValue}="${value}">
 				<div class="${elementClass}__value">
 					${text}
 				</div>
@@ -331,7 +369,6 @@ function changeSelectbox() {
 	}
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
-	changeSelectbox();
+	initCombobox();
 });

@@ -137,6 +137,7 @@
     padding: rem(10) rem(24) rem(10) rem(3);
     font-size: inherit;
     font-weight: inherit;
+    font-family: inherit;
 }
 
 .combo-box-options {
@@ -170,7 +171,7 @@
         margin-right: rem(5);
     }
 
-    &.selected, &.multiSelected {
+    &.selected {
         background: #000;
         color: #fff;
     }
@@ -178,6 +179,10 @@
     &:focus, &_focused {
         background: #cfcfcf;
         color: #fff;
+    }
+
+    &_hidden {
+        display: none;
     }
 }
 

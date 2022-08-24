@@ -157,7 +157,7 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Single</h2>
                     <div class="custom-select">
-                        <div class="combo-box searchable" data-combo-name="select" data-combo-value="all">
+                        <div class="combo-box" data-combo-name="select" data-combo-value="all">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Select Placeholder</span>
@@ -215,30 +215,29 @@
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
-                                    <div class="combo-option" data-option-value="1" tabindex='1'>Bmw</div>
-                                    <div class="combo-option" data-option-value="2" tabindex='2'>Mercedes</div>
-                                    <div class="combo-option" data-option-value="3" tabindex='3'>Volvo</div>
-                                    <div class="combo-option" data-option-value="4" tabindex='4'>Wolksvagen</div>
-                                    <div class="combo-option" data-option-value="5" tabindex='5'>Opel</div>
-                                    <div class="combo-option" data-option-value="6" tabindex='6'>Nissan</div>
-                                    <div class="combo-option" data-option-value="7" tabindex='7'>Toyota</div>
+                                    <div class="combo-option" data-option-value="1">Bmw</div>
+                                    <div class="combo-option" data-option-value="2">Mercedes</div>
+                                    <div class="combo-option" data-option-value="3">Volvo</div>
+                                    <div class="combo-option" data-option-value="4">Wolksvagen</div>
+                                    <div class="combo-option" data-option-value="5">Opel</div>
+                                    <div class="combo-option" data-option-value="6">Nissan</div>
+                                    <div class="combo-option" data-option-value="7">Toyota</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Tags -->
-                <!-- <div class="component__wrap">
+                <div class="component__wrap">
                     <h2 class="h2-font">Tags</h2>
                     <div class="custom-select">
-                        <div class="combo-box multiple searchable tag-mode" data-combo-name="tagsSelect">
+                        <div class="combo-box searchable multiple tag-mode" data-combo-name="tagsSelect">
                             <div class="combo-box-selected">
-                                <span class="combo-box-placeholder">Tags Select Placeholder</span>          
+                                <div class="combo-box-selected-wrap">
+                                    <span class="combo-box-placeholder">Tags Select Placeholder</span>
+                                </div>       
                             </div>
                             <div class="combo-box-dropdown">
-                                <div class="combo-box-search">
-                                    <input type="text" placeholder="Find option">
-                                </div>
                                 <div class="combo-box-options">
                                     <div class="combo-option" data-option-value="1">Tag 1</div>
                                     <div class="combo-option" data-option-value="2">Tag 2</div>
@@ -248,7 +247,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
     
             <!-- Accordion -->

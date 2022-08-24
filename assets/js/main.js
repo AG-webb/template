@@ -23,8 +23,8 @@ $(document).ready(function () {
     });
 
     // SWITCHER *************************
-    $(".switcher__item").on("click", function() {
-        if(!$(this).closest(".switcher").hasClass("switcher_multiple")) {
+    $(".switcher__item").on("click", function () {
+        if (!$(this).closest(".switcher").hasClass("switcher_multiple")) {
             $(this).closest(".switcher").find(".switcher__item").removeClass("active");
             $(this).addClass("active");
         } else {
@@ -52,25 +52,29 @@ $(document).ready(function () {
     });
 
     // FORM ITEMS *********************
-    $(".form-field__input").on("keyup", function() {
+    $(".form-field__input").on("keyup", function () {
         let val = $(this).val().trim();
-        
-        if(val.length) {
+
+        if (val.length) {
             $(this).closest(".form-field").addClass("filled");
         } else {
             $(this).closest(".form-field").removeClass("filled");
         }
     });
 
-    $(".form-field__input").on("focus", function() {
+    $(".form-field__input").on("focus", function () {
         $(this).closest(".form-field").addClass("focused");
     });
-    $(".form-field__input").on("focusout", function() {
+    $(".form-field__input").on("focusout", function () {
         $(this).closest(".form-field").removeClass("focused");
     });
 
+    $("select").on("change", function() {
+        console.log($(this).val());
+    });
+
     // Form Validation ***************************
-    $(".with-validation").on("submit", function(e) {
+    $(".with-validation").on("submit", function (e) {
         let isValid = true;
         let email = $(this).find(".email-validation");
         let errorHtml = `<div class="form-field__message error">Wrong email, please set correct email address</div>`;
@@ -78,28 +82,28 @@ $(document).ready(function () {
         $(this).find(".form-field__message.error").remove();
         $(this).find(".form-field.invalid").removeClass("invalid");
 
-        if(email.length) {
-            if(!isEmailValid(email.val())) {
+        if (email.length) {
+            if (!isEmailValid(email.val())) {
                 $(".email-validation").closest(".form-field").addClass("invalid").append(errorHtml);
                 isValid = false;
             }
         }
-        
-        if(!isValid) {
+
+        if (!isValid) {
             e.preventDefault();
         }
-    }); 
+    });
 
     // REMOVE ACTIVE CLASSES *******************************
     $(document).on('click', function (e) {
         if (!$(e.target).closest(".lang-switcher, .modal-trigger, .modal__wrapper").length) {
             $(".lang-switcher").removeClass("active");
             $(".modal").removeClass("active");
-            
+
             ScrollNone();
         }
 
-        if($(e.target).closest(".toast-close").length) {
+        if ($(e.target).closest(".toast-close").length) {
             removeToast($(e.target));
         }
 
