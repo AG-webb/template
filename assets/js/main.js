@@ -69,8 +69,48 @@ $(document).ready(function () {
         $(this).closest(".form-field").removeClass("focused");
     });
 
-    $("select").on("change", function() {
+    $("select").on("change", function () {
         console.log($(this).val());
+    });
+
+    // FIle Upload *******************************
+    $(".file-upload-input").on("change", function () {
+        let input = this;
+        let files = this.files;
+        let mainWrapper = $(input).closest(".file-upload");
+
+        if (files.length === 1) {
+            let reader = new FileReader();
+            let { name, size, type } = files[0];
+
+            if(mainWrapper.hasClass("avatar-upload")) {
+                reader.onload = function () {
+                    let img = document.createElement('img');
+                    img.src = reader.result;
+    
+                    mainWrapper.addClass("preview-mode")
+                    mainWrapper.find(".avatar-upload__body").prepend(img);
+                }
+                reader.readAsDataURL(files[0]);
+            }
+
+            if(mainWrapper.hasClass("document-upload")) {
+                console.log("document");
+            }
+        } else if (files.length > 1) {
+            let previewContainer = mainWrapper.find(".doc-upload__preview");
+
+            for(let i = 0; i < files.length; i++) {
+                let { name, size, type } = files[i];
+                let previewItemHtml = `
+                    <div class="doc-upload-item">
+                        <span>${name}</span>
+                        <div class="doc-upload-item__remove">x</div>
+                    </div>
+                `
+                previewContainer.append(previewItemHtml);
+            }
+        }
     });
 
     // Form Validation ***************************

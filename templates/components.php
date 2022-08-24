@@ -361,6 +361,36 @@
                     <div class="skeleton__element skeleton__element_text"></div>
                 </div>
             </div>
+
+            <!-- File Upload -->
+            <div class="component">
+                <h1 class="h1-font">File Upload</h1>
+                <div class="component__wrap">
+                    <h2 class="h2-font">Single Upload Avatar</h2>
+                    <div class="file-upload avatar-upload">
+                        <div class="file-upload__wrap">
+                            <div class="avatar-upload__body">
+                                <div class="avatar-upload__content">upload</div>
+                            </div>
+                            <input type="file" class="file-upload-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="component__wrap">
+                    <h2 class="h2-font">Multiple Upload Document</h2>
+                    <div class="file-upload doc-upload">
+                        <div class="file-upload__wrap">
+                            <div class="doc-upload__body">
+                                <div class="doc-upload__btn btn btn_lg btn_test">
+                                    <span>upload Document(s)</span>
+                                </div>
+                            </div>
+                            <input type="file" class="file-upload-input" multiple="multiple">
+                        </div>
+                        <div class="doc-upload__preview"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
