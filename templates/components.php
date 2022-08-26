@@ -96,7 +96,7 @@
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input type="number" name="phone" class="form-field__input">
+                                    <input type="number" name="phone" class="formatted-phone form-field__input">
                                 </div>
                             </div>
                         </div>

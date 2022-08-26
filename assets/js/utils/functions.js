@@ -3,8 +3,22 @@ function isEmailValid(email) {
     return emailRegex.test(email);
 }
 
+function formatPhoneNumber(number) {
+    //Filter only numbers from the input
+    let cleaned = ("" + number).replace(/\D/g, "");
+
+    //Check if the input is of correct length
+    let match = cleaned.match(/^(\d{3})(\d{2})(\d{2})(\d{2})(\d{2})$/);
+
+    if (match) {
+        return "(+" + match[1] + ") " +  match[2] + " " + match[3] + " " + match[4] + " " + match[4];
+    };
+
+    return null
+}
+
 function dinamicAppendInit() {
-    $("[data-append]").each(function() {
+    $("[data-append]").each(function () {
         let [mediaSize, appendBlockClass] = $(this).attr("data-append").split(", ");
 
         if ($(window).width() < mediaSize) {
@@ -18,7 +32,7 @@ function makeSticky(selector) {
     let elementOffsetTop = element.offset().top;
     let scrollTop = $(document).scrollTop();
 
-    $(document).bind('ready scroll', function () {
+    $(document).bind("ready scroll", function () {
         scrollTop = $(document).scrollTop();
 
         if (scrollTop >= elementOffsetTop) {
@@ -30,7 +44,7 @@ function makeSticky(selector) {
 }
 
 function tabsInit() {
-    $(".tab").on("click", function() {
+    $(".tab").on("click", function () {
         let contentId = $(this).attr("data-tab");
 
         $(this).closest(".tabs__control").find(".tab").removeClass("active");
@@ -42,7 +56,7 @@ function tabsInit() {
 }
 
 let _toastCounter = 0;
-function toastMessage(message, type = "default") { 
+function toastMessage(message, type = "default") {
     let toastContainer = `<div class="toast-messages"></div>`;
 
     let toastBody = `
@@ -56,7 +70,7 @@ function toastMessage(message, type = "default") {
         </div>
     </div>`;
 
-    if(!$(".toast-messages").length) {
+    if (!$(".toast-messages").length) {
         $("main").append(toastContainer);
     }
     $(".toast-messages").append(toastBody);
@@ -66,16 +80,16 @@ function toastMessage(message, type = "default") {
 }
 
 function autoRemoveToast(index) {
-    new Promise(function(resolve, reject) {
-        setTimeout(function() {
+    new Promise(function (resolve, reject) {
+        setTimeout(function () {
             $(`.toast-message_${index - 1}`).addClass("toast-message_hidden");
             resolve();
         }, 4000);
-    }).then(function() {
-        setTimeout(function() {
+    }).then(function () {
+        setTimeout(function () {
             $(`.toast-message_${index - 1}`).remove();
-            
-            if($(".toast-message").length == 0) {
+
+            if ($(".toast-message").length == 0) {
                 $(".toast-messages").remove();
             }
         }, 500);
@@ -83,18 +97,18 @@ function autoRemoveToast(index) {
 }
 
 function removeToast(closeElement, index) {
-    if(!index) {
+    if (!index) {
         let toast = closeElement.closest(".toast-message");
 
         toast.addClass("toast-message_hidden");
-    
-        setTimeout(function() {
+
+        setTimeout(function () {
             toast.remove();
         }, 500);
     } else {
         $(`.toast-message_${index - 1}`).addClass("toast-message_hidden");
-    
-        setTimeout(function() {
+
+        setTimeout(function () {
             $(`.toast-message_${index - 1}`).remove();
         }, 500);
     }

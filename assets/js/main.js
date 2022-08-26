@@ -73,6 +73,38 @@ $(document).ready(function () {
         console.log($(this).val());
     });
 
+    // Form Validation ***************************
+    $(".with-validation").on("submit", function (e) {
+        let isValid = true;
+        let email = $(this).find(".email-validation");
+        let errorHtml = `<div class="form-field__message error">Wrong email, please set correct email address</div>`;
+
+        $(this).find(".form-field__message.error").remove();
+        $(this).find(".form-field.invalid").removeClass("invalid");
+
+        if (email.length) {
+            if (!isEmailValid(email.val())) {
+                $(".email-validation").closest(".form-field").addClass("invalid").append(errorHtml);
+                isValid = false;
+            }
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+
+    // $(".formatted-phone").on("keyup", function(e) {
+    //     let formattedNumber = formatPhoneNumber($(this).val());
+
+    //     if(formattedNumber) {
+    //         e.preventDefault();
+    //         $(this).val(formattedNumber);
+    //     } else {
+    //         e.preventDefault();
+    //     }
+    // });
+
     // FIle Upload *******************************
     let uploadedFiles = [];
     $(".file-upload-input").on("change", function () {
@@ -140,27 +172,6 @@ $(document).ready(function () {
         }
 
         itemBlock.remove();
-    });
-
-    // Form Validation ***************************
-    $(".with-validation").on("submit", function (e) {
-        let isValid = true;
-        let email = $(this).find(".email-validation");
-        let errorHtml = `<div class="form-field__message error">Wrong email, please set correct email address</div>`;
-
-        $(this).find(".form-field__message.error").remove();
-        $(this).find(".form-field.invalid").removeClass("invalid");
-
-        if (email.length) {
-            if (!isEmailValid(email.val())) {
-                $(".email-validation").closest(".form-field").addClass("invalid").append(errorHtml);
-                isValid = false;
-            }
-        }
-
-        if (!isValid) {
-            e.preventDefault();
-        }
     });
 
     // REMOVE ACTIVE CLASSES *******************************
