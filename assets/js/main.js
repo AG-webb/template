@@ -74,43 +74,72 @@ $(document).ready(function () {
     });
 
     // FIle Upload *******************************
+    let uploadedFiles = [];
     $(".file-upload-input").on("change", function () {
-        let input = this;
+        const input = this;
         let files = this.files;
-        let mainWrapper = $(input).closest(".file-upload");
+        const mainBlock = $(input).closest(".file-upload");
+        const previewBlock = mainBlock.find(".file-upload-preview");
 
-        if (files.length === 1) {
-            let reader = new FileReader();
-            let { name, size, type } = files[0];
+        uploadedFiles = [];
 
-            if(mainWrapper.hasClass("avatar-upload")) {
+        if(previewBlock.length) {
+            previewBlock.html("");
+        }
+
+        if (files.length) {
+            if(mainBlock.hasClass("avatar-upload")) {
+                let { name, size, type } = files[0];
+                uploadedFiles = [...uploadedFiles, files[0]];
+                let reader = new FileReader();
+
                 reader.onload = function () {
                     let img = document.createElement('img');
                     img.src = reader.result;
     
-                    mainWrapper.addClass("preview-mode")
-                    mainWrapper.find(".avatar-upload__body").prepend(img);
+                    mainBlock.addClass("preview-mode")
+                    mainBlock.find(".avatar-upload__body img").remove();
+                    mainBlock.find(".avatar-upload__body").prepend(img);
                 }
                 reader.readAsDataURL(files[0]);
+
+                console.log("UPLOADED DOCUMENTS LIST ----------- ", uploadedFiles);
             }
 
-            if(mainWrapper.hasClass("document-upload")) {
-                console.log("document");
-            }
-        } else if (files.length > 1) {
-            let previewContainer = mainWrapper.find(".doc-upload__preview");
+            if(mainBlock.hasClass("doc-upload")) {
+                for(let i = 0; i < files.length; i++) {
+                    let { name, size, type } = files[i];
+                    // add item to list
+                    uploadedFiles = [...uploadedFiles, files[i]];
 
-            for(let i = 0; i < files.length; i++) {
-                let { name, size, type } = files[i];
-                let previewItemHtml = `
-                    <div class="doc-upload-item">
-                        <span>${name}</span>
-                        <div class="doc-upload-item__remove">x</div>
-                    </div>
-                `
-                previewContainer.append(previewItemHtml);
+                    let previewItemHtml = `
+                        <div class="file-upload-item doc-upload-item">
+                            <span class="file-upload-item__name doc-upload-item__name">${name}</span>
+                            <div class="file-upload-item__remove doc-upload-item__remove">x</div>
+                        </div>
+                    `
+                    previewBlock.append(previewItemHtml);
+                }
+
+                console.log("UPLOADED DOCUMENTS LIST ----------- ", uploadedFiles);
             }
         }
+    });
+
+    $(".file-upload").on("click", ".file-upload-item__remove", function() {
+        let itemBlock = $(this).closest(".file-upload-item");
+        let itemName = itemBlock.find(".file-upload-item__name").text();
+
+        if(uploadedFiles.length) {
+            // remove item from list
+            uploadedFiles = [...uploadedFiles.filter(file => {
+                return file.name !== itemName
+            })];
+
+            console.log("UPLOADED DOCUMENTS LIST ----------- ", uploadedFiles);
+        }
+
+        itemBlock.remove();
     });
 
     // Form Validation ***************************

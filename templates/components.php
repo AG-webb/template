@@ -387,7 +387,7 @@
                             </div>
                             <input type="file" class="file-upload-input" multiple="multiple">
                         </div>
-                        <div class="doc-upload__preview"></div>
+                        <div class="file-upload-preview doc-upload__preview"></div>
                     </div>
                 </div>
             </div>
