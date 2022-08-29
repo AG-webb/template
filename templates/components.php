@@ -96,7 +96,18 @@
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input type="number" name="phone" class="formatted-phone form-field__input">
+                                    <input type="text" name="phone" class="input-number formatted-phone form-field__input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-fields__item">
+                            <div class="form-field form-field_md form-field_legend">
+                                <div class="form-field__label">Field Md number with Comma</div>
+                                <div class="form-field__target form-field__target_prefix">
+                                    <div class="form-field__icon">
+                                        <i class="icon icon-arrow-left"></i>
+                                    </div>
+                                    <input type="text" name="number_with_comma" class="input-number formatted-phone form-field__input" data-input-separator=",">
                                 </div>
                             </div>
                         </div>
