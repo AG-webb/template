@@ -4,7 +4,6 @@ function isEmailValid(email) {
 }
 
 function formatPhoneNumber(number) {
-    //Check if the input is of correct length
     let match = "" + number.match(/^(\d{3})(\d{2})(\d{2})(\d{2})(\d{2})$/);
 
     if (match) {
