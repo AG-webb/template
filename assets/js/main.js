@@ -94,16 +94,33 @@ $(document).ready(function () {
         }
     });
 
-    // $(".formatted-phone").on("keyup", function(e) {
-    //     let formattedNumber = formatPhoneNumber($(this).val());
+    $(".input-number").on("keyup", function(e) {
+        let val = $(this).val();
+        let onlyNum = getOnlyNumbers(val);
 
-    //     if(formattedNumber) {
-    //         e.preventDefault();
-    //         $(this).val(formattedNumber);
-    //     } else {
-    //         e.preventDefault();
-    //     }
-    // });
+        if (onlyNum) {
+            $(this).val(onlyNum)
+        } else {
+            $(this).val("");
+        }
+
+        // Separator
+        if($(this).attr("data-input-separator") !== undefined) {
+            let separator = $(this).attr("data-input-separator");
+            let valWithSeparator = numberWithSeparator($(this).val(), separator);
+
+            $(this).val(valWithSeparator);
+        }
+
+        // Phone Formatter
+        if($(this).hasClass("formatted-phone")) {
+            let formattedPhoneNumber = formatPhoneNumber($(this).val());
+            
+            if(formattedPhoneNumber) {
+                $(this).val(formattedPhoneNumber);
+            }
+        }
+    });
 
     // FIle Upload *******************************
     let uploadedFiles = [];
