@@ -107,7 +107,7 @@
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input type="text" name="number_with_comma" class="input-number formatted-phone form-field__input" data-input-separator=",">
+                                    <input type="text" name="number_with_comma" class="input-number form-field__input" data-input-separator=",">
                                 </div>
                             </div>
                         </div>

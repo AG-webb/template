@@ -1,14 +1,11 @@
 .skeleton {
+    position: relative;
+
     &__element {
         background-color: #e9e9e9;
         width: 100%;
-        // animation: shimmer 2s ease-in infinite;
         margin-bottom: rem(24);
-        background-image: linear-gradient(to right, transparent 0%, #ffffff 20%, transparent 40%, transparent 100%);
-        background-repeat: no-repeat;
-        background-position-x: 100%;
-        background-size: 200% 100%;
-        animation: 1.5s shine linear infinite;
+        // animation: shimmer 2s ease-in infinite;
 
         &_avatar {
             margin-left: rem(24);
@@ -35,6 +32,21 @@
             height: rem(15);
             border-radius: rem(30);
         }
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(to right, transparent 0%, #ffffff 20%, transparent 40%, transparent 100%);
+        background-repeat: no-repeat;
+        background-position-x: 100%;
+        background-size: 200% 100%;
+        animation: 1.5s shine linear infinite;
+        @extend %not-selectible;
     }
 }
 

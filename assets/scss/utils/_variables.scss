@@ -31,9 +31,9 @@ $z-indexes: (
 
 /* font */
 $defaultHtmlFont: "Tahoma", sans-serif;
-$fontMardoto: 'Mardoto';
-$fontMontserrat: 'Montserrat';
-$baseFontFamily: $fontMontserrat;
+$fontSecondary: 'Mardoto';
+$fontPrimary: 'Montserrat';
+$baseFontFamily: $fontPrimary;
 
 /*grid dimensions*/
 $mediaXxlLarge: 1366px;

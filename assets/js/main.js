@@ -122,7 +122,7 @@ $(document).ready(function () {
         }
     });
 
-    // FIle Upload *******************************
+    // File Upload *******************************
     let uploadedFiles = [];
     $(".file-upload-input").on("change", function () {
         const input = this;
@@ -130,6 +130,8 @@ $(document).ready(function () {
         const mainBlock = $(input).closest(".file-upload");
         const previewBlock = mainBlock.find(".file-upload-preview");
 
+        
+        mainBlock.removeClass("preview-mode");
         uploadedFiles = [];
 
         if(previewBlock.length) {
@@ -137,6 +139,8 @@ $(document).ready(function () {
         }
 
         if (files.length) {
+            mainBlock.addClass("preview-mode");
+            
             if(mainBlock.hasClass("avatar-upload")) {
                 let { name, size, type } = files[0];
                 uploadedFiles = [...uploadedFiles, files[0]];
@@ -146,7 +150,6 @@ $(document).ready(function () {
                     let img = document.createElement('img');
                     img.src = reader.result;
     
-                    mainBlock.addClass("preview-mode")
                     mainBlock.find(".avatar-upload__body img").remove();
                     mainBlock.find(".avatar-upload__body").prepend(img);
                 }
@@ -184,6 +187,10 @@ $(document).ready(function () {
             uploadedFiles = [...uploadedFiles.filter(file => {
                 return file.name !== itemName
             })];
+
+            if(!uploadedFiles.length) {
+                mainBlock.removeClass("preview-mode");
+            }
 
             console.log("UPLOADED DOCUMENTS LIST ----------- ", uploadedFiles);
         }
