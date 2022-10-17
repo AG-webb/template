@@ -402,6 +402,37 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Checkbox and radio -->
+            <div class="component">
+                <h1 class="h1-font">Custom Checkbox and radio button</h1>
+                <div class="component__wrap">
+                    <h2 class="h2-font">Checkbox</h2>
+                    <label class="custom-check custom-check_checkbox">
+                        <input type="checkbox" value="1" name="checkbox">
+                        <span class="custom-check__checkmark"></span>
+                        <span class="payment-info__label">Check 1</span>
+                    </label>
+                    <label class="custom-check custom-check_checkbox">
+                        <input type="checkbox" value="2" name="checkbox">
+                        <span class="custom-check__checkmark"></span>
+                        <span class="payment-info__label">Check 2</span>
+                    </label>
+                </div>
+                <div class="component__wrap">
+                    <h2 class="h2-font">Radio</h2>
+                    <label class="custom-check custom-check_radio" for="radio_button_1">
+                        <input type="radio" name="radio_button" id="radio_button_1" value="1">
+                        <span class="custom-check__checkmark"></span>
+                        <div class="custom-check__label">Radio 1</div>
+                    </label>
+                    <label class="custom-check custom-check_radio" for="radio_button_2">
+                        <input type="radio" name="radio_button" id="radio_button_2" value="2">
+                        <span class="custom-check__checkmark"></span>
+                        <div class="custom-check__label">Radio 2</div>
+                    </label>
+                </div>
+            </div>
         </div>
 
     </div>

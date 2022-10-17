@@ -20,7 +20,7 @@
         position: relative;
     }
 
-    &__icon {
+    &__icon { 
         @include center-absolute(vertical);
         @extend %flex;
         @extend %align-middle;
