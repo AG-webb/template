@@ -17,6 +17,8 @@ $(document).ready(function () {
         ScrollNone();
     });
 
+    console.log($("select[name='multiselect']").val());
+
     // TOAST ****************************
     $(".toast-trigger").on("click", function () {
         toastMessage("Toast Message", "default");

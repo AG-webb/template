@@ -1,4 +1,4 @@
-function initCombobox() {
+function initComboBox() {
 	// constants
 	const selectbox = ".combo-box";
 	const selectboxSelected = ".combo-box-selected";
@@ -11,7 +11,7 @@ function initCombobox() {
 	const selectboxOptionFocused = ".combo-option_focused";
 	const selectboxSearch = ".combo-box-search";
 	const tagModeClass = "tag-mode";
-	const tagWrappertClass = "combo-box-tags";
+	const tagWrapperClass = "combo-box-tags";
 	const tagElementClass = "combo-box-tag";
 	const userAddedOptionClass = "user-added-option";
 	const attrName = "data-combo-name";
@@ -38,7 +38,7 @@ function initCombobox() {
 		let currentTabIndex = -1;
 		let multiData = [];
 
-		createSelectelement($(this), selectboxName, selectOption);
+		createSelectElement($(this), selectboxName, selectOption);
 
 		// Keyboard Control
 		$(selectDiv).on('keydown', function (e) {
@@ -111,6 +111,16 @@ function initCombobox() {
 
 		// Multiple
 		if (selectDiv.hasClass("multiple")) {
+			// Sync multiData array with default selected options
+			if(selectDiv.attr('data-combo-value')) {
+				selectDiv.find(selectboxOption + ".selected").each(function() {
+					let text = $(this).text();
+					let value = $(this).attr(optionAttrValue);
+					
+					multiData = [...multiData, {value, text}];
+				});
+			}
+
 			selectDiv.find(selectOption).on("click", function (event) {
 				// VALUE UNSELECTING
 				if ($(this).hasClass('selected')) {
@@ -130,7 +140,7 @@ function initCombobox() {
 			});
 		}
 
-		// Search Functionallity
+		// Search Functionality
 		if (selectDiv.hasClass("searchable")) {
 			selectDiv.on("input", selectboxSearch, function (e) {
 				let val = $(this).val();
@@ -156,34 +166,34 @@ function initCombobox() {
 		const addMultiOption = (target, newOption) => {
 			multiData = [...multiData, newOption];
 			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
-
+	
 			target.closest(selectbox).find("select").val(multiValuesArray).change();
 			target.closest(selectbox).attr('data-combo-value', multiValues);
-
+	
 			if (target.closest(selectbox).hasClass(tagModeClass)) {
 				let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
 				target.closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
 			} else {
 				target.closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
-
+	
 				if (multiData.length > maxItemsShow) {
 					target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
 				}
 			}
-
+	
 			// if(multiData.length == selectDiv.find(selectOption).length){
 			// 	$(this).closest(selectbox).find(selectboxSelectedWrap).text("All selected!");
 			// }
 		}
-
+	
 		const removeMultiOption = (target, value) => {
 			multiData = [...multiData.filter(data => data.value !== value)];
 			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
-
+	
 			target.closest(selectbox).find("select").val(multiValuesArray).change();
 			target.closest(selectbox).attr('data-combo-value', multiValues);
 			target.closest(selectbox).find(selectboxOption + `[data-option-value="${value}"]`).removeClass('selected');
-
+	
 			if (multiData.length) {
 				if (multiData.length > maxItemsShow && !target.closest(selectbox).hasClass(tagModeClass)) {
 					target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
@@ -201,7 +211,7 @@ function initCombobox() {
 				target.closest(selectbox).removeAttr('data-combo-value');
 				target.closest(selectbox).find(selectboxSearch).focus();
 			}
-
+	
 			let selectOption = target.closest(selectbox).find(`option[value="${value}"]`);
 			if (selectOption.hasClass(userAddedOptionClass)) {
 				selectOption.remove();
@@ -292,8 +302,9 @@ function initCombobox() {
 		}
 	}
 
-	function createSelectelement(target, name, options) {
+	function createSelectElement(target, name, options) {
 		let multiple = false;
+		let multiData = [];
 		if(target.hasClass("multiple")) {
 			multiple = true;
 		}
@@ -302,10 +313,10 @@ function initCombobox() {
 
 		options.each(function () {
 			let selectCurrent = $(this),
-				selectOptionVal = $(this).text(),
-				selectOptionData = $(this).attr(optionAttrValue);
+				text = $(this).text(),
+				value = $(this).attr(optionAttrValue);
 
-			$(this).closest(selectbox).children('select').append("<option value='" + selectOptionData + "'>" + selectOptionVal + "</option>");
+			$(this).closest(selectbox).children('select').append("<option value='" + value + "'>" + text + "</option>");
 
 			// Disabled,selected options
 			$(this).closest(selectbox).find("option").each(function () {
@@ -317,8 +328,29 @@ function initCombobox() {
 
 				if (selectCurrent.hasClass("selected") && optionCurrent.attr("value") === selectCurrent.attr(optionAttrValue)) {
 					optionCurrent.attr("selected", true);
-					$(this).closest(selectbox).find('select').val(optionCurrent.val()).change();
-					$(this).closest(selectbox).find(selectboxSelectedWrap).html(selectCurrent.html());
+					
+					if(target.hasClass("multiple")) {
+						// DUPLICATED CODE NEED TO FIX THIS!!!!!!!!!! ***************************************
+						multiData = [...multiData, {value, text}];
+						let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
+				
+						target.closest(selectbox).attr('data-combo-value', multiValues);
+				
+						if (target.closest(selectbox).hasClass(tagModeClass)) {
+							let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
+							target.closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
+						} else {
+							target.closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
+				
+							if (multiData.length > maxItemsShow) {
+								target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
+							}
+						}
+						// **************************************************************************************************
+					} else {
+						$(this).closest(selectbox).find('select').val(optionCurrent.val()).change();
+						$(this).closest(selectbox).find(selectboxSelectedWrap).html(selectCurrent.html());
+					}
 				}
 			});
 		});
@@ -350,7 +382,7 @@ function initCombobox() {
 	}
 
 	function getTagsTemplate(array, elementClass = tagElementClass) {
-		let selectedTags = `<div class="${tagWrappertClass}">`;
+		let selectedTags = `<div class="${tagWrapperClass}">`;
 
 		array.map(({ value, text }) => {
 			selectedTags = selectedTags +
@@ -370,5 +402,5 @@ function initCombobox() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-	initCombobox();
+	initComboBox();
 });
