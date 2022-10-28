@@ -21,7 +21,7 @@ function getOnlyNumbers(str) {
     return str.replace(/[^\d]/g, '');
 }
 
-function dinamicAppendInit() {
+function dynamicAppendInit() {
     $("[data-append]").each(function () {
         let [mediaSize, appendBlockClass] = $(this).attr("data-append").split(", ");
 

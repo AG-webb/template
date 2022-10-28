@@ -283,7 +283,7 @@
 		background-image: url($path);
 		background-repeat: repeat-x;
 		background-size: contain;
-		@extend %not-selectible;
+		@extend %not-selectable;
 	}
 }
 
@@ -300,6 +300,6 @@
 		background-repeat: repeat-y;
 		background-position: center top;
 		background-size: contain;
-		@extend %not-selectible;
+		@extend %not-selectable;
 	}
 }

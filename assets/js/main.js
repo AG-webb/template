@@ -1,7 +1,7 @@
 $(document).ready(function () {
     headerFixed();
     tabsInit();
-    dinamicAppendInit();
+    dynamicAppendInit();
 
     // MODAL ***************************
     $("[data-modal]").on("click", function () {

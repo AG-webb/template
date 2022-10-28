@@ -46,7 +46,7 @@
         background-position-x: 100%;
         background-size: 200% 100%;
         animation: 1.5s shine linear infinite;
-        @extend %not-selectible;
+        @extend %not-selectable;
     }
 }
 
