@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
         <meta name="referrer" content="origin-when-cross-origin" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Dr. Amer Al Rawas</title>
+        <title>Demo</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="57x57" href="assets/img/fav/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="assets/img/fav/apple-icon-60x60.png">
@@ -50,3 +50,6 @@
         <script defer src="assets/js/main.js"></script>
     </body>
 </html>
+
+<!--  <link rel="stylesheet" href="assets/css/app.css" media="none" onload="if(media!='all')media='all'">-->
+<!--  <noscript><link rel="stylesheet" href="assets/css/app.css"></noscript>-->

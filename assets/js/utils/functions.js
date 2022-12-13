@@ -129,7 +129,7 @@ function headerFixed() {
 }
 
 function ScrollNone() {
-    if ($(".modal, .header-menu").hasClass("active")) {
+    if ($(".modal").hasClass("active")) {
         $("body").addClass("locked");
     } else {
         $("body").removeClass("locked");

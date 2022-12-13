@@ -271,7 +271,7 @@
 }
 
 
-@mixin horizontal-decor($path) {
+@mixin horizontal-decore($path) {
 	position: relative;
 
 	&::after {
@@ -283,15 +283,11 @@
 		background-image: url($path);
 		background-repeat: repeat-x;
 		background-size: contain;
-		-webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        pointer-events: none;
+		@extend %not-selectable;
 	}
 }
 
-@mixin vertical-decor($path) {
+@mixin vertical-decore($path) {
 	position: relative;
 
 	&::after {
@@ -304,10 +300,6 @@
 		background-repeat: repeat-y;
 		background-position: center top;
 		background-size: contain;
-		-webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        pointer-events: none;
+		@extend %not-selectable;
 	}
 }

@@ -7,10 +7,10 @@ $gridBreakpoints: (
 );
 
 .row {
-    max-width: calc(100% - #{rem(16)});
+    max-width: 100%;
     margin-right: auto;
     margin-left: auto;
-    display: -ms-flexbox; 
+    display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
@@ -59,13 +59,14 @@ $gridBreakpoints: (
 
 @media print, screen and (min-width: 768px) {
     .row {
+        // (100% - (size * 2) - ($columnSpace * 2))
         max-width: calc(100% - #{rem(96)});
     }
 }
 
 @media print, screen and (min-width: 1024px) {
     .row {
-        max-width: calc(100% - #{rem(268)});
+        max-width: calc(100% - #{rem(140)});
 
         .row {
             margin-right: -$columnSpace;
@@ -81,7 +82,7 @@ $gridBreakpoints: (
 
 @media print, screen and (min-width: 1440px) {
     .row {
-        max-width: calc(100% - #{rem(472)});
+        max-width: calc(100% - #{rem(300)});
     }
 }
 

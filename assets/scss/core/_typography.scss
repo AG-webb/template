@@ -1,65 +1,25 @@
 .h1-font {
-    @include font(500, 75, 103%, inherit, 0, $fontSecondary);
-    @include font-media($media-xxl, rem(54), 115%);
-    @include font-media($media-md, rem(34), 112%);
-    @include font-media($media-sm, rem(28), 114%);
-    letter-spacing: -0.04em;
+    @include font(900, 40, 1.1, inherit, 0);
+    @include font-media($media-lg, rem(30), 0);
+    @include font-media($media-sm, rem(25), 150%);
 }
 
 .h2-font {
-    @include font(500, 58, 110%, inherit, 0, $fontSecondary);
-    @include font-media($media-xxl, rem(48), 121%);
-    @include font-media($media-md, rem(27), 111%);
-    @include font-media($media-sm, rem(24), 121%);
-    letter-spacing: -0.04em;
+    @include font(700, 30, 1, inherit, 0);
+    @include font-media($media-lg, rem(25), 0);
 }
 
 .h3-font {
-    @include font(500, 40, 128%, inherit, 0, $fontSecondary);
-    @include font-media($media-xxl, rem(24), 0);
-    @include font-media($media-sm, rem(20), 115%);
-    letter-spacing: -0.04em;
+    @include font(600, 26, 1, inherit, 0);
+    @include font-media($media-lg, rem(22), 0);
 }
 
-.decor-font {
-    @include font(700, 40, 110%, initial, 0, $fontHelper);
-    @include font-media($media-xxl, rem(32), 0);
-    @include font-media($media-md, rem(24), 133%);
-    @include font-media($media-sm, rem(23), 104%);
-}
-
-.title_md {
-    @include font(800, 34, 135%, inherit, 0);
-    @include font-media($media-xxl, rem(24), 133%);
-    @include font-media($media-sm, rem(17), 147%);
+.h4-font {
+    @include font(600, 22, 1, inherit, 0);
+    @include font-media($media-lg, rem(18), 0);
 }
 
 .btn-font {
-    @include font(700, 16, 1, 0, uppercase);
-    @include font-media($media-xxl, rem(14), 0);
-}
-
-.text {
-    @include font(500, 18, 167%, inherit, 0);
-    @include font-media($media-xxl, rem(16), 162%);
-    @include font-media($media-md, rem(15), 168%);
-    @include font-media($media-sm, rem(15), 160%);
-}
-
-.highlight {
-    @include font(800, 21, 152%, inherit, 0);
-    @include font-media($media-xxl, rem(18), 144%);
-    @include font-media($media-sm, rem(17), 147%);
-}
-
-.highlight_sm {
-    @include font(800, 18, 167%, inherit, 0);
-    @include font-media($media-xxl, rem(16), 175%);
-    @include font-media($media-md, rem(17), 147%);
-}
-
-.highlight_md {
-    @include font(800, 26, 142%, inherit, 0);
-    @include font-media($media-xxl, rem(18), 144%);
-    @include font-media($media-sm, rem(17), 147%);
+    @include font(600, 18, 1, 0, 0);
+    @include font-media($media-lg, rem(15), 0);
 }

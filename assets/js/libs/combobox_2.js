@@ -309,7 +309,7 @@ function initComboBox() {
 			multiple = true;
 		}
 
-		target.append(`<select name="${name}" style='display:none' ${multiple ? "multiple='multiple'" : ''}></select>`);
+		target.append(`<select name="${name}" style='display:none' ${multiple ? "multiple='multiple'" : null}></select>`);
 
 		options.each(function () {
 			let selectCurrent = $(this),

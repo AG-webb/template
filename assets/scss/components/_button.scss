@@ -5,109 +5,82 @@
     @extend %align-middle;
     @extend %align-center;
     @extend %user-cursor;
-    @extend  %primary-transition;
+    @extend %primary-transition;
     max-width: 100%;
 
     & > span {
+        @include font(600, 18, 120%, inherit, 0);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
     & > img,& > svg, & > .icon {
-        font-size: rem(22);
-
         &:last-child {
-            margin-left: rem(8);
+            margin-left: rem(10);
         }
 
         &:first-child {
-            margin-right: rem(8);
-        }
-
-        @media (max-width: $media-md) {
-            font-size: rem(16);   
+            margin-right: rem(10);
         }
     }
 
 
     // types ******************************
     &_main {
-        background-color: $color-main;
-        box-shadow: map-get($shadows, 'main');
-        color: #fff;
+        border: rem(1) solid $color-main;
+        background-color: transparent;
+        color: $color-main;
 
-        &-border {
-            border: rem(1) solid rgba(54, 96, 110, 0.1);
-            color: map-get($color-scheme, 'blue');
+        &:hover {
+            background-color: $color-main;
+            color: #fff;
+
+            & > img {
+                filter: brightness(0) invert(1);
+            }
         }
     }
 
-    &_primary {
-        background-color: $color-primary;
-        box-shadow: map-get($shadows, 'primary');
-        color: #fff;
+    &_test {
+        border: rem(1) solid #000;
 
-        &-border {
-            border: rem(1) solid #EF7858;
-            color: $color-primary;
+        &:hover {
+            background-color: #000;
+            color: #fff;
         }
     }
 
     // sizes ***************************
-    &_md {
-        height: rem(52);
-        padding-left: rem(30);
-        padding-right: rem(30);
+    &_sm {
+        height: rem(32);
+        padding-left: rem(12);
+        padding-right: rem(12);
 
-        @media (max-width: $media-xxl) {
-            height: rem(48);
-            padding-left: rem(24);
-            padding-right: rem(24);
-        }
-
-        @media (max-width: $media-md) {
-            height: rem(40);
-            padding-left: rem(16);
-            padding-right: rem(16);
+        & > span {
+            font-size: rem(16);
         }
     }
 
+    &_md {
+        height: rem(48);
+        padding-left: rem(16);
+        padding-right: rem(16);
+    }
+
     &_lg {
+        height: rem(56);
+        padding-left: rem(20);
+        padding-right: rem(20);
+    }
+
+    &_xl {
         height: rem(64);
-        padding-left: rem(30);
-        padding-right: rem(30);
+        padding-left: rem(24);
+        padding-right: rem(24);
 
-        & > img,& > svg, & > .icon {
-            &:last-child {
-                margin-left: rem(11);
-            }
-    
-            &:first-child {
-                margin-right: rem(11);
-            }
-        }
-
-        @media (max-width: $media-xxl) {
-            height: rem(48);
-            padding-left: rem(24);
-            padding-right: rem(24);
-        }
-
-        @media (max-width: $media-md) {
-            height: rem(40);
-            padding-left: rem(16);
-            padding-right: rem(16);
-
-            & > img,& > svg, & > .icon {
-                &:last-child {
-                    margin-left: rem(8);
-                }
-        
-                &:first-child {
-                    margin-right: rem(8);
-                }
-            }
+        & > span {
+            font-size: rem(20);
         }
     }
 }

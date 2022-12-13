@@ -1,21 +1,19 @@
 /*colors*/
 $color-scheme: (
-    'main': #43889C,
-    'main-007': rgba(67, 136, 156, 0.07),
-    'primary': #EF7858,
-    'primary-007': rgba(239, 120, 88, 0.07),
-    'secondary': #282828,
-    'neutral': #828282,
-    'blue': #36606E,
-    'violet': #624882,
-    'green': #408F8B,
-    'white': #fff,
-    'black': #000,
+    'main': #273670,
+    'primary': #52B289,
+    'secondary': #4A4A4A,
+    'neutral': #dddddd,
+    'error': #f3131a,
+    'success': #198754,
+    'white': #ffffff,
+    'black': #000000,
 );
 
 $shadows: (
-    'main':  0px 8px 30px rgba(54, 96, 110, 0.3),
-    'primary': 0px 8px 30px rgba(239, 120, 88, 0.3),
+    'xs': 0 .125rem .25rem rgba(#000, .075),
+    'sm': 0 .5rem 1rem rgba(#000, .15),
+    'md': 0 1rem 3rem rgba(#000, .175),
 );
 
 $color-main: map-get($color-scheme, 'main');
@@ -27,22 +25,19 @@ $z-indexes: (
     'toast',
     'modal',
     'header',
-    'header-content',
-    'header-menu',
     'sticky-element',
     'dropdown',
 );
 
 /* font */
 $defaultHtmlFont: "Tahoma", sans-serif;
-$fontPrimary: 'Raleway';
-$fontSecondary: 'Mitr';
-$fontHelper: 'DancingScript';
+$fontSecondary: 'Mardoto';
+$fontPrimary: 'Montserrat';
 $baseFontFamily: $fontPrimary;
 
 /*grid dimensions*/
-$mediaXxlLarge: 1440px;
-$mediaXlLarge: 1366px;
+$mediaXxlLarge: 1366px;
+$mediaXlLarge: 1280px;
 $mediaLarge: 1024px;
 $mediaMedium: 768px;
 
@@ -52,7 +47,7 @@ $baseFontSize : 16;
 /* grid settings */
 $columnsSize: 12; //count of columns
 $columnSpace: rem(12);
-$columnSpaceSm: rem(8);
+$columnSpaceSm: rem(16);
 
 /*screenSizes*/
 $media-xxl: 1439px;

@@ -2,8 +2,7 @@
     font-family: "icomoon";
     src: url("../fonts/icons/icomoon.eot?8vdrqo");
     src: url("../fonts/icons/icomoon.eot?8vdrqo#iefix") format("embedded-opentype"),
-        url("../fonts/icons/icomoon.ttf?8vdrqo") format("truetype"),
-        url("../fonts/icons/icomoon.woff?8vdrqo") format("woff"),
+        url("../fonts/icons/icomoon.ttf?8vdrqo") format("truetype"), url("../fonts/icons/icomoon.woff?8vdrqo") format("woff"),
         url("../fonts/icons/icomoon.svg?8vdrqo#icomoon") format("svg");
     font-weight: normal;
     font-style: normal;
@@ -26,84 +25,27 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-arrow-left:before {
+.icon-arrow-down:before {
     content: "\e900";
 }
-.icon-arrow-right:before {
+.icon-arrow-left:before {
     content: "\e901";
 }
-.icon-chat:before {
+.icon-arrow-right:before {
     content: "\e902";
 }
-.icon-chevron-down:before {
+.icon-arrow-up:before {
     content: "\e903";
 }
-.icon-chevron-left:before {
+.icon-chevron-down:before {
     content: "\e904";
 }
-.icon-chevron-right:before {
+.icon-chevron-left:before {
     content: "\e905";
 }
-.icon-chevron-up:before {
+.icon-chevron-right:before {
     content: "\e906";
 }
-.icon-clock:before {
+.icon-chevron-up:before {
     content: "\e907";
-}
-.icon-close:before {
-    content: "\e908";
-}
-.icon-close-sm:before {
-    content: "\e909";
-}
-.icon-coin:before {
-    content: "\e90a";
-}
-.icon-date:before {
-    content: "\e90b";
-}
-.icon-education:before {
-    content: "\e90c";
-}
-.icon-fb:before {
-    content: "\e90d";
-}
-.icon-link:before {
-    content: "\e90e";
-}
-.icon-linkedin:before {
-    content: "\e90f";
-}
-.icon-oil:before {
-    content: "\e910";
-}
-.icon-photo:before {
-    content: "\e911";
-}
-.icon-pin:before {
-    content: "\e912";
-}
-.icon-play:before {
-    content: "\e913";
-}
-.icon-send:before {
-    content: "\e914";
-}
-.icon-star:before {
-    content: "\e915";
-}
-.icon-techno:before {
-    content: "\e916";
-}
-.icon-tower:before {
-    content: "\e917";
-}
-.icon-twitter:before {
-    content: "\e918";
-}
-.icon-video:before {
-    content: "\e919";
-}
-.icon-youtube:before {
-    content: "\e91a";
 }
