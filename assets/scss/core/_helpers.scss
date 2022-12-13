@@ -56,11 +56,11 @@
 }
 
 .hide {
-    display: none !important;
+    display: none;
 }
 
 .dn {
-    display: none;
+    display: none !important;
 }
 
 .hidden {
@@ -79,6 +79,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.round-badge {
+    @extend %flex;
+    @extend %align-middle;
+    @extend %align-center;
+    border-radius: 50%;
 }
 
 // Colors

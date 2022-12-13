@@ -3,6 +3,13 @@ $(document).ready(function () {
     tabsInit();
     dynamicAppendInit();
 
+    $(".burger").on("click", function() {
+        $(this).toggleClass("active");
+        $('.header-menu').toggleClass("active");
+
+        ScrollNone();
+    });
+
     // MODAL ***************************
     $("[data-modal]").on("click", function () {
         let targetModal = $(`.${$(this).attr("data-modal")}`);
@@ -16,8 +23,6 @@ $(document).ready(function () {
 
         ScrollNone();
     });
-
-    console.log($("select[name='multiselect']").val());
 
     // TOAST ****************************
     $(".toast-trigger").on("click", function () {

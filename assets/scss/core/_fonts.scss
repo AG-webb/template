@@ -2,25 +2,14 @@
 
 $fonts:  (
 //  fontName    fontType   fontWeight  fontStyle
-    $fontSecondary 'Regular' normal normal,
-    $fontPrimary 'BlackItalic' 900 italic,
-    $fontPrimary 'Black' 900 normal,
-    $fontPrimary 'ExtraBoldItalic' 800 italic,
     $fontPrimary 'ExtraBold' 800 normal,
-    $fontPrimary 'BoldItalic' bold italic,
     $fontPrimary 'Bold' bold normal,
-    $fontPrimary 'SemiBoldItalic' 600 italic,
     $fontPrimary 'SemiBold' 600 normal,
-    $fontPrimary 'MediumItalic' 500 italic,
     $fontPrimary 'Medium' 500 normal,
-    $fontPrimary 'Italic' normal italic,
     $fontPrimary 'Regular' normal normal,
-    $fontPrimary 'LightItalic' 300 italic,
-    $fontPrimary 'Light' 300 normal,
-    $fontPrimary 'ExtraLightItalic' 200 italic,
-    $fontPrimary 'ExtraLight' 200 normal,
-    $fontPrimary 'ThinItalic' 100 italic,
-    $fontPrimary 'Thin' 100 normal,
+    $fontSecondary 'Medium' 500 normal,
+    $fontSecondary 'Regular' normal normal,
+    $fontHelper 'Bold' bold normal,
 );
 
 @each $type in $fonts {
