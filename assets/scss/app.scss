@@ -1,4 +1,4 @@
-// node-sass -o assets/css assets/scss -w --output-style compressed
+// sass --watch --style=compressed assets/scss:assets/css
 @import "utils/_module";
 @import "core/_icons";
 @import "components/_button";

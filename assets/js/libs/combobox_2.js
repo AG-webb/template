@@ -56,7 +56,9 @@ function initComboBox() {
 				if ($(selectboxOptionFocused).length) {
 					$(selectboxOptionFocused).click();
 				} else {
-					addUserOption();
+					if($(this).hasClass("allow-custom-options")) {
+						addUserOption();
+					}
 				}
 
 				resetSearchInput();
@@ -166,18 +168,20 @@ function initComboBox() {
 		const addMultiOption = (target, newOption) => {
 			multiData = [...multiData, newOption];
 			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
-	
+			
 			target.closest(selectbox).find("select").val(multiValuesArray).change();
 			target.closest(selectbox).attr('data-combo-value', multiValues);
-	
+			
 			if (target.closest(selectbox).hasClass(tagModeClass)) {
 				let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
 				target.closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
 			} else {
 				target.closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
-	
+				
 				if (multiData.length > maxItemsShow) {
-					target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
+					const maxItemsShowText = getMaxItemsShowText(multiTexts);
+					const restOptionsCount = multiData.length - maxItemsShow;
+					target.closest(selectbox).find(selectboxSelectedWrap).text(maxItemsShowText + ` +${restOptionsCount}`);
 				}
 			}
 	
@@ -196,7 +200,9 @@ function initComboBox() {
 	
 			if (multiData.length) {
 				if (multiData.length > maxItemsShow && !target.closest(selectbox).hasClass(tagModeClass)) {
-					target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
+					const maxItemsShowText = getMaxItemsShowText(multiTexts);
+					const restOptionsCount = multiData.length - maxItemsShow;
+					target.closest(selectbox).find(selectboxSelectedWrap).text(maxItemsShowText + ` +${restOptionsCount}`);
 				} else {
 					if (target.closest(selectbox).hasClass(tagModeClass)) {
 						let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
@@ -309,7 +315,7 @@ function initComboBox() {
 			multiple = true;
 		}
 
-		target.append(`<select name="${name}" style='display:none' ${multiple ? "multiple='multiple'" : null}></select>`);
+		target.append(`<select name="${name}" style='display:none' ${multiple ? "multiple='multiple'" : ''}></select>`);
 
 		options.each(function () {
 			let selectCurrent = $(this),
@@ -398,6 +404,10 @@ function initComboBox() {
 		selectedTags += "</div>";
 
 		return selectedTags;
+	}
+
+	function getMaxItemsShowText(text) {
+		return text.split(", ").slice(0, maxItemsShow).join(", ");
 	}
 }
 

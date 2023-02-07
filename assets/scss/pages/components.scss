@@ -81,3 +81,10 @@
         margin-right: rem(24);
     }
 }
+
+ul {
+    li {
+        margin-bottom: rem(10);
+        list-style-position: inside;
+    }
+}

@@ -164,6 +164,15 @@
             <!-- Select -->
             <div class="component">
                 <h1 class="h1-font">Custom Select</h1>
+                <h2 class="h2-font">
+                    Classnames for config
+                </h2>
+                <ul>
+                    <li><strong>"multiple"</strong> - to be able to select more that 1 option</li>
+                    <li><strong>"searchable"</strong> - for search functionality</li>
+                    <li><strong>"allow-custom-options"</strong> - for user created options(need to be set with <strong>"searchable"</strong> class)</li>
+                    <li><strong>"tag-mode"</strong> - for tags template</li>
+                </ul>
                 <!-- Single -->
                 <div class="component__wrap">
                     <h2 class="h2-font">Single</h2>
@@ -218,7 +227,7 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Multiple With Search</h2>
                     <div class="custom-select">
-                        <div class="combo-box multiple searchable" data-combo-name="multiselectSearch">
+                        <div class="combo-box multiple searchable allow-custom-options" data-combo-name="multiselectSearch">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Multiple Select Placeholder</span>
@@ -229,7 +238,7 @@
                                     <div class="combo-option" data-option-value="1">Bmw</div>
                                     <div class="combo-option" data-option-value="2">Mercedes</div>
                                     <div class="combo-option" data-option-value="3">Volvo</div>
-                                    <div class="combo-option" data-option-value="4">Wolksvagen</div>
+                                    <div class="combo-option" data-option-value="4">Volkswagen</div>
                                     <div class="combo-option" data-option-value="5">Opel</div>
                                     <div class="combo-option" data-option-value="6">Nissan</div>
                                     <div class="combo-option" data-option-value="7">Toyota</div>
