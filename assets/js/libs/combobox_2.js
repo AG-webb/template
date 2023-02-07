@@ -336,7 +336,7 @@ function initComboBox() {
 					optionCurrent.attr("selected", true);
 					
 					if(target.hasClass("multiple")) {
-						// DUPLICATED CODE NEED TO FIX THIS!!!!!!!!!! ***************************************
+						// DUPLICATED CODE NEED TO REFACTOR THIS!!!!!!!!!! ***************************************
 						multiData = [...multiData, {value, text}];
 						let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
 				
@@ -349,7 +349,9 @@ function initComboBox() {
 							target.closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
 				
 							if (multiData.length > maxItemsShow) {
-								target.closest(selectbox).find(selectboxSelectedWrap).text(multiData.length + " selected");
+								const maxItemsShowText = getMaxItemsShowText(multiTexts);
+								const restOptionsCount = multiData.length - maxItemsShow;
+								target.closest(selectbox).find(selectboxSelectedWrap).text(maxItemsShowText + ` +${restOptionsCount}`);
 							}
 						}
 						// **************************************************************************************************

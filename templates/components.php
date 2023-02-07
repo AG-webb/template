@@ -235,8 +235,8 @@
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
-                                    <div class="combo-option" data-option-value="1">Bmw</div>
-                                    <div class="combo-option" data-option-value="2">Mercedes</div>
+                                    <div class="combo-option selected" data-option-value="1">Bmw</div>
+                                    <div class="combo-option selected" data-option-value="2">Mercedes</div>
                                     <div class="combo-option" data-option-value="3">Volvo</div>
                                     <div class="combo-option" data-option-value="4">Volkswagen</div>
                                     <div class="combo-option" data-option-value="5">Opel</div>
