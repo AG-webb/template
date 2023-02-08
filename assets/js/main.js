@@ -24,6 +24,14 @@ $(document).ready(function () {
         toastMessage("Toast Message", "default");
     });
 
+    // DATEPICKER ************************
+    $(".single-datepicker input").datepicker({
+        dateFormat: "dd/mm/yy",
+        onSelect: (date, inst) => {
+            console.log("Single date Selected:", date);
+        }
+    });
+
     // SWITCHER *************************
     $(".switcher__item").on("click", function () {
         if (!$(this).closest(".switcher").hasClass("switcher_multiple")) {

@@ -1,0 +1,110 @@
+.custom-datepicker {
+    input {
+        width: 100%;
+        height: rem(48);
+    }
+}
+
+.ui-datepicker.ui-widget.ui-widget-content {
+    border: 0;
+    border-radius: rem(24);
+    background-color: #fff;
+    color: inherit;
+    padding: rem(30);
+    @include font(normal, 16, 1, inherit, 0);
+    box-shadow: map-get($shadows, 'md');
+    width: rem(350);
+
+    .ui-datepicker-header {
+        padding: 0 0 rem(15) 0;
+        border-radius: 0;
+        border: 0;
+        color: inherit;
+        font-weight: medium;
+        background-color: #fff;
+
+        .ui-corner-all {
+            top: 0;
+            width: initial;
+            height: initial;
+            @extend %user-cursor;
+            
+            &.ui-datepicker-prev {
+                left: 0;
+
+                &::before {
+                    @include font-icon("\e901");
+                    font-size: rem(24);
+                    display: block;
+                }
+            }
+            &.ui-datepicker-next {
+                right: 0;
+
+                &::before {
+                    @include font-icon("\e902");
+                    font-size: rem(24);
+                    display: block;
+                }
+            }
+            &.ui-state-hover {
+                background-color: #fff;
+                border: 0;
+            }
+
+            span {
+                display: none;
+            }
+        }
+
+        .ui-datepicker-title {
+            margin: 0 rem(32);
+            line-height: rem(24);
+            font-size: rem(18);
+
+            .ui-datepicker-month {
+                
+            }
+            .ui-datepicker-year {
+
+            }
+        }
+    }
+    .ui-datepicker-calendar {
+        margin: 0;
+        font-size: inherit;
+        table-layout: fixed;
+
+        th {
+            padding: 0 0 rem(10) 0;
+            color: #dddddd;
+        }
+        td {
+            padding: 0;
+
+            .ui-state-default {
+                border: 0;
+                background-color: transparent;
+                color: inherit;
+                font-weight: inherit;
+                text-align: center;
+                height: rem(41.42);
+                line-height: rem(41.42);
+                border-radius: 50%;
+                font-weight: 500;
+                padding: 0;
+
+                &.ui-state-active, &.ui-state-hover {
+                    background-color: #52B289;
+                    color: #fff;
+                }
+            }
+
+            &.ui-datepicker-today {
+                .ui-state-default {
+                    color: #273670;
+                }
+            }
+        }
+    }
+}

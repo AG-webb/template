@@ -442,6 +442,21 @@
                     </label>
                 </div>
             </div>
+            
+            <!-- Jquery Datepicker -->
+            <div class="component">
+                <h1 class="h1-font">Custom Datepicker</h1>
+                <div class="component__wrap">
+                    <h2 class="h2-font">Single</h2>
+                    <div class="single-datepicker custom-datepicker">
+                        <div class="form-field form-field_md">
+                            <div class="form-field__target">
+                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

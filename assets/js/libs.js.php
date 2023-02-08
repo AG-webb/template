@@ -6,3 +6,5 @@
     // require("libs/combobox.js");
     echo "\n";
     require("libs/combobox_2.js");
+    echo "\n";
+    require("libs/jquery-ui-datepicker.min.js");
