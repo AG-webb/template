@@ -39,7 +39,10 @@ $(document).ready(function () {
     });
 
     $('.range-datepicker input').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        let startDate = picker.startDate.format('DD/MM/YYYY');
+        let endDate = picker.endDate.format('DD/MM/YYYY');
+        
+        $(this).val(startDate + ' - ' + endDate);
     });
 
     // SWITCHER *************************

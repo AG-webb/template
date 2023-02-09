@@ -105,7 +105,7 @@ function initComboBox() {
 				}
 
 				closeDropdown();
-				$(this).closest(selectbox).attr('data-combo-value', $(this).attr(optionAttrValue));
+				$(this).closest(selectbox).attr(attrValue, $(this).attr(optionAttrValue));
 				$(this).closest(selectbox).find("select").val($(this).attr(optionAttrValue)).change();
 				$(this).closest(selectbox).find(selectboxSelectedWrap).html($(this).html());
 			});
@@ -114,7 +114,7 @@ function initComboBox() {
 		// Multiple
 		if (selectDiv.hasClass("multiple")) {
 			// Sync multiData array with default selected options
-			if(selectDiv.attr('data-combo-value')) {
+			if(selectDiv.attr(attrValue)) {
 				selectDiv.find(selectboxOption + ".selected").each(function() {
 					let text = $(this).text();
 					let value = $(this).attr(optionAttrValue);
@@ -170,7 +170,7 @@ function initComboBox() {
 			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
 			
 			target.closest(selectbox).find("select").val(multiValuesArray).change();
-			target.closest(selectbox).attr('data-combo-value', multiValues);
+			target.closest(selectbox).attr(attrValue, multiValues);
 			
 			if (target.closest(selectbox).hasClass(tagModeClass)) {
 				let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
@@ -195,8 +195,8 @@ function initComboBox() {
 			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
 	
 			target.closest(selectbox).find("select").val(multiValuesArray).change();
-			target.closest(selectbox).attr('data-combo-value', multiValues);
-			target.closest(selectbox).find(selectboxOption + `[data-option-value="${value}"]`).removeClass('selected');
+			target.closest(selectbox).attr(attrValue, multiValues);
+			target.closest(selectbox).find(selectboxOption + `[${optionAttrValue}="${value}"]`).removeClass('selected');
 	
 			if (multiData.length) {
 				if (multiData.length > maxItemsShow && !target.closest(selectbox).hasClass(tagModeClass)) {
@@ -207,14 +207,14 @@ function initComboBox() {
 					if (target.closest(selectbox).hasClass(tagModeClass)) {
 						let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
 						target.closest(selectbox).find(selectboxSelectedWrap).html(tagsTemplate);
-						target.closest(selectbox).find(selectboxOption + `[data-option-value="${value}"]`).removeClass('selected');
+						target.closest(selectbox).find(selectboxOption + `[${optionAttrValue}="${value}"]`).removeClass('selected');
 					} else {
 						target.closest(selectbox).find(selectboxSelectedWrap).text(multiTexts);
 					}
 				}
 			} else {
 				target.closest(selectbox).find(selectboxSelectedWrap).html(placeholderElement);
-				target.closest(selectbox).removeAttr('data-combo-value');
+				target.closest(selectbox).removeAttr(attrValue);
 				target.closest(selectbox).find(selectboxSearch).focus();
 			}
 	
@@ -340,7 +340,7 @@ function initComboBox() {
 						multiData = [...multiData, {value, text}];
 						let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
 				
-						target.closest(selectbox).attr('data-combo-value', multiValues);
+						target.closest(selectbox).attr(attrValue, multiValues);
 				
 						if (target.closest(selectbox).hasClass(tagModeClass)) {
 							let tagsTemplate = getTagsTemplate(multiData, tagElementClass);
@@ -395,13 +395,13 @@ function initComboBox() {
 		array.map(({ value, text }) => {
 			selectedTags = selectedTags +
 				`<div class="${elementClass}" ${tagAttrValue}="${value}">
-				<div class="${elementClass}__value">
-					${text}
-				</div>
-				<div class="${elementClass}__remove">
-					<img src="assets/img/icons/close-white.svg" alt="close">
-				</div>
-			</div>`
+					<div class="${elementClass}__value">
+						${text}
+					</div>
+					<div class="${elementClass}__remove">
+						<img src="assets/img/icons/close-white.svg" alt="close">
+					</div>
+				</div>`
 		});
 		selectedTags += "</div>";
 
