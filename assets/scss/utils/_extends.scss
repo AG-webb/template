@@ -124,3 +124,8 @@
 %overflow-radius {
     -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
+
+%clip-text {
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+}
