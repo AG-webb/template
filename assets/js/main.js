@@ -32,6 +32,16 @@ $(document).ready(function () {
         }
     });
 
+    $('.range-datepicker input').daterangepicker({
+        autoApply: true,
+        autoUpdateInput: false,
+        parentEl: ".range-datepicker",
+    });
+
+    $('.range-datepicker input').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
     // SWITCHER *************************
     $(".switcher__item").on("click", function () {
         if (!$(this).closest(".switcher").hasClass("switcher_multiple")) {

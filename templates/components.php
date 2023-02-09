@@ -456,6 +456,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="component__wrap">
+                    <h2 class="h2-font">Range picker</h2>
+                    <div class="range-datepicker custom-datepicker">
+                        <div class="form-field form-field_md">
+                            <div class="form-field__target">
+                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
