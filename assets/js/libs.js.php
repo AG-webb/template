@@ -5,7 +5,7 @@
     echo "\n";
     require("libs/moment.min.js");
     echo "\n";
-    require("libs/combobox_2.js");
+    require("libs/combobox.js");
     echo "\n";
     require("libs/jquery-ui-datepicker.min.js");
     echo "\n";
