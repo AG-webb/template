@@ -1,6 +1,6 @@
 @function strip-unit($number) {
     @if type-of($number) == "number" and not unitless($number) {
-        @return $number / ($number * 0 + 1);
+        @return calc($number / ($number * 0 + 1));
     }
     @return $number;
 }
@@ -13,7 +13,7 @@
     @if (unitless($context)) {
         $context: $context * 1;
     }
-    @return $rem / $context * 1rem;
+    @return calc($rem / $context * 1rem);
 }
 
 // Z-index Sort Function

@@ -51,16 +51,16 @@
                 <h1 class="h1-font">Button Sizes</h1>
                 <div class="btns">
                     <button class="btn btn_test btn_sm">
-                        <span>Buttton Sm</span>
+                        <span>Button Sm</span>
                     </button>
                     <button class="btn btn_test btn_md">
-                        <span>Buttton Md</span>
+                        <span>Button Md</span>
                     </button>
                     <button class="btn btn_test btn_lg">
-                        <span>Buttton Lg</span>
+                        <span>Button Lg</span>
                     </button>
                     <button class="btn btn_test btn_xl">
-                        <span>Buttton Xl</span>
+                        <span>Button Xl</span>
                     </button>
                 </div>
             </div>

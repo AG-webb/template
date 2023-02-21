@@ -1,6 +1,5 @@
 .btn {
     position: relative;
-    padding: rem(4);
     @extend %inline-flex;
     @extend %align-middle;
     @extend %align-center;

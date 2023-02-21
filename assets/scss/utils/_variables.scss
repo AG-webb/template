@@ -20,7 +20,7 @@ $color-main: map-get($color-scheme, 'main');
 $color-primary: map-get($color-scheme, 'primary');
 $color-secondary: map-get($color-scheme, 'secondary');
 
-// Z-index Order (From Hight To Low)
+// Z-index Order (From Hight To Low) starts with 101
 $z-indexes: (
     'toast',
     'modal',
@@ -34,6 +34,7 @@ $defaultHtmlFont: "Tahoma", sans-serif;
 $fontSecondary: 'Mardoto';
 $fontPrimary: 'Montserrat';
 $baseFontFamily: $fontPrimary;
+$baseFontSize: 16;
 
 /*grid dimensions*/
 $mediaXxlLarge: 1366px;
@@ -41,10 +42,7 @@ $mediaXlLarge: 1280px;
 $mediaLarge: 1024px;
 $mediaMedium: 768px;
 
-/*font settings*/
-$baseFontSize : 16;
-
-/* grid settings */
+/* grid  */
 $columnsSize: 12; //count of columns
 $columnSpace: rem(12);
 $columnSpaceSm: rem(16);

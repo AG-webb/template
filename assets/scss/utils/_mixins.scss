@@ -2,29 +2,29 @@
 
 @mixin font($weight, $sizeValue, $line, $color, $textTransform, $fontFamily: $baseFontFamily) {
     @if $textTransform != 0 and $weight != 0 and $color != 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
         color: $color;
         text-transform: $textTransform;
     } @else if $textTransform == 0 and $weight != 0 and $color == 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
     } @else if $textTransform != 0 and $weight == 0 and $color == 0 {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
         text-transform: $textTransform;
     } @else if $textTransform == 0 and $weight == 0 and $color != 0 {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
         color: $color;
     } @else if $textTransform != 0 and $weight != 0 and $color == 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
         text-transform: $textTransform;
     } @else if $textTransform != 0 and $weight == 0 and $color != 0 {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
         color: $color;
         text-transform: $textTransform;
     } @else if $textTransform == 0 and $weight != 0 and $color != 0 {
-        font: $weight ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: $weight calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
         color: $color;
     } @else {
-        font: ($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
+        font: calc($sizeValue / 16) + rem/$line $fontFamily, $defaultHtmlFont;
     }
 }
 
@@ -190,7 +190,7 @@
     -webkit-backface-visibility: hidden;
 }
 
-@mixin scroll-container($spaces) {
+@mixin scroll-container($spaces: 0) {
     overflow: auto;
     -ms-scroll-snap-type: both mandatory;
     scroll-snap-type: both mandatory;
@@ -258,7 +258,6 @@
     overflow: hidden;
 }
 
-
 @mixin font-icon($content) {
     content: $content;
     font-family: "icomoon" !important;
@@ -270,36 +269,35 @@
     line-height: 1;
 }
 
+@mixin horizontal-decor($path) {
+    position: relative;
 
-@mixin horizontal-decore($path) {
-	position: relative;
-
-	&::after {
-		content: "";
-		position: absolute;
-		left: 0;
-		width: 100%;
-		height: rem(2);
-		background-image: url($path);
-		background-repeat: repeat-x;
-		background-size: contain;
-		@extend %not-selectable;
-	}
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: rem(2);
+        background-image: url($path);
+        background-repeat: repeat-x;
+        background-size: contain;
+        @extend %not-selectable;
+    }
 }
 
-@mixin vertical-decore($path) {
-	position: relative;
+@mixin vertical-decor($path) {
+    position: relative;
 
-	&::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		width: rem(2);
-		height: 100%;
-		background-image: url($path);
-		background-repeat: repeat-y;
-		background-position: center top;
-		background-size: contain;
-		@extend %not-selectable;
-	}
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: rem(2);
+        height: 100%;
+        background-image: url($path);
+        background-repeat: repeat-y;
+        background-position: center top;
+        background-size: contain;
+        @extend %not-selectable;
+    }
 }

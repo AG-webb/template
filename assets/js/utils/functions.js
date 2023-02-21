@@ -59,12 +59,24 @@ function tabsInit() {
     });
 }
 
-let _toastCounter = 0;
+function generateId(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+    }
+    return result;
+}
+
 function toastMessage(message, type = "default") {
     let toastContainer = `<div class="toast-messages"></div>`;
+    const toastId = generateId(7);
 
     let toastBody = `
-    <div class="toast-message toast-message_${_toastCounter} ${type}">
+    <div class="toast-message ${type}" data-toast-id="${toastId}">
         <div class="toast-message-icon">
             <img src="assets/img/icons/success.svg" alt="success">
         </div>
@@ -78,20 +90,19 @@ function toastMessage(message, type = "default") {
         $("main").append(toastContainer);
     }
     $(".toast-messages").append(toastBody);
-    _toastCounter += 1;
 
-    autoRemoveToast(_toastCounter);
+    autoRemoveToast(toastId);
 }
 
-function autoRemoveToast(index) {
+function autoRemoveToast(id) {
     new Promise(function (resolve, reject) {
         setTimeout(function () {
-            $(`.toast-message_${index - 1}`).addClass("toast-message_hidden");
+            $(`[data-toast-id="${id}"]`).addClass("toast-message_hidden");
             resolve();
         }, 4000);
     }).then(function () {
         setTimeout(function () {
-            $(`.toast-message_${index - 1}`).remove();
+            $(`[data-toast-id="${id}"]`).remove();
 
             if ($(".toast-message").length == 0) {
                 $(".toast-messages").remove();
@@ -100,8 +111,8 @@ function autoRemoveToast(index) {
     });
 }
 
-function removeToast(closeElement, index) {
-    if (!index) {
+function removeToast(closeElement, id) {
+    if (!id) {
         let toast = closeElement.closest(".toast-message");
 
         toast.addClass("toast-message_hidden");
@@ -110,10 +121,10 @@ function removeToast(closeElement, index) {
             toast.remove();
         }, 500);
     } else {
-        $(`.toast-message_${index - 1}`).addClass("toast-message_hidden");
+        $(`[data-toast-id="${id}"]`).addClass("toast-message_hidden");
 
         setTimeout(function () {
-            $(`.toast-message_${index - 1}`).remove();
+            $(`[data-toast-id="${id}"]`).remove();
         }, 500);
     }
 }

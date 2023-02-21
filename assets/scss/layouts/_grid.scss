@@ -90,13 +90,13 @@ $gridBreakpoints: (
     @media print, screen and (min-width: #{nth($type, 2)}) {
         @for $i from 1 through $columnsSize {
             .#{nth($type, 1)}-#{$i} {
-                -ms-flex: 0 0 100% / $columnsSize * $i;
-                flex: 0 0 100% / $columnsSize * $i;
-                max-width: 100% / $columnsSize * $i;
+                -ms-flex: 0 0 calc(100% / $columnsSize * $i);
+                flex: 0 0 calc(100% / $columnsSize * $i);
+                max-width: calc(100% / $columnsSize * $i);
             }
 
             .#{nth($type, 1)}-offset-#{$i} {
-                margin-left: calc(#{100% / $columnsSize * $i});
+                margin-left: calc(100% / $columnsSize * $i);
             }
         }
 
@@ -380,6 +380,11 @@ $gridBreakpoints: (
         .#{nth($type, 1)}-flex {
             display: -ms-flexbox;
             display: flex;
+        }
+
+        .#{nth($type, 1)}-inline-flex {
+            display: -ms-inline-flexbox;
+            display: inline-flex;
         }
 
         .#{nth($type, 1)}-flex-auto {
