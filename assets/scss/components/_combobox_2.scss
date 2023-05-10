@@ -12,7 +12,16 @@
                 }
             }
         }
+        
+        &:not(.multiple):not(.tag-mode) {
+            .combo-box-selected.active {
+                .combo-box-selected-wrap {
+                    display: none;
+                }
+            }
+        }
     }
+
 
     &.tag-mode {
         .combo-box-selected {
