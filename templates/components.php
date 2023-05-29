@@ -137,11 +137,11 @@
                     </button>
                 </form>
             </div>
-            
+
             <!-- Shadows -->
             <div class="component">
                 <h1 class="h1-font">Shadows List</h1>
-    
+
                 <div class="shadow-item shadow-xs h2-font">
                     Shadow Xs
                 </div>
@@ -152,7 +152,7 @@
                     Shadow Md
                 </div>
             </div>
-    
+
             <!-- Toast -->
             <div class="component">
                 <h1 class="h1-font">Display Toast Messages</h1>
@@ -160,7 +160,7 @@
                     <span>Display Toast</span>
                 </button>
             </div>
-    
+
             <!-- Select -->
             <div class="component">
                 <h1 class="h1-font">Custom Select</h1>
@@ -231,7 +231,7 @@
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Multiple Select Placeholder</span>
-                                </div>      
+                                </div>
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
@@ -255,7 +255,7 @@
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Tags Select Placeholder</span>
-                                </div>       
+                                </div>
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
@@ -269,7 +269,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- Accordion -->
             <div class="component">
                 <h1 class="h1-font">Accordion</h1>
@@ -316,7 +316,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- Modal -->
             <div class="component">
                 <h1 class="h1-font">Modal. Possible classes - "from-left", "from-right", "center-modal", "error", "success"</h1>
@@ -442,7 +442,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <!-- Jquery Datepicker -->
             <div class="component">
                 <h1 class="h1-font">Custom Datepicker</h1>
@@ -467,10 +467,44 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Jquery Datepicker -->
+            <div class="component">
+                <h1 class="h1-font">Popover Component</h1>
+                <div class="component__wrap">
+                    <div class="lang-switcher popover-container">
+                        <div class="lang-switcher__current popover-trigger">
+                            <span>En</span>
+                            <i class="icon icon-chevron-down"></i>
+                        </div>
+                        <div class="lang-switcher__dropdown popover-wrap">
+                            <div class="lang-switcher__dropdown-body popover">
+                                <div class="lang-switcher__dropdown-items">
+                                    <div class="lang-switcher__item active"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">Ru</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
-</div>
 </div>
 
 

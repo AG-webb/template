@@ -129,6 +129,73 @@ function removeToast(closeElement, id) {
     }
 }
 
+function popoverSlideInit(target) {
+    let targetContainer = target.closest(".popover-container");
+    let targetWrap = target.closest(".popover-wrap");
+    let targetHeight;
+    let distance = 0;
+    let isHeadingTouched = false;
+    let startPositionY;
+
+    setTimeout(() => {
+        targetHeight = target.outerHeight();
+    }, 300);
+
+    target[0].addEventListener('touchstart', dragElement);
+    target[0].addEventListener('touchmove', draggingElement);
+    target[0].addEventListener('touchend', draggedElement);
+
+    function dragElement(e) {
+        isHeadingTouched = false;
+        startPositionY = e.touches[0].clientY;
+        let offsetTop = target[0].offsetTop;
+        let paddingTop = parseInt(target.css("padding-top"));
+        let elementTriggerPart = offsetTop + paddingTop;
+
+        if (startPositionY <= elementTriggerPart && startPositionY >= offsetTop) {
+            isHeadingTouched = true;
+        }
+    }
+
+    function draggingElement(e) {
+        let posY = e.touches[0].clientY;
+
+        if (isHeadingTouched) {
+            targetWrap.addClass("dragging");
+            distance = posY - startPositionY;
+
+            if (distance > 0) {
+                target.css("transform", `translateY(${distance}px)`);
+            } else {
+                target.css({
+                    "transform": `translateY(${distance * 0.1}px)`,
+                    "--negative-offset": `${distance * -0.15}px`,
+                });
+            }
+        }
+    }
+
+    function draggedElement(e) {
+        targetWrap.removeClass("dragging");
+        target.removeAttr("style");
+        let targetHeightHalf = target.outerHeight() / 2;
+        let targetWrapHeight = targetWrap.height();
+
+        if(target.outerHeight() > targetWrapHeight) {
+            if (distance > (targetWrapHeight / 2)) {
+                targetContainer.removeClass("active");
+                ScrollNone();
+            }
+        } else {
+            if (distance > targetHeightHalf) {
+                targetContainer.removeClass("active");
+                ScrollNone();
+            }
+        }
+        distance = 0;
+    }
+}
+
 function headerFixed() {
     let st = $(this).scrollTop();
 
@@ -140,7 +207,7 @@ function headerFixed() {
 }
 
 function ScrollNone() {
-    if ($(".modal").hasClass("active")) {
+    if ($(".modal, .popover-container").hasClass("active")) {
         $("body").addClass("locked");
     } else {
         $("body").removeClass("locked");

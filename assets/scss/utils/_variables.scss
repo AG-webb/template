@@ -23,6 +23,7 @@ $color-secondary: map-get($color-scheme, 'secondary');
 // Z-index Order (From Hight To Low) starts with 101
 $z-indexes: (
     'toast',
+    'header-dropdown',
     'modal',
     'header',
     'sticky-element',
