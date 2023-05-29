@@ -281,7 +281,11 @@
         background-image: url($path);
         background-repeat: repeat-x;
         background-size: contain;
-        @extend %not-selectable;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
     }
 }
 
@@ -298,6 +302,10 @@
         background-repeat: repeat-y;
         background-position: center top;
         background-size: contain;
-        @extend %not-selectable;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
     }
 }
