@@ -1,4 +1,5 @@
-// sass --watch --style=compressed assets/scss:assets/css
+// sass --watch --style=compressed assets/scss:assets/
+// sass --no-source-map --watch --style=compressed assets/scss:assets/css
 @import "utils/_module";
 @import "core/_icons";
 @import "components/_button";
