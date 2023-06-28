@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
-        <meta name="referrer" content="origin-when-cross-origin" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="referrer" content="origin-when-cross-origin">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Demo</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="57x57" href="assets/img/fav/apple-icon-57x57.png">
@@ -27,8 +27,8 @@
     </head>
     <body>
         <!-- First Needed styles -->
-        <link rel="preload" as="style" href="assets/css/top.css" />
-        <link rel="stylesheet" href="assets/css/top.css" />
+        <link rel="preload" as="style" href="assets/css/top.css">
+        <link rel="stylesheet" href="assets/css/top.css">
 
         <?php require("templates/header.php"); ?>
 
@@ -39,7 +39,7 @@
         <?php require("templates/footer.php"); ?>
 
         <!-- Rest Styles -->
-        <link rel="stylesheet" href="assets/css/libs.css.php" />
+        <link rel="stylesheet" href="assets/css/libs.css.php">
         <link rel="stylesheet" href="assets/css/app.css">
         <link rel="stylesheet" href="assets/css/bottom.css">
 
