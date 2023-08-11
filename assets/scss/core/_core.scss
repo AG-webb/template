@@ -32,16 +32,6 @@ html {
     @media (max-width: $media-sm) {
         font-size: 16px;
     }
-
-    &.no-touchevents {
-        body.locked {
-            padding-right: rem(17);
-            
-            // .header {
-            //     padding-right: rem(17);
-            // }
-        }
-    }
 }
 
 body {

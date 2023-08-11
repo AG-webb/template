@@ -8,13 +8,13 @@ $(document).ready(function () {
         let targetModal = $(`.${$(this).attr("data-modal")}`);
         targetModal.addClass("active");
 
-        ScrollNone();
+        scrollNone();
     });
 
     $(".modal-close").on("click", function () {
         $(this).closest(".modal").removeClass("active");
 
-        ScrollNone();
+        scrollNone();
     });
 
     console.log($("select[name='multiselect']").val());
@@ -92,7 +92,7 @@ $(document).ready(function () {
         }
 
         if ($(window).width() < 1024) {
-            ScrollNone();
+            scrollNone();
         }
     });
 
@@ -251,7 +251,7 @@ $(document).ready(function () {
             $(".modal").removeClass("active");
             $(".popover-container").removeClass("active");
 
-            ScrollNone();
+            scrollNone();
         }
 
         if ($(e.target).closest(".toast-close").length) {

@@ -184,12 +184,12 @@ function popoverSlideInit(target) {
         if(target.outerHeight() > targetWrapHeight) {
             if (distance > (targetWrapHeight / 2)) {
                 targetContainer.removeClass("active");
-                ScrollNone();
+                scrollNone();
             }
         } else {
             if (distance > targetHeightHalf) {
                 targetContainer.removeClass("active");
-                ScrollNone();
+                scrollNone();
             }
         }
         distance = 0;
@@ -206,10 +206,36 @@ function headerFixed() {
     }
 }
 
-function ScrollNone() {
+function getDocumentVisibleWidth() {
+    return Math.max(
+        document.body.scrollWidth, document.documentElement.scrollWidth,
+        document.body.offsetWidth, document.documentElement.offsetWidth,
+        document.body.clientWidth, document.documentElement.clientWidth
+    );
+}
+
+function scrollNone() {
+    let scrollWidthBeforeFreeze = getDocumentVisibleWidth();
+
     if ($(".modal, .popover-container").hasClass("active")) {
         $("body").addClass("locked");
+
+        let scrollWidthAfterFreeze = getDocumentVisibleWidth();
+        
+        if(scrollWidthBeforeFreeze < scrollWidthAfterFreeze) {
+            let scrollSpace = scrollWidthAfterFreeze - scrollWidthBeforeFreeze;
+
+            $("body").css("padding-right", scrollSpace + "px");
+        }
     } else {
         $("body").removeClass("locked");
+        $("body").css("padding-right", '');
+
+        if($("body").attr("style") === "") {
+            $("body").removeAttr("style");
+        }
+        if($("body").attr("class") === "") {
+            $("body").removeAttr("class");
+        }
     }
 }
