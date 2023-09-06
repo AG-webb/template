@@ -104,6 +104,12 @@
     transition: $prop $delay $timing;
 }
 
+@mixin transitionBack($prop, $delay) {
+    -webkit-transition: $prop $delay cubic-bezier(.18,.89,.32,1.27);
+    -moz-transition: $prop $delay cubic-bezier(.18,.89,.32,1.27);
+    transition: $prop $delay cubic-bezier(.18,.89,.32,1.27);
+}
+
 @mixin transform-origin($origin) {
     -moz-transform-origin: $origin;
     -webkit-transform-origin: $origin;
