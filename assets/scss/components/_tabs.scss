@@ -13,9 +13,24 @@
             @extend %hidden;
             @extend %primary-transition;
     
+            &:not(.active) {
+                .tab-content.active {
+                    position: absolute;
+                    @extend %hidden;
+                    overflow: hidden;
+                }
+            }
+    
             &.active {
                 position: static;
                 @extend %show;
+                overflow: visible;
+
+                .tab-content.active {
+                    position: static;
+                    @extend %show;
+                    overflow: visible;
+                }
             }
         }
     }
