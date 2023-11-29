@@ -55,6 +55,19 @@ $(document).ready(function () {
         }
     });
 
+    // TOGGLER *************************
+    $(".toggler-trigger").on("click", function() {
+        const toggler =  $(this).closest(".toggler");
+        toggler.toggleClass("active");
+
+        scrollNone();
+    });
+    $(".toggler-close").on("click", function() {
+        $(this).closest(".toggler").removeClass("active");
+
+        scrollNone();
+    });
+
     // ACCORDION ************************
     $(".accordion__header").on("click", function (e) {
         let accordion = $(this).closest(".accordion");
@@ -245,11 +258,12 @@ $(document).ready(function () {
 
     // REMOVE ACTIVE CLASSES *******************************
     $(document).on('click', function (e) {
-        // if (!$(e.target).closest(".lang-switcher, .modal-trigger, .modal__wrapper").length) {
-        if (!$(e.target).closest(".modal-trigger, .modal__wrapper, .popover-trigger, .popover").length) {
+        // if (!$(e.target).closest(".lang-switcher, [data-modal], .modal__wrapper, .toggler_global").length) {
+        if (!$(e.target).closest("[data-modal], .modal__wrapper, .popover-trigger, .popover, .toggler_global").length) {
             // $(".lang-switcher").removeClass("active");
             $(".modal").removeClass("active");
             $(".popover-container").removeClass("active");
+            $(".toggler_global").removeClass("active");
 
             scrollNone();
         }
