@@ -165,7 +165,7 @@
             <div class="component">
                 <h1 class="h1-font">Custom Select</h1>
                 <h2 class="h2-font">
-                    Classnames for config
+                    Classnames for combo-box config
                 </h2>
                 <ul>
                     <li><strong>"multiple"</strong> - to be able to select more that 1 option</li>
@@ -185,16 +185,16 @@
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
-                                    <div class="combo-option selected" data-option-value="all">
+                                    <div class="combo-option selected" data-option-value="all" data-test="Data 1">
                                         <span>all</span>
                                     </div>
-                                    <div class="combo-option" data-option-value="1">
+                                    <div class="combo-option" data-option-value="1" data-test="Data 2">
                                         <span>Paris</span>
                                     </div>
-                                    <div class="combo-option" data-option-value="2">
+                                    <div class="combo-option" data-option-value="2" data-test="Data 3">
                                         <span>Rome</span>
                                     </div>
-                                    <div class="combo-option" data-option-value="3">
+                                    <div class="combo-option" data-option-value="3" data-test="Data 4">
                                         <span>Moscow</span>
                                     </div>
                                 </div>
@@ -482,20 +482,8 @@
                                 <div class="lang-switcher__dropdown-items">
                                     <div class="lang-switcher__item active"><a href="#">En</a></div>
                                     <div class="lang-switcher__item"><a href="#">Ru</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
-                                    <div class="lang-switcher__item"><a href="#">En</a></div>
+                                    <div class="lang-switcher__item"><a href="#">Am</a></div>
+                                    <div class="lang-switcher__item"><a href="#">Fr</a></div>
                                 </div>
                             </div>
                         </div>

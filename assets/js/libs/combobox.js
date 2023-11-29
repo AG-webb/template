@@ -321,8 +321,15 @@ function initComboBox() {
 			let selectCurrent = $(this),
 				text = $(this).text(),
 				value = $(this).attr(optionAttrValue);
+				let dataAttrs = '';
+				
+				$.each($(this).get(0).attributes, (index, attr) => {
+					if(attr.name.startsWith("data") && attr.name !== optionAttrValue) {
+						dataAttrs += `${attr.name}='${attr.value}' `;
+					}
+				});
 
-			$(this).closest(selectbox).children('select').append("<option value='" + value + "'>" + text + "</option>");
+			$(this).closest(selectbox).children('select').append(`<option value="${value}" ${dataAttrs}>${text}</option>`);
 
 			// Disabled,selected options
 			$(this).closest(selectbox).find("option").each(function () {

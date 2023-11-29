@@ -17,8 +17,6 @@ $(document).ready(function () {
         scrollNone();
     });
 
-    console.log($("select[name='multiselect']").val());
-
     // TOAST ****************************
     $(".toast-trigger").on("click", function () {
         toastMessage("Toast Message", "default");
@@ -128,7 +126,7 @@ $(document).ready(function () {
     });
 
     $("select").on("change", function () {
-        console.log($(this).val());
+        console.log($(this).attr("data-test"));
     });
 
     // Form Validation ***************************
