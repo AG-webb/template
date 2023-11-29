@@ -9,3 +9,11 @@
     top: 0;
     z-index: z(sticky-element);
 }
+
+.aspect-ratio {
+    img {
+        width: 15%;
+        aspect-ratio: 3/2;
+        object-fit: contain;
+    }
+}

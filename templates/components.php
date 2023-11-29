@@ -468,7 +468,7 @@
                 </div>
             </div>
 
-            <!-- Jquery Datepicker -->
+            <!-- Popover Component -->
             <div class="component">
                 <h1 class="h1-font">Popover Component</h1>
                 <div class="component__wrap">
@@ -487,6 +487,19 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Aspect Ratio -->
+            <div class="component">
+                <h1 class="h1-font">Image Aspect Ratio</h1>
+                <div class="component__wrap">
+                    <div class="aspect-ratio flex align-between">
+                        <img src="assets/img/logo-1.svg" alt="logo">
+                        <img src="assets/img/logo-2.svg" alt="logo">
+                        <img src="assets/img/logo-3.svg" alt="logo">
+                        <img src="assets/img/logo-4.png" alt="logo">
                     </div>
                 </div>
             </div>
