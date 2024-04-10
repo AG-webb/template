@@ -153,6 +153,74 @@
                 </div>
             </div>
 
+            <!-- CSS only carousel -->
+            <div class="component">
+                <h1 class="h1-font">Css Only Carousel</h1>
+
+                <div class="carousel">
+                    <div class="carousel__slide">
+                        <a href="#">
+                            <figure>
+                                <img src="assets/img/logo-1.svg" alt="logo">
+                                <figcaption>
+                                    Image Caption
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="carousel__slide">
+                        <a href="#">
+                            <figure>
+                                <img src="assets/img/logo-2.svg" alt="logo">
+                                <figcaption>
+                                    Image Caption
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="carousel__slide">
+                        <a href="#">
+                            <figure>
+                                <img src="assets/img/logo-3.svg" alt="logo">
+                                <figcaption>
+                                    Image Caption
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="carousel__slide">
+                        <a href="#">
+                            <figure>
+                                <img src="assets/img/logo-3.svg" alt="logo">
+                                <figcaption>
+                                    Image Caption
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="carousel__slide">
+                        <a href="#">
+                            <figure>
+                                <img src="assets/img/logo-3.svg" alt="logo">
+                                <figcaption>
+                                    Image Caption
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="carousel__slide">
+                        <a href="#">
+                            <figure>
+                                <img src="assets/img/logo-3.svg" alt="logo">
+                                <figcaption>
+                                    Image Caption
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Toast -->
             <div class="component">
                 <h1 class="h1-font">Display Toast Messages</h1>

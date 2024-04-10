@@ -1,0 +1,26 @@
+$gap: rem(32);
+
+.carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: calc($gap / 2);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: $gap;
+    scroll-snap-stop: always;
+    scroll-behavior: smooth;
+
+    // &:not(.show-scroll)::-webkit-scrollbar {
+    //     display: none;
+    // }
+      
+
+    &__slide {
+        width: rem(350);
+    }
+
+    figure {
+        scroll-snap-align: start;
+    }
+}
