@@ -238,7 +238,7 @@
                 <ul>
                     <li><strong>"multiple"</strong> - to be able to select more that 1 option</li>
                     <li><strong>"searchable"</strong> - for search functionality</li>
-                    <li><strong>"allow-custom-options"</strong> - for user created options(need to be set with <strong>"searchable"</strong> class)</li>
+                    <li><strong>"allow-custom-options"</strong> - for user created options(<strong>"searchable"</strong> class is required)</li>
                     <li><strong>"tag-mode"</strong> - for tags template</li>
                 </ul>
                 <!-- Single -->
