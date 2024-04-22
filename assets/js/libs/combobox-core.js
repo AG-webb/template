@@ -45,6 +45,9 @@ function initComboBox() {
 
 		// Keyboard Control
 		selectBoxElement.addEventListener("keydown", function(e) {
+			// Search Functional
+			filterOptionsWithQuery(e);
+
 			let keyCode = e.keyCode || e.which;
 			const arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27, backspace: 8 };
 			const isSelectBoxSelectedActive = selectBoxElement.querySelector(selectBoxSelected).classList.contains("active")
@@ -158,29 +161,29 @@ function initComboBox() {
 		}
 
 		// Search Functionality
-		if (selectBoxElement.classList.contains("searchable")) {
-			selectBoxElement.addEventListener("input", function (e) {
-				if(e.target.classList.contains(selectBoxSearch.replace(".", ""))) {
-					const thisSearch = e.target;
-					let val = thisSearch.value;
-	
-					if (val.trim().length) {
-						val = val.toUpperCase();
-	
-						selectOptions.forEach((option) => {
-							let optionVal = option.textContent;
-	
-							if (optionVal.toUpperCase().indexOf(val) > -1) {
-								option.classList.remove(selectBoxOptionHidden);
-							} else {
-								option.classList.add(selectBoxOptionHidden);
-							}
-						});
-					} else {
-						selectOptions.classList.remove(selectBoxOptionHidden);
-					}
+		const filterOptionsWithQuery = (e, options) => {
+			if(e.target.classList.contains(selectBoxSearch.replace(".", ""))) {
+				const thisSearch = e.target;
+				let val = thisSearch.value;
+
+				if (val.trim().length) {
+					val = val.toUpperCase();
+
+					selectOptions.forEach((option) => {
+						let optionVal = option.textContent;
+
+						if (optionVal.toUpperCase().indexOf(val) > -1) {
+							option.classList.remove(selectBoxOptionHidden);
+						} else {
+							option.classList.add(selectBoxOptionHidden);
+						}
+					});
+				} else {
+					selectOptions.forEach((option) => {
+						option.classList.remove(selectBoxOptionHidden);
+					});
 				}
-			});
+			}
 		}
 
 		const addMultiOption = (target, newOption) => {
@@ -279,7 +282,9 @@ function initComboBox() {
 		}
 
 		const increaseTabIndex = () => {
-			if (currentTabIndex < selectOption.not('.hide').length - 1) {
+			const visibleSelectOptions = getVisibleOptions(selectBoxElement);
+			
+			if (currentTabIndex < visibleSelectOptions.length - 1) {
 				currentTabIndex++;
 			}
 
@@ -289,7 +294,7 @@ function initComboBox() {
 		}
 
 		const resetSearchInput = (target) => {
-			const selectBoxSearchElement = target.querySelector(selectBoxSearch);
+			const selectBoxSearchElement = target.closest(selectBox).querySelector(selectBoxSearch);
 			selectBoxSearchElement.value = ""
 			selectOptions.forEach((option) => {
 				option.classList.remove(selectBoxOptionHidden);
@@ -300,10 +305,12 @@ function initComboBox() {
 			selectOptions.forEach((option) => {
 				option.classList.remove(selectBoxOptionFocused.replace(".", ""));
 			});
-			const visibleSelectOptions = selectBoxElement.querySelectorAll(`${selectBoxOption}:not(.${selectBoxOptionHidden})`);
-			console.log("HELOO", visibleSelectOptions);
-			if (currentTabIndex !== -1 || visibleSelectOptions.length === 1) {
+			
+			const visibleSelectOptions = getVisibleOptions(selectBoxElement);
+			if (currentTabIndex !== -1) {
 				visibleSelectOptions[currentTabIndex].classList.add(selectBoxOptionFocused.replace(".", ""));
+			} else if(visibleSelectOptions.length === 1) {
+				visibleSelectOptions[0].classList.add(selectBoxOptionFocused.replace(".", ""));
 			}
 		}
 	});
@@ -464,6 +471,10 @@ function initComboBox() {
 		selectedTags += "</div>";
 
 		return selectedTags;
+	}
+
+	function getVisibleOptions(selectBoxElement) {
+		return selectBoxElement.querySelectorAll(`${selectBoxOption}:not(.${selectBoxOptionHidden})`);
 	}
 
 	function getMaxItemsShowText(text) {
