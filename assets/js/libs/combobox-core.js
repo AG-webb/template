@@ -273,7 +273,8 @@ function initComboBox() {
 				currentTabIndex--;
 			}
 
-			let optionTop = selectOptions.not('.hide')[currentTabIndex].offsetTop;
+			// TODO: get offset top relative to view not element height
+			let optionTop = getVisibleOptions(selectBoxElement)[currentTabIndex].offsetTop;
 			let optionsPaddingTop = parseInt(window.getComputedStyle(selectBoxOptionsElements[0], null).getPropertyValue('padding-top'));
 
 			if (optionTop < optionsPaddingTop) {
@@ -319,9 +320,9 @@ function initComboBox() {
 		let thisOptionsWrapper = target.closest(selectBox).querySelector(selectBoxOptions);
 
 		if (position === "down") {
-			thisOptionsWrapper.scrollTop = thisOptionsWrapper.scrollTop + target.querySelectorAll(selectBoxOption)[0].innerHeight;
+			thisOptionsWrapper.scrollTop = thisOptionsWrapper.scrollTop + target.querySelectorAll(selectBoxOption)[0].offsetHeight;
 		} else {
-			thisOptionsWrapper.scrollTop = thisOptionsWrapper.scrollTop - target.querySelectorAll(selectBoxOption)[0].innerHeight;
+			thisOptionsWrapper.scrollTop = thisOptionsWrapper.scrollTop - target.querySelectorAll(selectBoxOption)[0].offsetHeight;
 		}
 	}
 
