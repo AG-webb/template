@@ -18,20 +18,13 @@ function initComboBox() {
 	const optionAttrValue = "data-option-value";
 	const tagAttrValue = "data-tag-value";
 	const maxItemsShow = 3;
-	const maxOptionsShow = 5;
 	const htmlElement = document.querySelector("html");
 	const selectBoxElements = document.querySelectorAll(selectBox);
 	const selectBoxSelectedElements = document.querySelectorAll(selectBoxSelected);
 	const selectBoxDropdownElements = document.querySelectorAll(selectBoxDropdown);
-	const selectBoxOptionsElements = document.querySelectorAll(selectBoxOptions);
+	const selectBoxOptionElements = document.querySelectorAll(selectBoxOption);
 
 	htmlElement.addEventListener("click", closeDropdown);
-
-	selectBoxDropdownElements.forEach((dropdown) => {
-		dropdown.addEventListener("click", function(e) {
-			e.stopPropagation();
-		});
-	});
 
 	selectBoxElements.forEach((selectBoxElement) => {
 		const selectBoxSelectedElement = selectBoxElement.querySelector(selectBoxSelected);
@@ -43,12 +36,16 @@ function initComboBox() {
 
 		createSelectElement(selectBoxElement, selectBoxName, selectOptions);
 
-		// Keyboard Control
-		selectBoxElement.addEventListener("keydown", function(e) {
+		selectBoxElement.addEventListener("keyup", function(e) {
 			// Search Functional
 			filterOptionsWithQuery(e);
+			
+			moveFocus();
+		});
 
-			let keyCode = e.keyCode || e.which;
+		// Keyboard Control
+		selectBoxElement.addEventListener("keydown", function(e) {
+			const keyCode = e.keyCode || e.which;
 			const arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27, backspace: 8 };
 			const isSelectBoxSelectedActive = selectBoxElement.querySelector(selectBoxSelected).classList.contains("active")
 	
@@ -78,11 +75,9 @@ function initComboBox() {
 				if (selectBoxElement.querySelector(selectBoxSearch).value === "" && selectBoxElement.getAttribute(attrValue)) {
 					let lastSelectedValue = getLastSelectedValue(selectBoxElement.getAttribute(attrValue));
 	
-					removeMultiOption($(this), lastSelectedValue);
+					removeMultiOption(e.target, lastSelectedValue);
 				}
 			}
-	
-			moveFocus();
 		});
 		
 		// Dropdown function
@@ -98,7 +93,7 @@ function initComboBox() {
 			if (e.target.closest("." + tagElementClass + "__remove")) {
 				let value = $(e.target).closest("." + tagElementClass).getAttribute(tagAttrValue);
 	
-				removeMultiOption($(this), value);
+				removeMultiOption(e.target, value);
 			}
 		});
 
@@ -161,7 +156,7 @@ function initComboBox() {
 		}
 
 		// Search Functionality
-		const filterOptionsWithQuery = (e, options) => {
+		function filterOptionsWithQuery (e, options) {
 			if(e.target.classList.contains(selectBoxSearch.replace(".", ""))) {
 				const thisSearch = e.target;
 				let val = thisSearch.value;
@@ -219,6 +214,7 @@ function initComboBox() {
 			multiData = [...multiData.filter(data => data.value !== value)];
 			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
 			const selectBoxContainer = target.closest(selectBox);
+			console.log(target);
 			const selectBoxWrap = selectBoxContainer.querySelector(selectBoxSelectedWrap);
 			const targetSelect = selectBoxContainer.querySelector("select");
 			const selectBoxContainerSearch = selectBoxContainer.querySelector("select");
@@ -272,14 +268,9 @@ function initComboBox() {
 			if (currentTabIndex > 0) {
 				currentTabIndex--;
 			}
+			const currentOption = getVisibleOptions(selectBoxElement)[currentTabIndex];
 
-			// TODO: get offset top relative to view not element height
-			let optionTop = getVisibleOptions(selectBoxElement)[currentTabIndex].offsetTop;
-			let optionsPaddingTop = parseInt(window.getComputedStyle(selectBoxOptionsElements[0], null).getPropertyValue('padding-top'));
-
-			if (optionTop < optionsPaddingTop) {
-				scrollToFocusedOption(selectBoxElement, "up");
-			}
+			scrollToFocusedOption(currentOption);
 		}
 
 		const increaseTabIndex = () => {
@@ -289,9 +280,7 @@ function initComboBox() {
 				currentTabIndex++;
 			}
 
-			if (currentTabIndex >= maxOptionsShow) {
-				scrollToFocusedOption(selectBoxElement, "down");
-			}
+			scrollToFocusedOption(visibleSelectOptions[currentTabIndex]);
 		}
 
 		const resetSearchInput = (target) => {
@@ -303,11 +292,19 @@ function initComboBox() {
 		}
 
 		const moveFocus = () => {
+			const visibleSelectOptions = getVisibleOptions(selectBoxElement);
+
+			const isFirstFocused = currentTabIndex === 0 && visibleSelectOptions[currentTabIndex].classList.contains(selectBoxOptionFocused.replace(".", ""));
+			const isLastFocused = currentTabIndex + 1 === visibleSelectOptions.length && visibleSelectOptions[currentTabIndex].classList.contains(selectBoxOptionFocused.replace(".", ""));
+			
+			if(isFirstFocused || isLastFocused) {
+				return;
+			}
+
 			selectOptions.forEach((option) => {
 				option.classList.remove(selectBoxOptionFocused.replace(".", ""));
 			});
 			
-			const visibleSelectOptions = getVisibleOptions(selectBoxElement);
 			if (currentTabIndex !== -1) {
 				visibleSelectOptions[currentTabIndex].classList.add(selectBoxOptionFocused.replace(".", ""));
 			} else if(visibleSelectOptions.length === 1) {
@@ -316,25 +313,37 @@ function initComboBox() {
 		}
 	});
 
-	function scrollToFocusedOption(target, position) {
-		let thisOptionsWrapper = target.closest(selectBox).querySelector(selectBoxOptions);
+	function scrollToFocusedOption(currentOption) {
+		// TODO: Working fine, but need to check here for bugs
+		const optionsWrapper = currentOption.closest(selectBox).querySelector(selectBoxOptions);
+		const optionsWrapperView = optionsWrapper.offsetHeight - parseFloat(getStyle(optionsWrapper, "padding-top"));
+		const currentOptionTop = currentOption.offsetTop;
 
-		if (position === "down") {
-			thisOptionsWrapper.scrollTop = thisOptionsWrapper.scrollTop + target.querySelectorAll(selectBoxOption)[0].offsetHeight;
+		if(currentOptionTop >= optionsWrapperView) {
+			optionsWrapper.scrollTop = optionsWrapper.scrollTop + currentOption.offsetHeight;
 		} else {
-			thisOptionsWrapper.scrollTop = thisOptionsWrapper.scrollTop - target.querySelectorAll(selectBoxOption)[0].offsetHeight;
+			const currentOptionTopInView = currentOptionTop - optionsWrapper.scrollTop;
+
+			if(currentOptionTopInView < 0) {
+				optionsWrapper.scrollTop = currentOptionTop;
+			}
 		}
+		// =========================>
 	}
 
-	function closeDropdown() {
+	function closeDropdown(e) {
+		if(e.target.closest(selectBoxDropdown)) {
+			return;
+		}
+
 		selectBoxSelectedElements.forEach((element) => {
 			element.classList.remove("active");
 		});
 		selectBoxDropdownElements.forEach((dropdown) => {
 			dropdown.classList.remove("opened");
 		});
-		selectBoxOptionsElements.forEach((option) => {
-			option.classList.remove(selectBoxOptionFocused.replace(".", ""));
+		selectBoxOptionElements.forEach((option) => {
+			option.classList.remove(selectBoxOptionFocused.replace(".", ""), selectBoxOptionHidden);
 		});
 		selectBoxElements.forEach((select) => {
 			if (select.classList.contains("searchable")) {
@@ -481,6 +490,10 @@ function initComboBox() {
 	function getMaxItemsShowText(text) {
 		return text.split(", ").slice(0, maxItemsShow).join(", ");
 	}
+
+	function getStyle(element, property) {
+		return window.getComputedStyle(element, null).getPropertyValue(property);
+	};
 }
 
 document.addEventListener("DOMContentLoaded", function () {

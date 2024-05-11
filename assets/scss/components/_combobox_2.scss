@@ -152,6 +152,7 @@
 .combo-box-options {
     max-height: rem(200);
     overflow: auto;
+    padding: rem(16) 0;
 
     &::-webkit-scrollbar {
         width: rem(7);

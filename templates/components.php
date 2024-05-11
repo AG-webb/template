@@ -233,7 +233,7 @@
             <div class="component">
                 <h1 class="h1-font">Custom Select</h1>
                 <h2 class="h2-font">
-                    Classnames for combo-box config
+                    Classnames for custom select config
                 </h2>
                 <ul>
                     <li><strong>"multiple"</strong> - to be able to select more that 1 option</li>
