@@ -134,6 +134,12 @@
     }
     &.center-modal {
         @extend %align-center;
+        @extend %align-middle;
+
+        .modal__wrapper {
+            @extend %flex;
+            height: initial;
+        }
     }
 
     // Classes ===========
