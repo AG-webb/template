@@ -65,7 +65,7 @@ function initComboBox() {
 			} else if (keyCode === arrow.esc && selectDiv.children(selectboxSelected).hasClass("active")) {
 				// Escape
 				closeDropdown();
-			} else if (keyCode === arrow.backspace && selectDiv.children(selectboxSelected).hasClass("active")) {
+			} else if (keyCode === arrow.backspace && selectDiv.children(selectboxSelected).hasClass("active") && selectDiv.hasClass("multiple")) {
 				// Backspace
 				if (selectDiv.find(selectboxSearch).val() === "" && selectDiv.attr(attrValue)) {
 					let lastSelectedValue = getLastSelectedValue(selectDiv.attr(attrValue));

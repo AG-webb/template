@@ -72,7 +72,7 @@ function initComboBox() {
 				closeDropdown();
 			} else if (keyCode === arrow.backspace && isSelectBoxSelectedActive) {
 				// Backspace
-				if (selectBoxElement.querySelector(selectBoxSearch).value === "" && selectBoxElement.getAttribute(attrValue)) {
+				if (selectBoxElement.querySelector(selectBoxSearch).value === "" && selectBoxElement.getAttribute(attrValue) && selectBoxElement.classList.contains("multiple")) {
 					let lastSelectedValue = getLastSelectedValue(selectBoxElement.getAttribute(attrValue));
 	
 					removeMultiOption(e.target, lastSelectedValue);
