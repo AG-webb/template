@@ -127,6 +127,7 @@ $(document).ready(function () {
 
     $("select").on("change", function () {
         console.log($(this).attr("data-test"));
+        console.log($(this).val());
     });
 
     // Form Validation ***************************

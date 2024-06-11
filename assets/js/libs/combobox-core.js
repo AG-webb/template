@@ -91,7 +91,7 @@ function initComboBox() {
 	
 			// Remove tag
 			if (e.target.closest("." + tagElementClass + "__remove")) {
-				let value = $(e.target).closest("." + tagElementClass).getAttribute(tagAttrValue);
+				let value = e.target.closest("." + tagElementClass).getAttribute(tagAttrValue);
 	
 				removeMultiOption(e.target, value);
 			}
@@ -214,7 +214,6 @@ function initComboBox() {
 			multiData = [...multiData.filter(data => data.value !== value)];
 			let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
 			const selectBoxContainer = target.closest(selectBox);
-			console.log(target);
 			const selectBoxWrap = selectBoxContainer.querySelector(selectBoxSelectedWrap);
 			const targetSelect = selectBoxContainer.querySelector("select");
 			const selectBoxContainerSearch = selectBoxContainer.querySelector("select");
@@ -314,7 +313,7 @@ function initComboBox() {
 	});
 
 	function scrollToFocusedOption(currentOption) {
-		// TODO: Working fine, but need to check here for bugs
+		// TODO: Works fine, but need to check here for bugs
 		const optionsWrapper = currentOption.closest(selectBox).querySelector(selectBoxOptions);
 		const optionsWrapperView = optionsWrapper.offsetHeight - parseFloat(getStyle(optionsWrapper, "padding-top"));
 		const currentOptionTop = currentOption.offsetTop;
@@ -332,7 +331,7 @@ function initComboBox() {
 	}
 
 	function closeDropdown(e) {
-		if(e.target.closest(selectBoxDropdown)) {
+		if(e && e.target.closest(selectBoxDropdown)) {
 			return;
 		}
 
