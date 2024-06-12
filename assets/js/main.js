@@ -126,8 +126,43 @@ $(document).ready(function () {
     });
 
     $("select").on("change", function () {
-        console.log($(this).attr("data-test"));
         console.log($(this).val());
+    });
+
+    $(".append-select").on("click", function() {
+        if(!$(this).parent().find(".custom-select").length) {
+            $(this).parent().append(`
+                <div class="custom-select dynamic-select">
+                    <div class="combo-box multiple searchable" data-combo-name="dynamicSelect">
+                        <div class="combo-box-selected">
+                            <div class="combo-box-selected-wrap">
+                                <span class="combo-box-placeholder">Dynamic appended Select Placeholder</span>
+                            </div>
+                        </div>
+                        <div class="combo-box-dropdown">
+                            <div class="combo-box-options">
+                                <div class="combo-option selected" data-option-value="1">Option 1</div>
+                                <div class="combo-option" data-option-value="2">Option 2</div>
+                                <div class="combo-option" data-option-value="3">Option 3</div>
+                                <div class="combo-option" data-option-value="4">Option 4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            `);
+    
+            _initComboBox($(".dynamic-select .combo-box").get(0));
+        }
+    });
+
+    $(".append-options").on("click", function() {
+        $(".ajax-select").find(".combo-box-options").append(`
+            <div class="combo-option" data-option-value="5">option 5</div>
+            <div class="combo-option" data-option-value="6">option 6</div>
+        `);
+        $(this).remove();
+
+        // _UpdateComboBox($(".ajax-select .combo-box").get(0));
     });
 
     // Form Validation ***************************

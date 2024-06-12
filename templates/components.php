@@ -336,6 +336,39 @@
                         </div>
                     </div>
                 </div>
+                <!-- Dynamic append select -->
+                <div class="component__wrap">
+                    <h2 class="h2-font">Dynamic appended select</h2>
+                    <div class="btn btn_test btn_lg append-select">
+                        <span>Append Select</span>
+                    </div>
+                    <br /><br />
+                </div>
+                <!-- Dynamic appended options -->
+                <div class="component__wrap">
+                    <h2 class="h2-font">Dynamic appended options (UNDER CONSTRUCT!!!!)</h2>
+                    <div class="btn btn_test btn_lg append-options">
+                        <span>Append Options 5 & 6</span>
+                    </div>
+                    <br /><br />
+                    <div class="custom-select ajax-select">
+                        <div class="combo-box multiple" data-combo-name="dynamicOptions">
+                            <div class="combo-box-selected">
+                                <div class="combo-box-selected-wrap">
+                                    <span class="combo-box-placeholder">Dynamic options Placeholder</span>
+                                </div>
+                            </div>
+                            <div class="combo-box-dropdown">
+                                <div class="combo-box-options">
+                                    <div class="combo-option selected" data-option-value="1">option 1</div>
+                                    <div class="combo-option selected" data-option-value="2">option 2</div>
+                                    <div class="combo-option" data-option-value="3">option 3</div>
+                                    <div class="combo-option" data-option-value="4">option 4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Accordion -->
