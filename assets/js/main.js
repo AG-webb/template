@@ -133,7 +133,7 @@ $(document).ready(function () {
         if(!$(this).parent().find(".custom-select").length) {
             $(this).parent().append(`
                 <div class="custom-select dynamic-select">
-                    <div class="combo-box multiple searchable" data-combo-name="dynamicSelect">
+                    <div class="combo-box multiple searchable" data-combo-name="dynamicSelect[]">
                         <div class="combo-box-selected">
                             <div class="combo-box-selected-wrap">
                                 <span class="combo-box-placeholder">Dynamic appended Select Placeholder</span>
@@ -156,13 +156,33 @@ $(document).ready(function () {
     });
 
     $(".append-options").on("click", function() {
-        $(".ajax-select").find(".combo-box-options").append(`
-            <div class="combo-option" data-option-value="5">option 5</div>
-            <div class="combo-option" data-option-value="6">option 6</div>
-        `);
+        const options = [
+            {
+                value: 5,
+                name: 'Option 5',
+                attributes: {
+                    test: 'test attr 5',
+                }
+            },
+            {
+                value: 6,
+                name: 'Option 6',
+                attributes: {
+                    test: 'test attr 6',
+                    hello: 'world',
+                }
+            },
+        ]
+        _addDynamicOptions($(".ajax-select .combo-box").get(0), options);
         $(this).remove();
+    });
 
-        // _UpdateComboBox($(".ajax-select .combo-box").get(0));
+    $(".custom-selects-form").on("submit", function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        data = data.split("&");
+
+        console.log(data);
     });
 
     // Form Validation ***************************

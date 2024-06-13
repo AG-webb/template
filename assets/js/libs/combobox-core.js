@@ -104,6 +104,7 @@ function _initComboBox(selector) {
 		});
 
 		selectBoxElement.addEventListener("click", function(e) {
+			// Selected Element
 			if(e.target.closest(_selectBoxSelected)) {
 				e.stopPropagation();
 				currentTabIndex = -1;
@@ -121,7 +122,7 @@ function _initComboBox(selector) {
 			}
 
 			if(e.target.closest(_selectBoxOption)) {
-				// Single Option CLick
+				// SINGLE SELECT
 				const option = e.target;
 
 				if (!option.closest(_selectBox).classList.contains("multiple")) {
@@ -137,20 +138,19 @@ function _initComboBox(selector) {
 						option.classList.add("selected");
 					}
 	
-					optionSelect.setAttribute(_attrValue, option.getAttribute(_optionAttrValue));
-					optionSelect.value = option.getAttribute(_optionAttrValue)
+					optionSelectBox.setAttribute(_attrValue, option.getAttribute(_optionAttrValue));
+					optionSelect.value = option.getAttribute(_optionAttrValue);
 					optionSelect.dispatchEvent(new Event("change"));
 					optionSelectBox.querySelector(_selectBoxSelectedWrap).innerHTML = option.innerHTML;
 				} else {
-				// Multiple options click
-					// VALUE UNSELECTING
+					// MULTIPLE VALUE UNSELECTING
 					if (option.classList.contains('selected')) {
 						option.classList.remove('selected');
 						let value = option.getAttribute(_optionAttrValue);
 	
 						removeMultiOption(option, value);
 					}
-					// VALUE SELECTING
+					// MULTIPLE VALUE SELECTING
 					else {
 						option.classList.add('selected');
 						let value = option.getAttribute(_optionAttrValue);
@@ -168,7 +168,7 @@ function _initComboBox(selector) {
 			moveFocus();
 		}
 
-		// Search Functionality
+		// SEARCH
 		function filterOptionsWithQuery (e, options) {
 			if(e.target.classList.contains(_selectBoxSearch.replace(".", ""))) {
 				const thisSearch = e.target;
@@ -201,7 +201,12 @@ function _initComboBox(selector) {
 			const targetSelect = targetSelectBox.querySelector("select");
 			const targetSelectWrap = targetSelectBox.querySelector(_selectBoxSelectedWrap);
 			
-			targetSelect.value = multiValuesArray;
+			multiValuesArray.forEach((value) => {
+				if(targetSelect.querySelector(`option[value="${value}"]`)) {
+					targetSelect.querySelector(`option[value="${value}"]`).setAttribute("selected", true);
+					targetSelect.querySelector(`option[value="${value}"]`).selected = true;
+				}
+			});
 			targetSelect.dispatchEvent(new Event('change'));
 			targetSelectBox.setAttribute(_attrValue, multiValues);
 			
@@ -231,7 +236,10 @@ function _initComboBox(selector) {
 			const targetSelect = selectBoxContainer.querySelector("select");
 			const selectBoxContainerSearch = selectBoxContainer.querySelector("select");
 	
-			targetSelect.value = multiValuesArray;
+			if(targetSelect.querySelector(`option[value="${value}"]`)) {
+				targetSelect.querySelector(`option[value="${value}"]`).removeAttribute("selected", true);
+				targetSelect.querySelector(`option[value="${value}"]`).selected = false;
+			}
 			targetSelect.dispatchEvent(new Event('change'));
 			selectBoxContainer.setAttribute(_attrValue, multiValues);
 			selectBoxContainer.querySelector(_selectBoxOption + `[${_optionAttrValue}="${value}"]`).classList.remove('selected');
@@ -503,6 +511,28 @@ function _initComboBox(selector) {
 	function getStyle(element, property) {
 		return window.getComputedStyle(element, null).getPropertyValue(property);
 	};
+}
+
+function _addDynamicOptions(target, options) {
+	const targetOptionsWrap = target.querySelector(_selectBoxOptions);
+	const targetSelectElement = target.querySelector('select');
+	let optionsHtml = '';
+	let optionsCoreHtml = '';
+	let dataAttrs = '';
+
+	options.map(({ value, name, data }) => {
+		if(data && Object.keys(data).length) {
+			for (const [key, value] of Object.entries(data)) {
+				dataAttrs += `data-${key}="${value}" `;
+			}
+		}
+
+		optionsHtml += `<div class="combo-option" data-option-value="${value}" ${dataAttrs}>${name}</div>`;
+		optionsCoreHtml += `<option value="${value}">${name}</option>`;
+	});
+
+	targetOptionsWrap.insertAdjacentHTML("beforeend", optionsHtml);
+	targetSelectElement.insertAdjacentHTML("beforeend", optionsCoreHtml);
 }
 
 function _closeDropdown() {

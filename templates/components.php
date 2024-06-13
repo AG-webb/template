@@ -230,7 +230,7 @@
             </div>
 
             <!-- Select -->
-            <div class="component">
+            <form action="#" method="post" class="component custom-selects-form">
                 <h1 class="h1-font">Custom Select</h1>
                 <h2 class="h2-font">
                     Classnames for custom select config
@@ -245,7 +245,7 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Single</h2>
                     <div class="custom-select">
-                        <div class="combo-box" data-combo-name="select" data-combo-value="all">
+                        <div class="combo-box" data-combo-name="single" data-combo-value="all">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Select Placeholder</span>
@@ -346,7 +346,7 @@
                 </div>
                 <!-- Dynamic appended options -->
                 <div class="component__wrap">
-                    <h2 class="h2-font">Dynamic appended options (UNDER CONSTRUCT!!!!)</h2>
+                    <h2 class="h2-font">Dynamic appended options</h2>
                     <div class="btn btn_test btn_lg append-options">
                         <span>Append Options 5 & 6</span>
                     </div>
@@ -369,7 +369,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="component__wrap">
+                    <button type="submit" class="btn btn_test btn_lg">
+                        <span>Submit</span>
+                    </button>
+                </div>
+            </form>
 
             <!-- Accordion -->
             <div class="component">
