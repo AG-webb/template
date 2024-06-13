@@ -52,6 +52,18 @@ function _initComboBox(selector) {
 
 		createSelectElement(selectBoxElement, selectBoxName, selectOptions);
 
+		if (selectBoxElement.classList.contains("multiple")) {
+			// Sync multiData array with default selected options
+			if(selectBoxElement.getAttribute(_attrValue)) {
+				selectBoxElement.querySelectorAll(_selectBoxOption + ".selected").forEach((element) => {
+					let text = element.textContent;
+					let value = element.getAttribute(_optionAttrValue);
+					
+					multiData = [...multiData, {value, text}];
+				});
+			}
+		}
+
 		selectBoxElement.addEventListener("keyup", handleKeyup);
 
 		// Keyboard Control
@@ -90,28 +102,29 @@ function _initComboBox(selector) {
 				}
 			}
 		});
+
+		selectBoxElement.addEventListener("click", function(e) {
+			if(e.target.closest(_selectBoxSelected)) {
+				e.stopPropagation();
+				currentTabIndex = -1;
 		
-		// Dropdown function
-		selectBoxSelectedElement.addEventListener("click", function(e) {
-			e.stopPropagation();
-			currentTabIndex = -1;
-	
-			if (!e.target.closest("." + _tagElementClass) && !e.target.closest(_selectBoxSearch)) {
-				toggleDropdown(e.target);
+				if (!e.target.closest("." + _tagElementClass) && !e.target.closest(_selectBoxSearch)) {
+					toggleDropdown(e.target);
+				}
 			}
-	
+
 			// Remove tag
 			if (e.target.closest("." + _tagElementClass + "__remove")) {
 				let value = e.target.closest("." + _tagElementClass).getAttribute(_tagAttrValue);
 	
 				removeMultiOption(e.target, value);
 			}
-		});
 
-		// Single
-		if (!selectBoxElement.classList.contains("multiple")) {
-			selectOptions.forEach((option) => {
-				option.addEventListener("click", function () {
+			if(e.target.closest(_selectBoxOption)) {
+				// Single Option CLick
+				const option = e.target;
+
+				if (!option.closest(_selectBox).classList.contains("multiple")) {
 					const optionSelectBox = option.closest(_selectBox);
 					const optionSelect = optionSelectBox.querySelector("select");
 
@@ -128,24 +141,8 @@ function _initComboBox(selector) {
 					optionSelect.value = option.getAttribute(_optionAttrValue)
 					optionSelect.dispatchEvent(new Event("change"));
 					optionSelectBox.querySelector(_selectBoxSelectedWrap).innerHTML = option.innerHTML;
-				});
-			});
-		}
-
-		// Multiple
-		if (selectBoxElement.classList.contains("multiple")) {
-			// Sync multiData array with default selected options
-			if(selectBoxElement.getAttribute(_attrValue)) {
-				selectBoxElement.querySelectorAll(_selectBoxOption + ".selected").forEach((element) => {
-					let text = element.textContent;
-					let value = element.getAttribute(_optionAttrValue);
-					
-					multiData = [...multiData, {value, text}];
-				});
-			}
-
-			selectOptions.forEach((option) => {
-				option.addEventListener("click", function () {
+				} else {
+				// Multiple options click
 					// VALUE UNSELECTING
 					if (option.classList.contains('selected')) {
 						option.classList.remove('selected');
@@ -161,9 +158,9 @@ function _initComboBox(selector) {
 	
 						addMultiOption(option, { value, text });
 					}
-				});
-			});
-		}
+				}
+			}
+		});
 
 		function handleKeyup (e) {
 			filterOptionsWithQuery(e);

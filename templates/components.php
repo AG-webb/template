@@ -274,7 +274,7 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Multiple</h2>
                     <div class="custom-select">
-                        <div class="combo-box multiple" data-combo-name="multiselect">
+                        <div class="combo-box multiple" data-combo-name="multiselect[]">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Multiple Select Placeholder</span>
@@ -295,7 +295,7 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Multiple With Search</h2>
                     <div class="custom-select">
-                        <div class="combo-box multiple searchable allow-custom-options" data-combo-name="multiselectSearch">
+                        <div class="combo-box multiple searchable allow-custom-options" data-combo-name="multiselectSearch[]">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Multiple Select Placeholder</span>
@@ -319,7 +319,7 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Tags</h2>
                     <div class="custom-select">
-                        <div class="combo-box searchable multiple tag-mode" data-combo-name="tagsSelect">
+                        <div class="combo-box searchable multiple tag-mode" data-combo-name="tagsSelect[]">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Tags Select Placeholder</span>
@@ -352,7 +352,7 @@
                     </div>
                     <br /><br />
                     <div class="custom-select ajax-select">
-                        <div class="combo-box multiple" data-combo-name="dynamicOptions">
+                        <div class="combo-box multiple" data-combo-name="dynamicOptions[]">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Dynamic options Placeholder</span>
