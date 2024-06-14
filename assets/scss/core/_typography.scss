@@ -1,25 +1,37 @@
-.h1-font {
-    @include font(900, 40, 1.1, inherit, 0);
-    @include font-media($media-lg, rem(30), 0);
-    @include font-media($media-sm, rem(25), 150%);
+$textSizes: (12, 14, 16, 18, 20, 22, 24, 28, 32, 36);
+
+.font {
+    @each $size in $textSizes {
+        &-#{$size} {
+            font-size: rem($size);
+        }
+    }
 }
 
-.h2-font {
-    @include font(700, 30, 1, inherit, 0);
-    @include font-media($media-lg, rem(25), 0);
+@media (max-width: $media-md) {
+    .font-md {
+        @each $size in $textSizes {
+            &-#{$size} {
+                font-size: rem($size);
+            }
+        }
+    }   
 }
-
-.h3-font {
-    @include font(600, 26, 1, inherit, 0);
-    @include font-media($media-lg, rem(22), 0);
+@media (max-width: $media-sm) {
+    .font-sm {
+        @each $size in $textSizes {
+            &-#{$size} {
+                font-size: rem($size);
+            }
+        }
+    }   
 }
-
-.h4-font {
-    @include font(600, 22, 1, inherit, 0);
-    @include font-media($media-lg, rem(18), 0);
-}
-
-.btn-font {
-    @include font(600, 18, 1, 0, 0);
-    @include font-media($media-lg, rem(15), 0);
+@media (max-width: $media-xs) {
+    .font-xs {
+        @each $size in $textSizes {
+            &-#{$size} {
+                font-size: rem($size);
+            }
+        }
+    }   
 }
