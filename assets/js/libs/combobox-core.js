@@ -123,7 +123,7 @@ function _initComboBox(selector) {
 
 			if(e.target.closest(_selectBoxOption)) {
 				// SINGLE SELECT
-				const option = e.target;
+				const option = e.target.closest(_selectBoxOption);
 
 				if (!option.closest(_selectBox).classList.contains("multiple")) {
 					const optionSelectBox = option.closest(_selectBox);
