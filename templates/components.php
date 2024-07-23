@@ -96,7 +96,7 @@
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input type="text" name="phone" class="input-number formatted-phone form-field__input">
+                                    <input type="text" name="phone" autocomplete="tel" class="input-number formatted-phone form-field__input">
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-right"></i>
                                     </div>
-                                    <input type="text" name="email" class="email-validation form-field__input">
+                                    <input type="text" name="email" autocomplete="email" class="email-validation form-field__input">
                                 </div>
                             </div>
                         </div>
@@ -616,7 +616,7 @@
 
 
 <!-- Modal -->
-<div class="modal main-modal modal_md from-left">
+<div class="modal main-modal modal_md center-modal">
     <div class="modal__wrapper">
         <div class="modal__body">
             <div class="modal__close modal-close">
@@ -626,7 +626,7 @@
             <div class="modal__content">
                 <div class="row expanded">
                     <div class="column sm-12">
-                        <div class="modal__title h1-font">Modal test</div>
+                        <div class="modal__title font-32 font-bold">Modal test</div>
                         <span>
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                             At voluptates ut enim est ipsum eum iure fugiat nostrum quo

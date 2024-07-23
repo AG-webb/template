@@ -133,12 +133,14 @@
         }
     }
     &.center-modal {
-        @extend %align-center;
-        @extend %align-middle;
+        // @extend %align-center;
+        // @extend %align-middle;
 
         .modal__wrapper {
             @extend %flex;
             height: initial;
+            margin: auto;
+            max-height: 95vh;
         }
     }
 
