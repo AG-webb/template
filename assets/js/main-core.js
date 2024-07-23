@@ -86,26 +86,39 @@ $(document).ready(function () {
     });
 
     // POPOVER **************************
-    if ($(".popover").length) {
+    const popoverElements = document.querySelectorAll(".popover");
+    const popoverTriggerElements = document.querySelectorAll(".popover-trigger");
+
+    if (popoverElements.length) {
         if ($(window).width() <= 1024) {
-            $(".popover").each(function () {
-                popoverSlideInit($(this));
+            popoverElements.forEach((popover) => {
+                popoverSlideInit(popover);
             });
         }
     }
 
-    $(".popover-trigger").on("click", function () {
-        if ($(this).closest(".popover-container").hasClass("active")) {
-            $(this).closest(".popover-container").removeClass("active");
-        } else {
-            $(".popover-container").removeClass("active");
-            $(this).closest(".popover-container").addClass("active");
-        }
-
-        if ($(window).width() < 1024) {
-            scrollNone();
-        }
-    });
+    if(popoverTriggerElements.length) {
+        popoverTriggerElements.forEach((popoverTrigger) => {
+            popoverTrigger.addEventListener("click", function () {
+                if (popoverTrigger.closest(".popover-container").classList.contains("active")) {
+                    popoverTrigger.closest(".popover-container").classList.remove("active");
+                } else {
+                    const popoverActiveContainers = document.querySelectorAll(".popover-container");
+                    if(popoverActiveContainers.length) {
+                        popoverActiveContainers.forEach((popoverActiveContainer) => {
+                            popoverActiveContainer.classList.remove("active");
+                        });
+                    }
+                    
+                    popoverTrigger.closest(".popover-container").classList.add("active");
+                }
+        
+                if (window.innerWidth < 1024) {
+                    scrollNone();
+                }
+            });
+        });
+    }
 
     // FORM ITEMS *********************
     $(".form-field__input").on("keyup", function () {
@@ -155,7 +168,7 @@ $(document).ready(function () {
         }
     });
 
-    // const customSelect = new CustomSelect();
+    const customSelect = new CustomSelect();
 
     $(".append-options").on("click", function() {
         const options = [
