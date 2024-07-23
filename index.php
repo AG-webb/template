@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="referrer" content="origin-when-cross-origin">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Demo</title>
+        <title>App</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="57x57" href="assets/img/fav/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="assets/img/fav/apple-icon-60x60.png">
@@ -20,15 +20,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="assets/img/fav/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="assets/img/fav/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="assets/img/fav/favicon-16x16.png">
-        <link rel="manifest" href="./manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="assets/img/fav/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
-    </head>
-    <body>
+        <link rel="manifest" href="./manifest.json">
         <!-- First Needed styles -->
         <link rel="preload" as="style" href="assets/css/top.css">
         <link rel="stylesheet" href="assets/css/top.css">
+    </head>
+    <body>
 
         <?php require("templates/header.php"); ?>
 
