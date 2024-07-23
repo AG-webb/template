@@ -72,62 +72,62 @@
                     <div class="form-fields">
                         <div class="form-fields__item">
                             <div class="form-field form-field_sm">
-                                <div class="form-field__label">Field Sm</div>
+                                <label class="form-field__label" for="firstName">Field Sm</label>
                                 <div class="form-field__target form-field__target_prefix">
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input type="text" name="firstName" class="form-field__input">
+                                    <input id="firstName" type="text" name="firstName" class="form-field__input">
                                 </div>
                             </div>
                         </div>
                         <div class="form-fields__item">
                             <div class="form-field form-field_md form-field_underline">
-                                <div class="form-field__label">Field Md</div>
+                                <label class="form-field__label" for="lastName">Field Md</label>
                                 <div class="form-field__target">
-                                    <input type="text" name="lastName" class="form-field__input">
+                                    <input id="lastName" type="text" name="lastName" class="form-field__input">
                                 </div>
                             </div>
                         </div>
                         <div class="form-fields__item">
                             <div class="form-field form-field_md form-field_legend">
-                                <div class="form-field__label">Field Md Phone</div>
+                                <label class="form-field__label" for="phoneNumber">Field Md Phone</label>
                                 <div class="form-field__target form-field__target_prefix">
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input type="text" name="phone" autocomplete="tel" class="input-number formatted-phone form-field__input">
+                                    <input id="phoneNumber" type="text" name="phone" autocomplete="tel" class="input-number formatted-phone form-field__input">
                                 </div>
                             </div>
                         </div>
                         <div class="form-fields__item">
                             <div class="form-field form-field_md form-field_legend">
-                                <div class="form-field__label">Field Md number with Comma</div>
+                                <label class="form-field__label" for="numberWithComma">Field Md number with Comma</label>
                                 <div class="form-field__target form-field__target_prefix">
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input type="text" name="number_with_comma" class="input-number form-field__input" data-input-separator=",">
+                                    <input id="numberWithComma" type="text" name="number_with_comma" class="input-number form-field__input" data-input-separator=",">
                                 </div>
                             </div>
                         </div>
                         <div class="form-fields__item">
                             <div class="form-field form-field_round form-field_lg">
-                                <div class="form-field__label">Field Lg Email*</div>
+                                <label class="form-field__label" for="emailInput">Field Lg Email*</label>
                                 <div class="form-field__target form-field__target_suffix">
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-right"></i>
                                     </div>
-                                    <input type="text" name="email" autocomplete="email" class="email-validation form-field__input">
+                                    <input id="emailInput" type="text" name="email" autocomplete="email" class="email-validation form-field__input">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-fields__item">
                         <div class="form-field form-field_textarea">
-                            <div class="form-field__label">Textarea</div>
+                            <label class="form-field__label" for="messageTextarea">Textarea</label>
                             <div class="form-field__target">
-                                <textarea name="message" class="form-field__input"></textarea>
+                                <textarea id="messageTextarea" name="message" class="form-field__input"></textarea>
                             </div>
                         </div>
                     </div>
@@ -498,7 +498,7 @@
                             <div class="avatar-upload__body">
                                 <div class="avatar-upload__content">upload</div>
                             </div>
-                            <input type="file" class="file-upload-input">
+                            <input type="file" class="file-upload-input" aria-label="uploadAvatar">
                         </div>
                     </div>
                 </div>
@@ -511,7 +511,7 @@
                                     <span>upload Document(s)</span>
                                 </div>
                             </div>
-                            <input type="file" class="file-upload-input" multiple="multiple">
+                            <input type="file" class="file-upload-input" multiple="multiple" aria-label="uploadDocuments">
                         </div>
                         <div class="file-upload-preview doc-upload__preview"></div>
                     </div>
@@ -523,13 +523,13 @@
                 <h1 class="h1-font">Custom Checkbox and radio button</h1>
                 <div class="component__wrap">
                     <h2 class="h2-font">Checkbox</h2>
-                    <label class="custom-check custom-check_checkbox">
-                        <input type="checkbox" value="1" name="checkbox">
+                    <label class="custom-check custom-check_checkbox" for="check_1">
+                        <input type="checkbox" value="1" name="checkbox" id="check_1">
                         <span class="custom-check__checkmark"></span>
                         <span class="payment-info__label">Check 1</span>
                     </label>
-                    <label class="custom-check custom-check_checkbox">
-                        <input type="checkbox" value="2" name="checkbox">
+                    <label class="custom-check custom-check_checkbox" for="check_2">
+                        <input type="checkbox" value="2" name="checkbox" id="check_2">
                         <span class="custom-check__checkmark"></span>
                         <span class="payment-info__label">Check 2</span>
                     </label>
@@ -557,7 +557,7 @@
                     <div class="single-datepicker custom-datepicker">
                         <div class="form-field form-field_md">
                             <div class="form-field__target">
-                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off">
+                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="singleDatepicker">
                             </div>
                         </div>
                     </div>
@@ -567,7 +567,7 @@
                     <div class="range-datepicker custom-datepicker">
                         <div class="form-field form-field_md">
                             <div class="form-field__target">
-                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off">
+                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="rangeDatepicker">
                             </div>
                         </div>
                     </div>
