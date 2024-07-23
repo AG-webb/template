@@ -54,7 +54,7 @@ function tabsInit() {
         $(this).closest(".tabs__control").find(".tab").removeClass("active");
         $(this).addClass("active");
 
-        $(this).closest(".tabs").find(".tab-content").removeClass("active");
+        $(this).closest(".tabs").find(".tabs__content").eq(0).children(".tab-content").removeClass("active");
         $("#" + contentId).addClass("active");
     });
 }
