@@ -293,13 +293,13 @@ $(document).ready(function () {
     });
 
     $(".file-upload").on("click", ".file-upload-item__remove", function() {
-        let itemBlock = $(this).closest(".file-upload-item");
-        let itemName = itemBlock.find(".file-upload-item__name").text();
+        let fileItem = $(this).closest(".file-upload-item");
+        let fileName = fileItem.find(".file-upload-item__name").text();
 
         if(uploadedFiles.length) {
             // remove item from list
             uploadedFiles = [...uploadedFiles.filter(file => {
-                return file.name !== itemName
+                return file.name !== fileName
             })];
 
             if(!uploadedFiles.length) {
@@ -309,7 +309,7 @@ $(document).ready(function () {
             console.log("UPLOADED DOCUMENTS LIST ----------- ", uploadedFiles);
         }
 
-        itemBlock.remove();
+        fileItem.remove();
     });
 
     // REMOVE ACTIVE CLASSES *******************************

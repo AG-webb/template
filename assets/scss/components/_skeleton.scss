@@ -16,8 +16,9 @@
         }
 
         &_image {
-            width: rem(450);
+            width: 100%;
             height: rem(450);
+            max-width: rem(450);
             display: inline-block;
         }
 

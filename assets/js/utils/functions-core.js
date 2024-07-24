@@ -10,15 +10,85 @@ function formatPhoneNumber(number) {
         return "(+" + match[1] + ") " + match[2] + " " + match[3] + " " + match[4] + " " + match[5];
     };
 
-    return null
+    return null;
 }
 
-function numberWithSeparator(value, separator) {
+function numberWithSeparator(value, separator = ",") {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 }
 
 function getOnlyNumbers(str) {
     return str.replace(/[^\d]/g, '');
+}
+
+function getStyle(target, property) {
+    return window.getComputedStyle(target, null).getPropertyValue(property);
+};
+
+function slideUp(target, duration = 300) {
+    target.style.transitionProperty = 'height, margin, padding';
+    target.style.transitionDuration = duration + 'ms';
+    target.style.boxSizing = 'border-box';
+    target.style.height = target.offsetHeight + 'px';
+    target.offsetHeight;
+    target.style.overflow = 'hidden';
+    target.style.height = 0;
+    target.style.paddingTop = 0;
+    target.style.paddingBottom = 0;
+    target.style.marginTop = 0;
+    target.style.marginBottom = 0;
+
+    window.setTimeout(() => {
+        target.style.display = 'none';
+        target.style.removeProperty('height');
+        target.style.removeProperty('padding-top');
+        target.style.removeProperty('padding-bottom');
+        target.style.removeProperty('margin-top');
+        target.style.removeProperty('margin-bottom');
+        target.style.removeProperty('overflow');
+        target.style.removeProperty('transition-duration');
+        target.style.removeProperty('transition-property');
+    }, duration);
+}
+
+function slideDown(target, duration = 300) {
+    target.style.removeProperty('display');
+    let display = window.getComputedStyle(target).display;
+
+    if (display === 'none')
+        display = 'block';
+
+    target.style.display = display;
+    let height = target.offsetHeight;
+    target.style.overflow = 'hidden';
+    target.style.height = 0;
+    target.style.paddingTop = 0;
+    target.style.paddingBottom = 0;
+    target.style.marginTop = 0;
+    target.style.marginBottom = 0;
+    target.offsetHeight;
+    target.style.boxSizing = 'border-box';
+    target.style.transitionProperty = "height, margin, padding";
+    target.style.transitionDuration = duration + 'ms';
+    target.style.height = height + 'px';
+    target.style.removeProperty('padding-top');
+    target.style.removeProperty('padding-bottom');
+    target.style.removeProperty('margin-top');
+    target.style.removeProperty('margin-bottom');
+    window.setTimeout(() => {
+        target.style.removeProperty('height');
+        target.style.removeProperty('overflow');
+        target.style.removeProperty('transition-duration');
+        target.style.removeProperty('transition-property');
+    }, duration);
+}
+
+function slideToggle(target, duration = 300) {
+    if (window.getComputedStyle(target).display === 'none') {
+        return slideDown(target, duration);
+    } else {
+        return slideUp(target, duration);
+    }
 }
 
 function dynamicAppendInit() {
@@ -39,22 +109,6 @@ function dynamicAppendInit() {
         });
     }
 }
-
-// function makeSticky(selector) {
-//     let element = $(selector);
-//     let elementOffsetTop = element.offset().top;
-//     let scrollTop = $(document).scrollTop();
-
-//     $(document).bind("ready scroll", function () {
-//         scrollTop = $(document).scrollTop();
-
-//         if (scrollTop >= elementOffsetTop) {
-//             element.addClass("sticky-element");
-//         } else {
-//             element.removeClass("sticky-element");
-//         }
-//     });
-// }
 
 function tabsInit() {
     const tabElements = document.querySelectorAll(".tab");
@@ -100,67 +154,78 @@ function generateId(length) {
     return result;
 }
 
-// function toastMessage(message, type = "default") {
-//     let toastContainer = `<div class="toast-messages"></div>`;
-//     const toastId = generateId(7);
+function toastMessage(message, type = "default") {
+    let toastMessagesElement = document.querySelector(".toast-messages");
+    const mainElement = document.querySelector("main");
+    const toastContainer = `<div class="toast-messages"></div>`;
+    const toastId = generateId(7);
 
-//     let toastBody = `
-//     <div class="toast-message ${type}" data-toast-id="${toastId}">
-//         <div class="toast-message-icon">
-//             <img src="assets/img/icons/success.svg" alt="success">
-//         </div>
-//         <span class="helvetica-65">${message}</span>
-//         <div class="toast-message__close toast-close">
-//             <img src="assets/img/icons/close-white.svg" alt="close">
-//         </div>
-//     </div>`;
+    const toastBody = `
+    <div class="toast-message ${type}" data-toast-id="${toastId}">
+        <div class="toast-message-icon">
+            <img src="assets/img/icons/success.svg" alt="success">
+        </div>
+        <span class="helvetica-65">${message}</span>
+        <div class="toast-message__close toast-close">
+            <img src="assets/img/icons/close-white.svg" alt="close">
+        </div>
+    </div>`;
 
-//     if (!$(".toast-messages").length) {
-//         $("main").append(toastContainer);
-//     }
-//     $(".toast-messages").append(toastBody);
+    if (!toastMessagesElement) {
+        mainElement.insertAdjacentHTML('beforeend', toastContainer);
+    }
+    toastMessagesElement = document.querySelector(".toast-messages");
+    
+    toastMessagesElement.insertAdjacentHTML('beforeend', toastBody);
 
-//     autoRemoveToast(toastId);
-// }
+    autoRemoveToast(toastId);
+}
 
-// function autoRemoveToast(id) {
-//     new Promise(function (resolve, reject) {
-//         setTimeout(function () {
-//             $(`[data-toast-id="${id}"]`).addClass("toast-message_hidden");
-//             resolve();
-//         }, 4000);
-//     }).then(function () {
-//         setTimeout(function () {
-//             $(`[data-toast-id="${id}"]`).remove();
+function autoRemoveToast(id) {
+    const thisToast = document.querySelector(`[data-toast-id="${id}"]`);
 
-//             if ($(".toast-message").length == 0) {
-//                 $(".toast-messages").remove();
-//             }
-//         }, 500);
-//     });
-// }
+    if(thisToast) {
+        new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                thisToast.classList.add("toast-message_hidden");
+                resolve();
+            }, 4000);
+        }).then(function () {
+            setTimeout(function () {
+                thisToast.remove();
+                const toastMessageElements = document.querySelectorAll(".toast-message");
+    
+                if (!toastMessageElements.length) {
+                    const toastMessagesElement = document.querySelector(".toast-messages");
 
-// function removeToast(closeElement, id) {
-//     if (!id) {
-//         let toast = closeElement.closest(".toast-message");
+                    if(toastMessagesElement) {
+                        toastMessagesElement.remove();
+                    }
+                }
+            }, 500);
+        });
+    }
+}
 
-//         toast.addClass("toast-message_hidden");
+function removeToast(closeElement, id) {
+    if (!id) {
+        let toast = closeElement.closest(".toast-message");
 
-//         setTimeout(function () {
-//             toast.remove();
-//         }, 500);
-//     } else {
-//         $(`[data-toast-id="${id}"]`).addClass("toast-message_hidden");
+        toast.classList.add("toast-message_hidden");
 
-//         setTimeout(function () {
-//             $(`[data-toast-id="${id}"]`).remove();
-//         }, 500);
-//     }
-// }
+        setTimeout(function () {
+            toast.remove();
+        }, 500);
+    } else {
+        const thisToast = document.querySelector(`[data-toast-id="${id}"]`); 
 
-function getStyle(target, property) {
-    return window.getComputedStyle(target, null).getPropertyValue(property);
-};
+        thisToast.classList.add("toast-message_hidden");
+
+        setTimeout(function () {
+            thisToast.remove();
+        }, 500);
+    }
+}
 
 function popoverSlideInit(target) {
     let targetContainer = target.closest(".popover-container");

@@ -77,7 +77,7 @@
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input id="firstName" type="text" name="firstName" class="form-field__input">
+                                    <input id="firstName" type="text" name="firstName" class="form-field__input" data-required="This field is required">
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             <div class="form-field form-field_md form-field_underline">
                                 <label class="form-field__label" for="lastName">Field Md</label>
                                 <div class="form-field__target">
-                                    <input id="lastName" type="text" name="lastName" class="form-field__input">
+                                    <input id="lastName" type="text" name="lastName" class="form-field__input" data-required="This field is required">
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,29 @@
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-right"></i>
                                     </div>
-                                    <input id="emailInput" type="text" name="email" autocomplete="email" class="email-validation form-field__input">
+                                    <input id="emailInput" type="text" name="email" autocomplete="email" class="email-validation form-field__input" data-email-validation="Incorrect Email format" data-required="This field is required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-fields__item">
+                            <div class="form-field form-field_round form-field_md">
+                                <label class="form-field__label" for="newPassword">Field Md new Password*</label>
+                                <div class="form-field__target form-field__target_suffix">
+                                    <div class="form-field__icon">
+                                        <i class="icon icon-arrow-right"></i>
+                                    </div>
+                                    <input id="newPassword" type="password" name="newPassword" autocomplete="current-password" class="email-validation form-field__input" data-new-pass="Passwords doesn't match" data-required="This field is required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-fields__item">
+                            <div class="form-field form-field_round form-field_md">
+                                <label class="form-field__label" for="repeatPassword">Field Md repeat Password*</label>
+                                <div class="form-field__target form-field__target_suffix">
+                                    <div class="form-field__icon">
+                                        <i class="icon icon-arrow-right"></i>
+                                    </div>
+                                    <input id="repeatPassword" type="password" name="repeatPassword" autocomplete="new-password" class="email-validation form-field__input" data-repeat-pass="Passwords doesn't match" data-required="This field is required">
                                 </div>
                             </div>
                         </div>
@@ -557,7 +579,7 @@
                     <div class="single-datepicker custom-datepicker">
                         <div class="form-field form-field_md">
                             <div class="form-field__target">
-                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="singleDatepicker">
+                                <input type="text" name="singleDatepicker" class="form-field__input" placeholder="Choose date" autocomplete="date" aria-label="singleDatepicker">
                             </div>
                         </div>
                     </div>
@@ -565,9 +587,20 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Range picker</h2>
                     <div class="range-datepicker custom-datepicker">
-                        <div class="form-field form-field_md">
-                            <div class="form-field__target">
-                                <input type="text" name="lastName" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="rangeDatepicker">
+                        <div class="form-fields">
+                            <div class="form-fields__item">
+                                <div class="form-field form-field_md">
+                                    <label class="form-field__label" for="rangeFrom">From</label>
+                                    <div class="form-field__target">
+                                        <input type="text" id="rangeFrom" name="from" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="rangeDatepicker">
+                                    </div>
+                                </div>
+                                <!-- <div class="form-field form-field_md">
+                                    <label class="form-field__label" for="rangeTo">To</label>
+                                    <div class="form-field__target">
+                                        <input type="text" id="rangeTo" name="to" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="rangeDatepicker">
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

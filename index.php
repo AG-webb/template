@@ -44,10 +44,12 @@
         <link rel="stylesheet" href="assets/css/bottom.css">
 
         <!-- JS -->
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
         <script defer src="assets/js/libs.js.php"></script>
-        <script defer src="assets/js/utils/functions.js"></script>
-        <script defer src="assets/js/main.js"></script>
+        <!-- <script defer src="assets/js/utils/functions.js"></script>
+        <script defer src="assets/js/main.js"></script> -->
+        <script defer src="assets/js/utils/functions-core.js"></script>
+        <script defer src="assets/js/main-core.js"></script>
     </body>
 </html>
 
