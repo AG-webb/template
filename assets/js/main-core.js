@@ -41,20 +41,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // DATEPICKER ************************
-    const singleDatePickerElements = document.querySelectorAll('.single-datepicker input');
+    const singleDatePickerElements = document.querySelectorAll('.single-datepicker');
     if(singleDatePickerElements.length) {
         singleDatePickerElements.forEach((singleDatePickerElement) => {
-            const singleDatepicker = new Datepicker(singleDatePickerElement, {
-                format: "dd/mm/yyyy",
-                nextArrow: "<i class='icon icon-arrow-right'></i>",
-                prevArrow: "<i class='icon icon-arrow-left'></i>",
-                autohide: true,
-                todayHighlight: true,
-            });
-    
-            singleDatePickerElement.addEventListener("changeDate", function(e) {
-                const { date, datepicker, viewDate, viewId } = e.detail;
-                console.log(date)
+            const singleDatepickerInput = singleDatePickerElement.querySelector("input");
+
+            const rangeDatepicker = new AirDatepicker(singleDatepickerInput, {
+                dateFormat: "dd/MM/yyyy",
+                // isMobile: true,
+                classes: "custom-datepicker-dropdown",
+                // inline: true,
+                autoClose: true,
+                nextHtml: "<i class='icon icon-arrow-right'></i>",
+                prevHtml: "<i class='icon icon-arrow-left'></i>",
+                onSelect: ({date, formattedDate, datepicker}) => {
+                    console.log(formattedDate);
+                }
             });
         });
     }
@@ -62,8 +64,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const rangeDatePickerElements = document.querySelectorAll('.range-datepicker');
     if(rangeDatePickerElements.length) {
         rangeDatePickerElements.forEach((rangeDatePickerElement) => {
-            const rangeDatepicker = new AirDatepicker('.range-datepicker input', {
+            const rangeDatepickerInput = rangeDatePickerElement.querySelector("input");
+
+            const rangeDatepicker = new AirDatepicker(rangeDatepickerInput, {
                 range: true,
+                autoClose: true,
+                // inline: true,
+                classes: "custom-datepicker-dropdown",
+                nextHtml: "<i class='icon icon-arrow-right'></i>",
+                prevHtml: "<i class='icon icon-arrow-left'></i>",
                 dateFormat: "dd/MM/yyyy",
                 multipleDatesSeparator: ' − ',
                 onSelect: ({date, formattedDate, datepicker}) => {
