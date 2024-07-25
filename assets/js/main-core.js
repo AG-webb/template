@@ -209,6 +209,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Sliders
+    const mainSliderElement = document.querySelector(".main-slider");
+    if (mainSliderElement) {
+        const mainSplideWrapper = mainSliderElement.querySelector(".splide");
+        const mainSlider = new Splide(mainSplideWrapper, {
+            direction: 'ttb',
+            perPage: 5,
+            perMove: 1,
+            type: 'loop',
+            height: '24.6875rem',
+            arrowPath: 'M12.5858 7.58579C13.3668 6.80474 14.6332 6.80474 15.4142 7.58579L26.9142 19.0858C27.6953 19.8668 27.6953 21.1332 26.9142 21.9142L15.4142 33.4142C14.6332 34.1953 13.3668 34.1953 12.5858 33.4142C11.8047 32.6332 11.8047 31.3668 12.5858 30.5858L22.6716 20.5L12.5858 10.4142C11.8047 9.63317 11.8047 8.36684 12.5858 7.58579Z',
+            breakpoints: {
+                1024: {
+                    height: '21.875rem',
+                },
+            }
+        });
+        mainSlider.mount();
+    }
+
     // FORM ITEMS *********************
     const formFieldInputElements = document.querySelectorAll(".form-field__input");
     if(formFieldInputElements) {
