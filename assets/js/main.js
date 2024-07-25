@@ -23,25 +23,46 @@ $(document).ready(function () {
     });
 
     // DATEPICKER ************************
-    $(".single-datepicker input").datepicker({
-        dateFormat: "dd/mm/yy",
-        onSelect: (date, inst) => {
-            console.log("Single date Selected:", date);
-        }
-    });
+    const singleDatePickerElements = document.querySelectorAll('.single-datepicker');
+    if(singleDatePickerElements.length) {
+        singleDatePickerElements.forEach((singleDatePickerElement) => {
+            const singleDatepickerInput = singleDatePickerElement.querySelector("input");
 
-    $('.range-datepicker input').daterangepicker({
-        autoApply: true,
-        autoUpdateInput: false,
-        parentEl: ".range-datepicker",
-    });
+            const rangeDatepicker = new AirDatepicker(singleDatepickerInput, {
+                dateFormat: "dd/MM/yyyy",
+                // isMobile: true,
+                classes: "custom-datepicker-dropdown",
+                // inline: true,
+                autoClose: true,
+                nextHtml: "<i class='icon icon-arrow-right'></i>",
+                prevHtml: "<i class='icon icon-arrow-left'></i>",
+                onSelect: ({date, formattedDate, datepicker}) => {
+                    console.log(formattedDate);
+                }
+            });
+        });
+    }
 
-    $('.range-datepicker input').on('apply.daterangepicker', function(ev, picker) {
-        let startDate = picker.startDate.format('DD/MM/YYYY');
-        let endDate = picker.endDate.format('DD/MM/YYYY');
-        
-        $(this).val(startDate + ' - ' + endDate);
-    });
+    const rangeDatePickerElements = document.querySelectorAll('.range-datepicker');
+    if(rangeDatePickerElements.length) {
+        rangeDatePickerElements.forEach((rangeDatePickerElement) => {
+            const rangeDatepickerInput = rangeDatePickerElement.querySelector("input");
+
+            const rangeDatepicker = new AirDatepicker(rangeDatepickerInput, {
+                range: true,
+                autoClose: true,
+                // inline: true,
+                classes: "custom-datepicker-dropdown",
+                nextHtml: "<i class='icon icon-arrow-right'></i>",
+                prevHtml: "<i class='icon icon-arrow-left'></i>",
+                dateFormat: "dd/MM/yyyy",
+                multipleDatesSeparator: ' − ',
+                onSelect: ({date, formattedDate, datepicker}) => {
+                    console.log(formattedDate);
+                }
+            });
+        });
+    }
 
     // SWITCHER *************************
     $(".switcher__item").on("click", function () {

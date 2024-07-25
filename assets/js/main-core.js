@@ -56,7 +56,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 prevHtml: "<i class='icon icon-arrow-left'></i>",
                 onSelect: ({date, formattedDate, datepicker}) => {
                     console.log(formattedDate);
-                }
+                },
+                onRenderCell: ({date, cellType, datepicker}) => {
+                    if (cellType === 'day') {
+                        if(date.getDate() === 4) {
+                            return {
+                                disabled: true,
+                            }
+                        }
+                        if (date.getDate() === 12) {
+                            const html = `<span>${date.getDate()}</span><span class="event-show"></span>`;
+                            const attrs = '';
+
+                            return {
+                                html,
+                                classes: 'custom-datepicker__event',
+                            }
+                        }
+                    }
+                },
             });
         });
     }
@@ -202,7 +220,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
 
     const selectElements = document.querySelectorAll("select");
     if(selectElements.length) {
