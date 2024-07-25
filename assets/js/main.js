@@ -79,6 +79,17 @@ $(document).ready(function () {
         const toggler =  $(this).closest(".toggler");
         toggler.toggleClass("active");
 
+        if($(this).closest(".form-field_password")) {
+            const formField = $(this).closest(".form-field_password");
+            const formFieldInput = formField.find(".form-field__input");
+
+            if(formField.hasClass("active")) {
+                formFieldInput.attr("type", "text");
+            } else {
+                formFieldInput.attr("type", "password");
+            }
+        }
+
         scrollNone();
     });
     $(".toggler-close").on("click", function() {
