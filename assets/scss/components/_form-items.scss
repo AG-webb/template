@@ -180,6 +180,44 @@
         }
     }
 
+    &_password {
+        .form-field {
+            &__icon {
+                width: rem(24);
+                height: rem(24);
+                @extend %user-cursor;
+                pointer-events: auto;
+
+                .icon {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    @include transition(all,0.3s,ease);
+                    font-size: rem(24);
+
+                    &-visible {
+                        @extend %hidden;
+                    }
+                }
+            }
+        }
+
+        &.active {
+            .form-field {
+                &__icon {
+                    .icon {
+                        &-hidden {
+                            @extend %hidden;
+                        }
+                        &-visible {
+                            @extend %show;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // TYPES ********************************
     &_round {
         .form-field {

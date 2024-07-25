@@ -123,6 +123,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 const toggler = togglerTriggerElement.closest(".toggler");
                 toggler.classList.toggle("active");
 
+                if(togglerTriggerElement.closest(".form-field_password")) {
+                    const formField = togglerTriggerElement.closest(".form-field_password");
+                    const formFieldInput = formField.querySelector(".form-field__input");
+
+                    if(formField.classList.contains("active")) {
+                        formFieldInput.setAttribute("type", "text");
+                    } else {
+                        formFieldInput.setAttribute("type", "password");
+                    }
+                }
+
                 scrollNone();
             });
         });

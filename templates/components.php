@@ -123,22 +123,24 @@
                             </div>
                         </div>
                         <div class="form-fields__item">
-                            <div class="form-field form-field_round form-field_md">
+                            <div class="form-field form-field_password form-field_round form-field_md toggler">
                                 <label class="form-field__label" for="newPassword">Field Md new Password*</label>
                                 <div class="form-field__target form-field__target_suffix">
-                                    <div class="form-field__icon">
-                                        <i class="icon icon-arrow-right"></i>
+                                    <div class="form-field__icon toggler-trigger">
+                                        <i class="icon icon-visible"></i>
+                                        <i class="icon icon-hidden"></i>
                                     </div>
                                     <input id="newPassword" type="password" name="newPassword" autocomplete="current-password" class="email-validation form-field__input" data-new-pass="Passwords doesn't match" data-required="This field is required">
                                 </div>
                             </div>
                         </div>
                         <div class="form-fields__item">
-                            <div class="form-field form-field_round form-field_md">
+                            <div class="form-field form-field_password form-field_round form-field_md toggler">
                                 <label class="form-field__label" for="repeatPassword">Field Md repeat Password*</label>
                                 <div class="form-field__target form-field__target_suffix">
-                                    <div class="form-field__icon">
-                                        <i class="icon icon-arrow-right"></i>
+                                    <div class="form-field__icon toggler-trigger">
+                                        <i class="icon icon-visible"></i>
+                                        <i class="icon icon-hidden"></i>
                                     </div>
                                     <input id="repeatPassword" type="password" name="repeatPassword" autocomplete="new-password" class="email-validation form-field__input" data-repeat-pass="Passwords doesn't match" data-required="This field is required">
                                 </div>
