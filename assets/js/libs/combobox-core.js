@@ -1,3 +1,4 @@
+// uglifyjs assets/js/libs/combobox-core.js --output assets/js/libs/combobox.min.js
 const _selectBox = ".combo-box";
 const _selectBoxSelected = ".combo-box-selected";
 const _selectBoxSelectedWrap = ".combo-box-selected-wrap";
