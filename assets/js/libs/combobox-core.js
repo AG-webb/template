@@ -13,13 +13,13 @@ const _tagWrapperClass = "combo-box-tags";
 const _tagElementClass = "combo-box-tag";
 const _userAddedOptionClass = "user-added-option";
 const _emptyMessageClass = "combo-box-message";
-const _emptyMessage = "Nothing found";
 const _attrName = "data-combo-name";
 const _attrValue = "data-combo-value";
 const _optionAttrValue = "data-option-value";
 const _tagAttrValue = "data-tag-value";
 const _htmlElement = document.querySelector("html");
-const _maxItemsShow = 3;
+const _defaultEmptyMessage = "Nothing found";
+const _defaultMaxItemsShow = 3;
 
 _htmlElement.addEventListener("click", function(e) {
 	if((e && !e.target.closest(_selectBoxDropdown)) || !e.target.closest(_selectBox).classList.contains("multiple")) {
@@ -47,6 +47,20 @@ function _initComboBox(selector) {
 		const selectOptions = selectBoxElement.querySelectorAll(_selectBoxOption);
 		const placeholderElement = selectBoxElement.querySelector(_selectBoxPlaceholder);
 		const selectBoxOptionsElement = selectBoxElement.querySelector(_selectBoxOptions);
+		let _emptyMessage = _defaultEmptyMessage;
+		let _maxItemsShow = _defaultMaxItemsShow;
+
+		// Options attributes
+		const maxItemsAttribute = selectBoxElement.getAttribute("data-max-items");
+		const emptyMessageAttribute = selectBoxElement.getAttribute("data-empty-message");
+
+		if(maxItemsAttribute !== null && Number(maxItemsAttribute)) {
+			_maxItemsShow = maxItemsAttribute;
+		}
+		if(emptyMessageAttribute !== null) {
+			_emptyMessage = emptyMessageAttribute;
+		}
+		
 		let currentTabIndex = -1;
 		let multiData = [];
 
@@ -342,6 +356,64 @@ function _initComboBox(selector) {
 				}
 			}
 		}
+
+		function createSelectElement(selectBoxElement, name, options) {
+			let multiple = selectBoxElement.classList.contains("multiple");
+			let multiData = [];
+	
+			if(selectBoxElement.querySelector("select")) {
+				selectBoxElement.querySelector("select").remove();
+			}
+	
+			selectBoxElement.insertAdjacentHTML("beforeend", `<select name="${name}" style='display:none' ${multiple ? "multiple='multiple'" : ''}></select>`);
+			
+			options.forEach((option) => {
+				const text = option.textContent;
+				const value = option.getAttribute(_optionAttrValue);
+				const isDisabled = option.classList.contains("disabled");
+				const isSelected = option.classList.contains("selected");
+				const optionSelect = option.closest(_selectBox).querySelector('select');
+				
+				optionSelect.insertAdjacentHTML(
+					"beforeend",
+					`<option ${isSelected ? "selected='selected'" : ""} ${isDisabled ? "disabled='disabled'" : ""} value="${value}">${text}</option>`
+				);
+				
+				
+				if(isSelected) {
+					if(selectBoxElement.classList.contains("multiple")) {
+						// DUPLICATED CODE NEED TO REFACTOR THIS!!!!!!!!!! ***************************************
+						multiData = [...multiData, {value, text}];
+						let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
+				
+						selectBoxElement.closest(_selectBox).setAttribute(_attrValue, multiValues);
+				
+						if (selectBoxElement.closest(_selectBox).classList.contains(_tagModeClass)) {
+							let tagsTemplate = getTagsTemplate(multiData, _tagElementClass);
+							selectBoxElement.closest(_selectBox).querySelector(_selectBoxSelectedWrap).innerHTML = tagsTemplate;
+						} else {
+							selectBoxElement.closest(_selectBox).querySelector(_selectBoxSelectedWrap).textContent = multiTexts;
+				
+							if (multiData.length > _maxItemsShow) {
+								const maxItemsShowText = getMaxItemsShowText(multiTexts);
+								const restOptionsCount = multiData.length - _maxItemsShow;
+								selectBoxElement.closest(_selectBox).querySelector(_selectBoxSelectedWrap).textContent = (maxItemsShowText + ` +${restOptionsCount}`);
+							}
+						}
+						// **************************************************************************************************
+					} else {
+						optionSelect.value = option.value;
+						optionSelect.dispatchEvent(new Event('change'));
+						option.closest(_selectBox).querySelector(_selectBoxSelectedWrap).innerHTML = option.innerHTML;
+					}
+				}
+			});
+	
+		}
+
+		function getMaxItemsShowText(text) {
+			return text.split(", ").slice(0, _maxItemsShow).join(", ");
+		}
 	}
 
 	function scrollToFocusedOption(currentOption) {
@@ -398,60 +470,6 @@ function _initComboBox(selector) {
 		}
 	}
 
-	function createSelectElement(selectBoxElement, name, options) {
-		let multiple = selectBoxElement.classList.contains("multiple");
-		let multiData = [];
-
-		if(selectBoxElement.querySelector("select")) {
-			selectBoxElement.querySelector("select").remove();
-		}
-
-		selectBoxElement.insertAdjacentHTML("beforeend", `<select name="${name}" style='display:none' ${multiple ? "multiple='multiple'" : ''}></select>`);
-		
-		options.forEach((option) => {
-			const text = option.textContent;
-			const value = option.getAttribute(_optionAttrValue);
-			const isDisabled = option.classList.contains("disabled");
-			const isSelected = option.classList.contains("selected");
-			const optionSelect = option.closest(_selectBox).querySelector('select');
-			
-			optionSelect.insertAdjacentHTML(
-				"beforeend",
-				`<option ${isSelected ? "selected='selected'" : ""} ${isDisabled ? "disabled='disabled'" : ""} value="${value}">${text}</option>`
-			);
-			
-			
-			if(isSelected) {
-				if(selectBoxElement.classList.contains("multiple")) {
-					// DUPLICATED CODE NEED TO REFACTOR THIS!!!!!!!!!! ***************************************
-					multiData = [...multiData, {value, text}];
-					let [multiValues, multiValuesArray, multiTexts] = getMultiVars(multiData);
-			
-					selectBoxElement.closest(_selectBox).setAttribute(_attrValue, multiValues);
-			
-					if (selectBoxElement.closest(_selectBox).classList.contains(_tagModeClass)) {
-						let tagsTemplate = getTagsTemplate(multiData, _tagElementClass);
-						selectBoxElement.closest(_selectBox).querySelector(_selectBoxSelectedWrap).innerHTML = tagsTemplate;
-					} else {
-						selectBoxElement.closest(_selectBox).querySelector(_selectBoxSelectedWrap).textContent = multiTexts;
-			
-						if (multiData.length > _maxItemsShow) {
-							const maxItemsShowText = getMaxItemsShowText(multiTexts);
-							const restOptionsCount = multiData.length - _maxItemsShow;
-							selectBoxElement.closest(_selectBox).querySelector(_selectBoxSelectedWrap).textContent = (maxItemsShowText + ` +${restOptionsCount}`);
-						}
-					}
-					// **************************************************************************************************
-				} else {
-					optionSelect.value = option.value;
-					optionSelect.dispatchEvent(new Event('change'));
-					option.closest(_selectBox).querySelector(_selectBoxSelectedWrap).innerHTML = option.innerHTML;
-				}
-			}
-		});
-
-	}
-
 	function getLastSelectedValue(values) {
 		let selectedValues = values.split(", ");
 		let lastSelectedValue = selectedValues[selectedValues.length - 1];
@@ -498,10 +516,6 @@ function _initComboBox(selector) {
 
 	function getVisibleOptions(selectBoxElement) {
 		return selectBoxElement.querySelectorAll(`${_selectBoxOption}:not(.${_selectBoxOptionHidden})`);
-	}
-
-	function getMaxItemsShowText(text) {
-		return text.split(", ").slice(0, _maxItemsShow).join(", ");
 	}
 
 	function getStyle(element, property) {

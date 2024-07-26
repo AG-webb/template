@@ -264,6 +264,13 @@
                     <li><strong>"allow-custom-options"</strong> - for user created options(<strong>"searchable"</strong> class is required)</li>
                     <li><strong>"tag-mode"</strong> - for tags template</li>
                 </ul>
+                <h2 class="h2-font">
+                    Attributes for customization
+                </h2>
+                <ul>
+                    <li><strong>"data-max-items"</strong> - set max items count for multiple mode. only numbers accepted!(<strong>default 3</strong>)</li>
+                    <li><strong>"data-empty-message"</strong> - set empty message for non found options (<strong>default - "Nothing found"</strong>)</li>
+                </ul>
                 <!-- Single -->
                 <div class="component__wrap">
                     <h2 class="h2-font">Single</h2>
@@ -297,7 +304,7 @@
                 <div class="component__wrap">
                     <h2 class="h2-font">Multiple</h2>
                     <div class="custom-select">
-                        <div class="combo-box multiple" data-combo-name="multiselect[]">
+                        <div class="combo-box multiple" data-combo-name="multiselect[]" data-max-items="2">
                             <div class="combo-box-selected">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Multiple Select Placeholder</span>
@@ -684,6 +691,9 @@
                 </li>
                 <li>
                     <a href="#skeleton">Skeleton</a>
+                </li>
+                <li>
+                    <a href="#file-upload">File Upload</a>
                 </li>
                 <li>
                     <a href="#checkbox">Custom Check</a>

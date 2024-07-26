@@ -36,6 +36,7 @@
 
 .components {
     padding: rem(25) 0;
+    counter-reset: component;
 }
 
 .component {
@@ -50,6 +51,12 @@
 
     .h1-font {
         margin-bottom: rem(32);
+        color: map-get($color-scheme, 'success');
+        
+        &::before {
+            counter-increment: component;
+            content: counter(component) '. '; 
+        }
     }
 
     .h2-font {
