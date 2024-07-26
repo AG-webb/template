@@ -4,11 +4,10 @@
 
 
 <div class="row">
-    <div class="column sm-12">
+    <div class="column sm-12 xl-10">
         <div class="components">
-
             <!-- Switcher -->
-            <div class="component">
+            <div class="component" id="switchers">
                 <h1 class="h1-font">"Active" Class Toggle Component</h1>
                 <div class="component__wrap">
                     <h2 class="h2-font">Default</h2>
@@ -47,7 +46,7 @@
             </div>
 
             <!-- Buttons -->
-            <div class="component">
+            <div class="component" id="buttons">
                 <h1 class="h1-font">Button Sizes</h1>
                 <div class="btns">
                     <button class="btn btn_test btn_sm">
@@ -66,7 +65,7 @@
             </div>
 
             <!-- Form Items -->
-            <div class="component">
+            <div class="component" id="form-items">
                 <h1 class="h1-font">Form Items</h1>
                 <form action="#" class="with-validation">
                     <div class="form-fields">
@@ -163,7 +162,7 @@
             </div>
 
             <!-- Shadows -->
-            <div class="component">
+            <div class="component" id="shadows">
                 <h1 class="h1-font">Shadows List</h1>
 
                 <div class="shadow-item shadow-xs h2-font">
@@ -178,7 +177,7 @@
             </div>
 
             <!-- CSS only carousel -->
-            <div class="component">
+            <div class="component" id="css-carousel">
                 <h1 class="h1-font">Css Only Carousel</h1>
 
                 <div class="carousel">
@@ -246,7 +245,7 @@
             </div>
 
             <!-- Toast -->
-            <div class="component">
+            <div class="component" id="toast">
                 <h1 class="h1-font">Display Toast Messages</h1>
                 <button class="btn btn_lg btn_test toast-trigger">
                     <span>Display Toast</span>
@@ -254,7 +253,7 @@
             </div>
 
             <!-- Select -->
-            <form action="#" method="post" class="component custom-selects-form">
+            <form action="#" method="post" class="component custom-selects-form" id="selects">
                 <h1 class="h1-font">Custom Select</h1>
                 <h2 class="h2-font">
                     Classnames for custom select config
@@ -401,7 +400,7 @@
             </form>
 
             <!-- Accordion -->
-            <div class="component">
+            <div class="component" id="accordion">
                 <h1 class="h1-font">Accordion</h1>
                 <div class="accordion">
                     <div class="accordion__item">
@@ -448,7 +447,7 @@
             </div>
 
             <!-- Modal -->
-            <div class="component">
+            <div class="component" id="modal">
                 <h1 class="h1-font">Modal. Possible classes - "from-left", "from-right", "center-modal", "error", "success"</h1>
                 <button class="btn btn_lg btn_test modal-trigger" data-modal="main-modal">
                     <span>Open Modal</span>
@@ -456,7 +455,7 @@
             </div>
 
             <!-- Tabs -->
-            <div class="component">
+            <div class="component" id="tabs">
                 <h1 class="h1-font">Tabs</h1>
                 <div class="tabs">
                     <div class="tabs__control">
@@ -485,7 +484,7 @@
             </div>
 
             <!-- Dinamic Append -->
-            <div class="component">
+            <div class="component" id="dinamic-append">
                 <h1 class="h1-font">Dinamic Append (resize window less than 1280px and reload page for result)</h1>
                 <div class="desktop-append-container">
                     <span>When window width >= 1280px</span>
@@ -499,7 +498,7 @@
             </div>
 
             <!-- Skeleton -->
-            <div class="component">
+            <div class="component" id="skeleton">
                 <h1 class="h1-font">Skeleton</h1>
                 <div class="skeleton">
                     <div class="skeleton__element skeleton__element_image"></div>
@@ -513,7 +512,7 @@
             </div>
 
             <!-- File Upload -->
-            <div class="component">
+            <div class="component" id="file-upload">
                 <h1 class="h1-font">File Upload</h1>
                 <div class="component__wrap">
                     <h2 class="h2-font">Single Upload Avatar</h2>
@@ -543,7 +542,7 @@
             </div>
 
             <!-- Checkbox and radio -->
-            <div class="component">
+            <div class="component" id="checkbox">
                 <h1 class="h1-font">Custom Checkbox and radio button</h1>
                 <div class="component__wrap">
                     <h2 class="h2-font">Checkbox</h2>
@@ -574,7 +573,7 @@
             </div>
 
             <!-- Jquery Datepicker -->
-            <div class="component">
+            <div class="component" id="datepickers">
                 <h1 class="h1-font">Custom Datepicker</h1>
                 <div class="component__wrap">
                     <h2 class="h2-font">Single</h2>
@@ -610,7 +609,7 @@
             </div>
 
             <!-- Popover Component -->
-            <div class="component">
+            <div class="component" id="popover">
                 <h1 class="h1-font">Popover Component</h1>
                 <div class="component__wrap">
                     <div class="lang-switcher popover-container">
@@ -633,7 +632,7 @@
             </div>
 
             <!-- Image Aspect Ratio -->
-            <div class="component">
+            <div class="component" id="aspect-ratio">
                 <h1 class="h1-font">Image Aspect Ratio</h1>
                 <div class="component__wrap">
                     <div class="aspect-ratio flex align-between">
@@ -646,6 +645,60 @@
             </div>
         </div>
 
+    </div>
+    <div class="column sm-12 xl-2 relative">
+        <div class="components-nav shadow-sm">
+            <ol>
+                <li>
+                    <a href="#switchers">Switchers</a>
+                </li>
+                <li>
+                    <a href="#buttons">Buttons</a>
+                </li>
+                <li>
+                    <a href="#form-items">Form Aitems</a>
+                </li>
+                <li>
+                    <a href="#shadows">Shadows</a>
+                </li>
+                <li>
+                    <a href="#css-carousel">Css Carousel</a>
+                </li>
+                <li>
+                    <a href="#toast">Toast</a>
+                </li>
+                <li>
+                    <a href="#selects">Custom Select</a>
+                </li>
+                <li>
+                    <a href="#accordion">Accordion</a>
+                </li>
+                <li>
+                    <a href="#modal">Modal</a>
+                </li>
+                <li>
+                    <a href="#tabs">Tabs</a>
+                </li>
+                <li>
+                    <a href="#dinamic-append">Dinamic Append</a>
+                </li>
+                <li>
+                    <a href="#skeleton">Skeleton</a>
+                </li>
+                <li>
+                    <a href="#checkbox">Custom Check</a>
+                </li>
+                <li>
+                    <a href="#datepickers">Custom Datepicker</a>
+                </li>
+                <li>
+                    <a href="#popover">Popover</a>
+                </li>
+                <li>
+                    <a href="#aspect-ratio">Aspect Ratio</a>
+                </li>
+            </ol>
+        </div>
     </div>
 </div>
 

@@ -13,6 +13,27 @@
 @import "../components/_popover";
 @import "../components/_carousel";
 
+
+.components-nav {
+    padding: rem(10);
+    border-radius: rem(10);
+    position: sticky;
+    top: rem(24);
+    right: 0;
+
+    ol {
+        list-style-position: inside;
+
+        li {
+            margin-bottom: rem(8);
+        }
+    }
+
+    @media (max-width: $media-lg) {
+        display: none;
+    }
+}
+
 .components {
     padding: rem(25) 0;
 }
@@ -37,6 +58,46 @@
 
     &:first-child {
         margin-top: 0;
+    }
+
+    &:target {
+        @include animation(fading, 5s, ease, 0s, 1, none);
+    }
+}
+
+@keyframes fading {
+    0% {
+        background-color: #eeeeee;
+    }
+    10% {
+        background-color: transparent;
+    }
+    20% {
+        background-color: #eeeeee;
+    }
+    30% {
+        background-color: transparent;
+    }
+    40% {
+        background-color: #eeeeee;
+    }
+    50% {
+        background-color: transparent;
+    }
+    60% {
+        background-color: #eeeeee;
+    }
+    70% {
+        background-color: transparent;
+    }
+    80% {
+        background-color: #eeeeee;
+    }
+    90% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: #eeeeee;
     }
 }
 
