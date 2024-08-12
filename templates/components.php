@@ -720,7 +720,7 @@
 
 
 <!-- Modal -->
-<div class="modal main-modal modal_md center-modal">
+<div class="modal main-modal modal_md centered">
     <div class="modal__wrapper">
         <div class="modal__body">
             <div class="modal__close modal-close">
