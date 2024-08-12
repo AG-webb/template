@@ -222,17 +222,52 @@ $(document).ready(function () {
     // Form Validation ***************************
     $(".with-validation").on("submit", function (e) {
         let isValid = true;
-        let email = $(this).find(".email-validation");
-        let errorHtml = `<div class="form-field__message error">Wrong email, please set correct email address</div>`;
+        const requiredFields = $(this).find("[data-required]");
+        const newPassField = $(this).find("[data-new-pass]");
+        const repeatPassField = $(this).find("[data-repeat-pass]");
+        const emailElements = $(this).find("[data-email-validation]");
 
         $(this).find(".form-field__message.error").remove();
         $(this).find(".form-field.invalid").removeClass("invalid");
 
-        if (email.length) {
-            if (!isEmailValid(email.val())) {
-                $(".email-validation").closest(".form-field").addClass("invalid").append(errorHtml);
+        if(requiredFields.length) {
+            requiredFields.each(function() {
+                if ($(this).val().trim() === '') {
+                    const requiredMessage = $(this).attr("data-required") || "This Field is Required";
+                    let requiredErrorHtml = `<div class="form-field__message error">${requiredMessage}</div>`;
+
+                    $(this).closest(".form-field").addClass("invalid");
+                    $(this).closest(".form-field").append(requiredErrorHtml);
+                    
+                    isValid = false;
+                }
+            });
+        }
+
+        if(newPassField.length && repeatPassField.length) {
+            if (newPassField.val() !== repeatPassField.val()) {
+                const requiredMessage = repeatPassField.attr("data-new-pass") || "Passwords doesn't match";
+                let requiredErrorHtml = `<div class="form-field__message error">${requiredMessage}</div>`;
+
+                repeatPassField.closest(".form-field").addClass("invalid");
+                repeatPassField.closest(".form-field").append(requiredErrorHtml);
+
                 isValid = false;
             }
+        }
+
+        if(emailElements.length) {
+            emailElements.each(function() {
+                if (!isEmailValid($(this).val())) {
+                    const requiredMessage = $(this).attr("data-email-validation") || "Incorrect Email format";
+                    let emailErrorHtml = `<div class="form-field__message error">${requiredMessage}</div>`;
+
+                    $(this).closest(".form-field").addClass("invalid");
+                    $(this).closest(".form-field").append(emailErrorHtml);
+                    
+                    isValid = false;
+                }
+            });
         }
 
         if (!isValid) {
