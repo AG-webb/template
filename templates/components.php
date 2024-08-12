@@ -463,7 +463,7 @@
                     <li><strong>"active"</strong> - to show modal</li>
                     <li><strong>"from-left"</strong> - opens from left</li>
                     <li><strong>"from-right"</strong> - opens from right</li>
-                    <li><strong>"center-modal"</strong> - opens from center</li>
+                    <li><strong>"centered"</strong> - opens in center</li>
                     <li><strong>"error"</strong> - for displaying error message after form submit</li>
                     <li><strong>"success"</strong> - for displaying success message after form submit</li>
                 </ul>

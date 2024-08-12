@@ -54,13 +54,13 @@
                 &::after {
                     content: "";
                     position: absolute;
-                    top: rem(4);
-                    left: rem(4);
+                    top: 50%;
+                    left: 50%;
                     width: rem(8);
                     height: rem(8);
                     background-color: #000;
                     border-radius: 50%;
-                    @include scale(0);
+                    @include transform(translate(-50%, -50%) scale(0));
                     @include transition(all,0.3s,ease);
                 }
             }
@@ -68,7 +68,7 @@
 
         input:checked ~ .custom-check__checkmark {
             &::after {
-                @include scale(1);
+                @include transform(translate(-50%, -50%) scale(1));
             }
         }
     }
