@@ -25,6 +25,25 @@ function getStyle(target, property) {
     return window.getComputedStyle(target, null).getPropertyValue(property);
 };
 
+function getMultipleSelectValues(select) {
+    let selectValues = [];
+
+    if(select) {
+        const options = select.querySelectorAll("option");
+
+        if(options.length) {
+            options.forEach(option => {
+                if(option.selected) {
+                    selectValues = [...selectValues, option.value || option.text];
+                }
+            });
+        }
+
+    }
+    
+    return selectValues; 
+}
+
 function slideUp(target, duration = 300) {
     target.style.transitionProperty = 'height, margin, padding';
     target.style.transitionDuration = duration + 'ms';

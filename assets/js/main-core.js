@@ -256,7 +256,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if(selectElements.length) {
         selectElements.forEach((selectElement) => {
             selectElement.addEventListener("change", function () {
-                console.log(selectElement.value);
+                if(selectElement.getAttribute("multiple") !== null) {
+                    console.log(getMultipleSelectValues(selectElement));
+                } else {
+                    console.log(selectElement.value);
+                }
             });
         });
     }
