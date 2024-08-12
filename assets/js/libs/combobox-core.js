@@ -101,7 +101,15 @@ function _initComboBox(selector) {
 				} else {
 					if(e.target.classList.contains("allow-custom-options")) {
 						addUserOption(e.target);
+					} else {
+						if(selectBoxOptionsElement.querySelector("." + _emptyMessageClass)) {
+							selectBoxOptionsElement.querySelector("." + _emptyMessageClass).remove();
+						}
 					}
+				}
+
+				if(e.target.closest(_selectBoxSearch)) {
+					e.preventDefault();
 				}
 	
 				resetSearchInput(e.target);
