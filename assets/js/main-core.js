@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // FORM ITEMS *********************
     const formFieldInputElements = document.querySelectorAll(".form-field__input");
-    if(formFieldInputElements) {
+    if(formFieldInputElements.length) {
         formFieldInputElements.forEach((formFieldInputElement) => {
             formFieldInputElement.addEventListener("keyup", function () {
                 let val = formFieldInputElement.value.trim();

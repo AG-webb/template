@@ -556,12 +556,12 @@
                     <label class="custom-check custom-check_checkbox" for="check_1">
                         <input type="checkbox" value="1" name="checkbox" id="check_1">
                         <span class="custom-check__checkmark"></span>
-                        <span class="payment-info__label">Check 1</span>
+                        <span class="custom-check__label">Check 1</span>
                     </label>
                     <label class="custom-check custom-check_checkbox" for="check_2">
                         <input type="checkbox" value="2" name="checkbox" id="check_2">
                         <span class="custom-check__checkmark"></span>
-                        <span class="payment-info__label">Check 2</span>
+                        <span class="custom-check__label">Check 2</span>
                     </label>
                 </div>
                 <div class="component__wrap">
@@ -663,7 +663,7 @@
                     <a href="#buttons">Buttons</a>
                 </li>
                 <li>
-                    <a href="#form-items">Form Aitems</a>
+                    <a href="#form-items">Form Items</a>
                 </li>
                 <li>
                     <a href="#shadows">Shadows</a>
