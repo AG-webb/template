@@ -23,7 +23,7 @@
     }
 
     &__dropdown {
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             position: absolute;
             left: 0;
             top: calc(80%);
@@ -73,7 +73,7 @@
                 }
             }
 
-            @media (min-width: 1025px) {
+            @media (min-width: 1024px) {
                 &__dropdown {
                     top: 100%;
                     visibility: visible;

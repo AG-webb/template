@@ -455,7 +455,18 @@
 
             <!-- Modal -->
             <div class="component" id="modal">
-                <h1 class="h1-font">Modal. Possible classes - "from-left", "from-right", "center-modal", "error", "success"</h1>
+                <h1 class="h1-font">Modal.</h1>
+                <h2 class="h2-font">
+                    Classnames for modal config
+                </h2>
+                <ul>
+                    <li><strong>"active"</strong> - to show modal</li>
+                    <li><strong>"from-left"</strong> - opens from left</li>
+                    <li><strong>"from-right"</strong> - opens from right</li>
+                    <li><strong>"center-modal"</strong> - opens from center</li>
+                    <li><strong>"error"</strong> - for displaying error message after form submit</li>
+                    <li><strong>"success"</strong> - for displaying success message after form submit</li>
+                </ul>
                 <button class="btn btn_lg btn_test modal-trigger" data-modal="main-modal">
                     <span>Open Modal</span>
                 </button>
@@ -492,7 +503,8 @@
 
             <!-- Dinamic Append -->
             <div class="component" id="dinamic-append">
-                <h1 class="h1-font">Dinamic Append (resize window less than 1280px and reload page for result)</h1>
+                <h1 class="h1-font">Dinamic Append</h1>
+                <h2 class="h2-font">resize window less than 1280px and reload page for result</h2>
                 <div class="desktop-append-container">
                     <span>When window width >= 1280px</span>
                     <button class="append-button btn btn_sm btn_test" data-append="1280, .tablet-append-container">
@@ -579,7 +591,7 @@
                 </div>
             </div>
 
-            <!-- Jquery Datepicker -->
+            <!-- Datepicker -->
             <div class="component" id="datepickers">
                 <h1 class="h1-font">Custom Datepicker</h1>
                 <div class="component__wrap">
@@ -598,17 +610,10 @@
                         <div class="form-fields">
                             <div class="form-fields__item">
                                 <div class="form-field form-field_md">
-                                    <label class="form-field__label" for="rangeFrom">From</label>
                                     <div class="form-field__target">
-                                        <input type="text" id="rangeFrom" name="from" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="rangeDatepicker">
+                                        <input type="text" id="rangepicker" name="from" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="rangeDatepicker">
                                     </div>
                                 </div>
-                                <!-- <div class="form-field form-field_md">
-                                    <label class="form-field__label" for="rangeTo">To</label>
-                                    <div class="form-field__target">
-                                        <input type="text" id="rangeTo" name="to" class="form-field__input" placeholder="Choose date" autocomplete="off" aria-label="rangeDatepicker">
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -617,7 +622,8 @@
 
             <!-- Popover Component -->
             <div class="component" id="popover">
-                <h1 class="h1-font">Popover Component</h1>
+                <h1 class="h1-font">Popover</h1>
+                <h2 class="h2-font">Visible only on devices < 1024px</h2>
                 <div class="component__wrap">
                     <div class="lang-switcher popover-container">
                         <div class="lang-switcher__current popover-trigger">
