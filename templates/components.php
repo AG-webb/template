@@ -71,20 +71,20 @@
                     <div class="form-fields">
                         <div class="form-fields__item">
                             <div class="form-field form-field_sm">
-                                <label class="form-field__label" for="firstName">Field Sm</label>
+                                <label class="form-field__label" for="firstName">Field Sm firstName</label>
                                 <div class="form-field__target form-field__target_prefix">
                                     <div class="form-field__icon">
                                         <i class="icon icon-arrow-left"></i>
                                     </div>
-                                    <input id="firstName" type="text" name="firstName" class="form-field__input" data-required="This field is required">
+                                    <input id="firstName" type="text" name="firstName" autocomplete="name" class="form-field__input" data-required="This field is required">
                                 </div>
                             </div>
                         </div>
                         <div class="form-fields__item">
                             <div class="form-field form-field_md form-field_underline">
-                                <label class="form-field__label" for="lastName">Field Md</label>
+                                <label class="form-field__label" for="lastName">Field Md lastName</label>
                                 <div class="form-field__target">
-                                    <input id="lastName" type="text" name="lastName" class="form-field__input" data-required="This field is required">
+                                    <input id="lastName" type="text" name="lastName" autocomplete="family-name" class="form-field__input" data-required="This field is required">
                                 </div>
                             </div>
                         </div>
