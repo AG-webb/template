@@ -418,7 +418,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputNumberElements = document.querySelectorAll(".input-number");
     if(inputNumberElements.length) {
         inputNumberElements.forEach((inputNumberElement) => {
-            inputNumberElement.addEventListener("keyup", function(e) {
+            inputNumberElement.addEventListener("input", function(e) {
                 let val = inputNumberElement.value;
                 let onlyNum = getOnlyNumbers(val);
         

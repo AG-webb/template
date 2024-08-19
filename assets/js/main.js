@@ -275,7 +275,7 @@ $(document).ready(function () {
         }
     });
 
-    $(".input-number").on("keyup", function(e) {
+    $(".input-number").on("input", function(e) {
         let val = $(this).val();
         let onlyNum = getOnlyNumbers(val);
 
