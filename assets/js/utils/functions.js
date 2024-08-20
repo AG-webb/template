@@ -168,8 +168,8 @@ function popoverSlideInit(target) {
         targetHeight = target.outerHeight();
     }, 300);
 
-    target[0].addEventListener('touchstart', dragElement);
-    target[0].addEventListener('touchmove', draggingElement);
+    target[0].addEventListener('touchstart', dragElement, { passive: true });
+    target[0].addEventListener('touchmove', draggingElement, { passive: true });
     target[0].addEventListener('touchend', draggedElement);
 
     function dragElement(e) {
