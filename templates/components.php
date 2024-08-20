@@ -626,10 +626,10 @@
                 <h2 class="h2-font">Visible only on devices < 1024px</h2>
                 <div class="component__wrap">
                     <div class="lang-switcher popover-container">
-                        <div class="lang-switcher__current popover-trigger">
+                        <button type="button" class="lang-switcher__current popover-trigger">
                             <span>En</span>
                             <i class="icon icon-chevron-down"></i>
-                        </div>
+                        </button>
                         <div class="lang-switcher__dropdown popover-wrap">
                             <div class="lang-switcher__dropdown-body popover">
                                 <div class="lang-switcher__dropdown-items">
