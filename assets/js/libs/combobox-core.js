@@ -99,8 +99,8 @@ function _initComboBox(selector) {
 				if (selectBoxOptionFocusedElement) {
 					selectBoxOptionFocusedElement.click();
 				} else {
-					if(e.target.classList.contains("allow-custom-options")) {
-						addUserOption(e.target);
+					if(e.target.closest(".allow-custom-options")) {
+						addUserOption(e.target.closest(".allow-custom-options"));
 					} else {
 						if(selectBoxOptionsElement.querySelector("." + _emptyMessageClass)) {
 							selectBoxOptionsElement.querySelector("." + _emptyMessageClass).remove();
@@ -110,9 +110,8 @@ function _initComboBox(selector) {
 
 				if(e.target.closest(_selectBoxSearch)) {
 					e.preventDefault();
+					resetSearchInput(e.target);
 				}
-	
-				resetSearchInput(e.target);
 			} else if (keyCode === arrow.esc && isSelectBoxSelectedActive) {
 				// Escape
 				_closeDropdown();
@@ -261,7 +260,10 @@ function _initComboBox(selector) {
 			}
 			targetSelect.dispatchEvent(new Event('change'));
 			selectBoxContainer.setAttribute(_attrValue, multiValues);
-			selectBoxContainer.querySelector(_selectBoxOption + `[${_optionAttrValue}="${value}"]`).classList.remove('selected');
+			const removingSelectedOption = selectBoxContainer.querySelector(_selectBoxOption + `[${_optionAttrValue}="${value}"]`);
+			if(removingSelectedOption) {
+				removingSelectedOption.classList.remove('selected');
+			}
 	
 			if (multiData.length) {
 				if (multiData.length > _maxItemsShow && !selectBoxContainer.classList.contains(_tagModeClass)) {
@@ -299,6 +301,7 @@ function _initComboBox(selector) {
 
 			if (!containsValue) {
 				selectBoxElement.querySelector("select").insertAdjacentHTML("beforeend", `<option class="${_userAddedOptionClass}" value="${value}">${value}</option>`);
+				selectBoxOptionsElement.insertAdjacentHTML("beforeend", `<div class="${_selectBoxOption.replace(".", "")} ${_userAddedOptionClass} selected" ${_optionAttrValue}="${value}">${value}</div>`);
 				addMultiOption(selectBoxElement, { value, text: value });
 			}
 		}
@@ -363,6 +366,9 @@ function _initComboBox(selector) {
 				if(!selectBoxOptionsElement.querySelector("." + _emptyMessageClass)) {
 					selectBoxOptionsElement.insertAdjacentHTML("beforeend", `<div class="${_emptyMessageClass}">${_emptyMessage}</div>`);
 				}
+				selectOptions.forEach((option) => {
+					option.classList.remove(_selectBoxOptionFocused.replace(".", ""));
+				});
 			}
 		}
 
