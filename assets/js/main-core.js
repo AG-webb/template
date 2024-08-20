@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     headerFixed();
     tabsInit();
+    accordionInit();
     dynamicAppendInit();
 
     // MODAL ***************************
@@ -149,30 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
-    // ACCORDION ************************
-    const accordionHeaderElements = document.querySelectorAll(".accordion__header");
-    accordionHeaderElements.forEach((accordionHeaderElement) => {
-        accordionHeaderElement.addEventListener("click", function (e) {
-            const accordion = accordionHeaderElement.closest(".accordion");
-            const thisItem = accordionHeaderElement.closest(".accordion__item");
-            const openItem = accordion.querySelector(".accordion__item.open");
-            const thisBody = thisItem.querySelector(".accordion__body");
-            const openBody = openItem && openItem.querySelector(".accordion__body");
-    
-            if (thisItem.classList.contains("open")) {
-                thisItem.classList.remove("open");
-                slideUp(thisBody);
-            } else {
-                if(openItem) {
-                    openItem.classList.remove("open");
-                    slideUp(openBody);
-                }
-                thisItem.classList.add("open");
-                slideDown(thisBody);
-            }
-        });
-    });
 
     // POPOVER **************************
     const popoverElements = document.querySelectorAll(".popover");

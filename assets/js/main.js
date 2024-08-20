@@ -1,6 +1,7 @@
 $(document).ready(function () {
     headerFixed();
     tabsInit();
+    accordionInit();
     dynamicAppendInit();
 
     // MODAL ***************************
@@ -96,25 +97,6 @@ $(document).ready(function () {
         $(this).closest(".toggler").removeClass("active");
 
         scrollNone();
-    });
-
-    // ACCORDION ************************
-    $(".accordion__header").on("click", function (e) {
-        let accordion = $(this).closest(".accordion");
-        let thisItem = $(this).closest(".accordion__item");
-        let openItem = accordion.find(".accordion__item.open");
-        let thisBody = thisItem.find(".accordion__body");
-        let openBody = openItem.find(".accordion__body");
-
-        if (thisItem.hasClass("open")) {
-            thisItem.removeClass("open");
-            thisBody.slideUp(300);
-        } else {
-            openItem.removeClass("open");
-            openBody.slideUp(300);
-            thisItem.addClass("open");
-            thisBody.slideDown(300);
-        }
     });
 
     // POPOVER **************************

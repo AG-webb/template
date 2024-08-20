@@ -162,6 +162,39 @@ function tabsInit() {
     }
 }
 
+function accordionInit(e) {
+    const accordionElements = document.querySelectorAll(".accordion");
+    accordionElements.forEach((accordionElement) => {
+        accordionElement.addEventListener("click", accordionSlideToggle);
+        accordionElement.addEventListener("keypress", accordionSlideToggle);
+    });   
+}
+
+function accordionSlideToggle(e) {
+    if(e.type === 'keypress' && e.keyCode !== 13) return;
+
+    if(e.target.closest(".accordion__header")) {
+        const target = e.target.closest(".accordion__header");
+        const accordion = target.closest(".accordion");
+        const thisItem = target.closest(".accordion__item");
+        const openItem = accordion.querySelector(".accordion__item.open");
+        const thisBody = thisItem.querySelector(".accordion__body");
+        const openBody = openItem && openItem.querySelector(".accordion__body");
+    
+        if (thisItem.classList.contains("open")) {
+            thisItem.classList.remove("open");
+            slideUp(thisBody);
+        } else {
+            if(openItem) {
+                openItem.classList.remove("open");
+                slideUp(openBody);
+            }
+            thisItem.classList.add("open");
+            slideDown(thisBody);
+        }
+    }
+}
+
 function generateId(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

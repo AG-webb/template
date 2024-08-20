@@ -59,6 +59,33 @@ function tabsInit() {
     });
 }
 
+function accordionInit(e) {
+    $(".accordion").on("click keypress", accordionSlideToggle);
+}
+
+function accordionSlideToggle(e) {
+    if(e.type === 'keypress' && e.keyCode !== 13) return;
+    
+    if($(e.target).closest(".accordion__header").length) {
+        const target = $(e.target).closest(".accordion__header");
+        let accordion = target.closest(".accordion");
+        let thisItem = target.closest(".accordion__item");
+        let openItem = accordion.find(".accordion__item.open");
+        let thisBody = thisItem.find(".accordion__body");
+        let openBody = openItem.find(".accordion__body");
+
+        if (thisItem.hasClass("open")) {
+            thisItem.removeClass("open");
+            thisBody.slideUp(300);
+        } else {
+            openItem.removeClass("open");
+            openBody.slideUp(300);
+            thisItem.addClass("open");
+            thisBody.slideDown(300);
+        }
+    }
+}
+
 function generateId(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

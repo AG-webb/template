@@ -411,7 +411,7 @@
                 <h1 class="h1-font">Accordion</h1>
                 <div class="accordion">
                     <div class="accordion__item">
-                        <div class="accordion__header">
+                        <div class="accordion__header" tabindex="0">
                             <div class="accordion__title">
                                 Accordion Item 1
                             </div>
@@ -431,7 +431,7 @@
                         </div>
                     </div>
                     <div class="accordion__item">
-                        <div class="accordion__header">
+                        <div class="accordion__header" tabindex="0">
                             <div class="accordion__title">
                                 Accordion Item 2
                             </div>
