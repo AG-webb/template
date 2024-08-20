@@ -23,6 +23,12 @@
 .avatar-upload {
     display: inline-block;
 
+    // .file-upload-input {
+    //     &:focus-visible+.avatar-upload__body, &:focus-within+.avatar-upload__body {
+    //         outline: 2px solid #000;
+    //     }
+    // }
+
     &__body {
         width: rem(100);
         height: rem(100);
@@ -65,6 +71,11 @@
     .file-upload__wrap {
         display: inline-block
     }
+    // .file-upload-input {
+    //     &:focus-visible+.doc-upload__body, &:focus-within+.doc-upload__body {
+    //         outline: 2px solid #000;
+    //     }
+    // }
     &__preview {
         @extend %flex;
         @include flex-flow(column, nowrap);

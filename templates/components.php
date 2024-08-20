@@ -537,10 +537,10 @@
                     <h2 class="h2-font">Single Upload Avatar</h2>
                     <div class="file-upload avatar-upload">
                         <div class="file-upload__wrap">
+                            <input type="file" class="file-upload-input" aria-label="uploadAvatar">
                             <div class="avatar-upload__body">
                                 <div class="avatar-upload__content">upload</div>
                             </div>
-                            <input type="file" class="file-upload-input" aria-label="uploadAvatar">
                         </div>
                     </div>
                 </div>
@@ -548,12 +548,12 @@
                     <h2 class="h2-font">Multiple Upload Document</h2>
                     <div class="file-upload doc-upload">
                         <div class="file-upload__wrap">
+                            <input type="file" class="file-upload-input" multiple="multiple" aria-label="uploadDocuments">
                             <div class="doc-upload__body">
                                 <div class="doc-upload__btn btn btn_lg btn_test">
                                     <span>upload Document(s)</span>
                                 </div>
                             </div>
-                            <input type="file" class="file-upload-input" multiple="multiple" aria-label="uploadDocuments">
                         </div>
                         <div class="file-upload-preview doc-upload__preview"></div>
                     </div>

@@ -11,6 +11,10 @@
         cursor: pointer;
         height: 0;
         width: 0;
+
+        // &:focus-visible+.custom-check__checkmark, &:focus-within+.custom-check__checkmark {
+        //     outline: 2px solid #000;
+        // }
     }
 
     &_checkbox {
@@ -43,7 +47,7 @@
 
     &_radio {
         .custom-check {
-            &__checkmark {  
+            &__checkmark {
                 width: rem(18);
                 height: rem(18);
                 border-radius: 50%;
