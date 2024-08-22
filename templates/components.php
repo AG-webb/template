@@ -276,7 +276,7 @@
                     <h2 class="h2-font">Single</h2>
                     <div class="custom-select">
                         <div class="combo-box" data-combo-name="single" data-combo-value="all">
-                            <div class="combo-box-selected">
+                            <div class="combo-box-selected" tabindex="0">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Select Placeholder</span>
                                 </div>
@@ -305,7 +305,7 @@
                     <h2 class="h2-font">Multiple</h2>
                     <div class="custom-select">
                         <div class="combo-box multiple" data-combo-name="multiselect[]" data-max-items="2">
-                            <div class="combo-box-selected">
+                            <div class="combo-box-selected" tabindex="0">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Multiple Select Placeholder</span>
                                 </div>
@@ -326,7 +326,7 @@
                     <h2 class="h2-font">Multiple With Search</h2>
                     <div class="custom-select">
                         <div class="combo-box multiple searchable allow-custom-options" data-combo-name="multiselectSearch[]">
-                            <div class="combo-box-selected">
+                            <div class="combo-box-selected" tabindex="0">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Multiple Select Placeholder</span>
                                 </div>
@@ -350,7 +350,7 @@
                     <h2 class="h2-font">Tags</h2>
                     <div class="custom-select">
                         <div class="combo-box searchable multiple tag-mode" data-combo-name="tagsSelect[]">
-                            <div class="combo-box-selected">
+                            <div class="combo-box-selected" tabindex="0">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Tags Select Placeholder</span>
                                 </div>
@@ -369,31 +369,31 @@
                 <!-- Dynamic append select -->
                 <div class="component__wrap">
                     <h2 class="h2-font">Dynamic appended select</h2>
-                    <div class="btn btn_test btn_lg append-select">
+                    <button type="button" class="btn btn_test btn_lg append-select">
                         <span>Append Select</span>
-                    </div>
+                    </button>
                     <br /><br />
                 </div>
                 <!-- Dynamic appended options -->
                 <div class="component__wrap">
                     <h2 class="h2-font">Dynamic appended options</h2>
-                    <div class="btn btn_test btn_lg append-options">
+                    <button type="button" class="btn btn_test btn_lg append-options">
                         <span>Append Options 5 & 6</span>
-                    </div>
+                    </button>
                     <br /><br />
                     <div class="custom-select ajax-select">
                         <div class="combo-box multiple" data-combo-name="dynamicOptions[]">
-                            <div class="combo-box-selected">
+                            <div class="combo-box-selected" tabindex="0">
                                 <div class="combo-box-selected-wrap">
                                     <span class="combo-box-placeholder">Dynamic options Placeholder</span>
                                 </div>
                             </div>
                             <div class="combo-box-dropdown">
                                 <div class="combo-box-options">
-                                    <div class="combo-option selected" data-option-value="1">option 1</div>
-                                    <div class="combo-option selected" data-option-value="2">option 2</div>
-                                    <div class="combo-option" data-option-value="3">option 3</div>
-                                    <div class="combo-option" data-option-value="4">option 4</div>
+                                    <div class="combo-option selected" data-option-value="1" tabindex="0">option 1</div>
+                                    <div class="combo-option selected" data-option-value="2" tabindex="0">option 2</div>
+                                    <div class="combo-option" data-option-value="3" tabindex="0">option 3</div>
+                                    <div class="combo-option" data-option-value="4" tabindex="0">option 4</div>
                                 </div>
                             </div>
                         </div>

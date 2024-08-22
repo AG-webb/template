@@ -84,18 +84,38 @@ function _initComboBox(selector) {
 		// Keyboard Control
 		selectBoxElement.addEventListener("keydown", function(e) {
 			const keyCode = e.keyCode || e.which;
-			const arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27, backspace: 8 };
+			const arrow = { tab: 9, enter: 13, up: 38, down: 40, esc: 27, backspace: 8, tab: 9 };
 			const isSelectBoxSelectedActive = selectBoxElement.querySelector(_selectBoxSelected).classList.contains("active")
-	
+			
+			// Tab
+			if(keyCode ===arrow.tab) {
+				_closeDropdown();
+			}
+			// Enter
+			if(keyCode === arrow.enter) {
+				if(e.target.classList.contains(_selectBoxSelected.replace(".", ""))){
+					toggleDropdown(e.target.closest(_selectBoxSelected));
+				}
+
+				if(e.target.closest(_selectBoxOption)){
+					e.target.closest(_selectBoxOption).click();
+				}
+
+				e.preventDefault();
+			} 
 			if (keyCode === arrow.up && isSelectBoxSelectedActive) {
 				// Arrow Up
 				decreaseTabIndex();
+
+				e.preventDefault();
 			} else if (keyCode === arrow.down && isSelectBoxSelectedActive) {
 				// Arrow Down
 				increaseTabIndex();
+
+				e.preventDefault();
 			} else if (keyCode === arrow.enter && isSelectBoxSelectedActive) {
 				const selectBoxOptionFocusedElement = document.querySelector(_selectBoxOptionFocused)
-				// Enter
+				// Enter + opened
 				if (selectBoxOptionFocusedElement) {
 					selectBoxOptionFocusedElement.click();
 				} else {
@@ -263,6 +283,10 @@ function _initComboBox(selector) {
 			const removingSelectedOption = selectBoxContainer.querySelector(_selectBoxOption + `[${_optionAttrValue}="${value}"]`);
 			if(removingSelectedOption) {
 				removingSelectedOption.classList.remove('selected');
+
+				if(removingSelectedOption.classList.contains(_userAddedOptionClass)) {
+					removingSelectedOption.remove();
+				}
 			}
 	
 			if (multiData.length) {
@@ -341,6 +365,7 @@ function _initComboBox(selector) {
 
 		const moveFocus = () => {
 			const visibleSelectOptions = getVisibleOptions(selectBoxElement);
+			const selectOptions = selectBoxElement.querySelectorAll(_selectBoxOption);
 
 			if(visibleSelectOptions.length) {
 				if(selectBoxOptionsElement.querySelector("." + _emptyMessageClass)) {
