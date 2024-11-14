@@ -10,6 +10,10 @@
     z-index: z(sticky-element);
 }
 
+.inset {
+    inset: 0; //top left bottom right
+}
+
 .aspect-ratio {
     img {
         width: 15%;
