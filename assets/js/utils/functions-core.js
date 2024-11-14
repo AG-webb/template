@@ -130,6 +130,13 @@ function dynamicAppendInit() {
     }
 }
 
+function splitText(element) {
+    let wordsList = element.textContent.trim().split(" ");
+    let wrappedWords = wordsList.filter(word => word ? word : null).map(word => `<span class="split-word"><span>${word}</span></span>`);
+
+    return wrappedWords.join(" ");
+}
+
 function tabsInit() {
     const tabElements = document.querySelectorAll(".tab");
 
