@@ -138,24 +138,18 @@ function tabsInit() {
             tabElement.addEventListener("click", function () {
                 let contentId = tabElement.getAttribute("data-tab");
 
-                const thisSiblingTabs = tabElement.closest(".tabs__control").querySelectorAll(".tab");
-                if (thisSiblingTabs.length) {
-                    thisSiblingTabs.forEach((thisSiblingTab) => {
-                        thisSiblingTab.classList.remove("active");
-                    });
-                }
-                tabElement.classList.add("active");
+                if(!tabElement.classList.contains("active")) {
+                    const thisActiveTab = tabElement.closest(".tabs__control").querySelector(".tab.active");
+                    thisActiveTab.classList.remove("active");
+                    tabElement.classList.add("active");
+                    
+                    const thisContentElement = document.getElementById(contentId);
+                    if (thisContentElement) {
+                        const thisActiveTabContent =  tabElement.closest(".tabs").querySelector(".tab-content.active");
+                        thisActiveTabContent.classList.remove("active");
 
-                const thisTabContents = tabElement.closest(".tabs").querySelectorAll(".tab-content");
-                if (thisTabContents.length) {
-                    thisTabContents.forEach((thisTabContent) => {
-                        thisTabContent.classList.remove("active");
-                    });
-                }
-
-                const thisContentElement = document.getElementById(contentId);
-                if (thisContentElement) {
-                    thisContentElement.classList.add("active");
+                        thisContentElement.classList.add("active");
+                    }
                 }
             });
         });
