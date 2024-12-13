@@ -386,11 +386,11 @@ function scrollNone() {
         if (scrollWidthBeforeFreeze < scrollWidthAfterFreeze) {
             let scrollSpace = scrollWidthAfterFreeze - scrollWidthBeforeFreeze;
 
-            body.paddingRight = scrollSpace + "px";
+            body.style.paddingRight = scrollSpace + "px";
         }
     } else {
         body.classList.remove("locked");
-        body.paddingRight = '';
+        body.style.paddingRight = '';
 
         if (body.getAttribute("style") === "") {
             body.removeAttribute("style");

@@ -515,44 +515,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.addEventListener('click', function (e) {
-        if (!e.target.closest(".lang-switcher")) {
-            const langSwitcher = document.querySelector(".lang-switcher");
-            if (langSwitcher) {
-                langSwitcher.classList.remove("active");
+        const langSwitcher = document.querySelector(".lang-switcher");
+        const activeModalElements = document.querySelectorAll(".modal.active");
+        const popoverActiveContainers = document.querySelectorAll(".popover-container.active");
+        const activeTogglerElements = document.querySelectorAll(".toggler_global.active");
 
-                scrollNone();
-            }
+        if (langSwitcher && !e.target.closest(".lang-switcher") && langSwitcher.classList.contains("active")) {
+            langSwitcher.classList.remove("active");
+
+            scrollNone();
         }
-        if (!e.target.closest(".modal__wrapper") && !e.target.closest("[data-modal]")) {
-            const activeModalElements = document.querySelectorAll(".modal.active");
-            if (activeModalElements.length) {
-                activeModalElements.forEach((activeModalElement) => {
-                    activeModalElement.classList.remove("active");
-                });
+        if (activeModalElements.length && !e.target.closest(".modal__wrapper") && !e.target.closest("[data-modal]")) {
+            activeModalElements.forEach((activeModalElement) => {
+                activeModalElement.classList.remove("active");
+            });
 
-                scrollNone();
-            }
+            scrollNone();
         }
-        if (!e.target.closest(".popover") && !e.target.closest(".popover-trigger")) {
-            const popoverActiveContainers = document.querySelectorAll(".popover-container.active");
-            if (popoverActiveContainers.length) {
-                popoverActiveContainers.forEach((popoverActiveContainer) => {
-                    popoverActiveContainer.classList.remove("active");
-                });
+        if (popoverActiveContainers.length && !e.target.closest(".popover") && !e.target.closest(".popover-trigger")) {
+            popoverActiveContainers.forEach((popoverActiveContainer) => {
+                popoverActiveContainer.classList.remove("active");
+            });
 
-                scrollNone();
-            }
+            scrollNone();
         }
-        if (!e.target.closest(".toggler_global")) {
-            const activeTogglerElements = document.querySelectorAll(".toggler_global.active");
+        if (activeTogglerElements.length && !e.target.closest(".toggler_global")) {
+            activeTogglerElements.forEach((activeTogglerElement) => {
+                activeTogglerElement.classList.remove("active");
+            });
 
-            if (activeTogglerElements.length) {
-                activeTogglerElements.forEach((activeTogglerElement) => {
-                    activeTogglerElement.classList.remove("active");
-                });
-
-                scrollNone();
-            }
+            scrollNone();
         }
 
         if (e.target.closest(".toast-close")) {
