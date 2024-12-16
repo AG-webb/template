@@ -515,13 +515,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.addEventListener('click', function (e) {
-        const langSwitcher = document.querySelector(".lang-switcher");
+        const activeLangSwitcher = document.querySelector(".lang-switcher.active");
         const activeModalElements = document.querySelectorAll(".modal.active");
         const popoverActiveContainers = document.querySelectorAll(".popover-container.active");
         const activeTogglerElements = document.querySelectorAll(".toggler_global.active");
 
-        if (langSwitcher && !e.target.closest(".lang-switcher") && langSwitcher.classList.contains("active")) {
-            langSwitcher.classList.remove("active");
+        if (activeLangSwitcher && !e.target.closest(".lang-switcher")) {
+            activeLangSwitcher.classList.remove("active");
 
             scrollNone();
         }
