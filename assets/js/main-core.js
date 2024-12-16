@@ -396,14 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if(inputNumberElements.length) {
         inputNumberElements.forEach((inputNumberElement) => {
             inputNumberElement.addEventListener("input", function(e) {
-                let val = inputNumberElement.value;
-                let onlyNum = getOnlyNumbers(val);
-        
-                if (onlyNum) {
-                    inputNumberElement.value = onlyNum;
-                } else {
-                    inputNumberElement.value = "";
-                }
+                const value = getOnlyNumbers(inputNumberElement.value);
         
                 // Separator
                 if(inputNumberElement.getAttribute("data-input-separator") !== null) {
@@ -411,6 +404,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let valWithSeparator = numberWithSeparator(inputNumberElement.value, separator);
         
                     inputNumberElement.value = valWithSeparator;
+                    return;
                 }
         
                 // Phone Formatter
@@ -419,8 +413,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     
                     if(formattedPhoneNumber) {
                         inputNumberElement.value = formattedPhoneNumber;
+                        return;
                     }
                 }
+
+                inputNumberElement.value = value;
             });
         });
     }
