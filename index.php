@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/app.css">
         <link rel="stylesheet" href="assets/css/bottom.css">
     </head>
-    <body>
+    <body class="shift-element">
 
         <?php require("templates/header.php"); ?>
 
