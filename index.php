@@ -24,9 +24,12 @@
         <meta name="msapplication-TileImage" content="assets/img/fav/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
         <link rel="manifest" href="./manifest.json">
-        <!-- First Needed styles -->
         <link rel="preload" as="style" href="assets/css/top.css">
         <link rel="stylesheet" href="assets/css/top.css">
+        
+        <link rel="stylesheet" href="assets/css/libs.css.php">
+        <link rel="stylesheet" href="assets/css/app.css">
+        <link rel="stylesheet" href="assets/css/bottom.css">
     </head>
     <body>
 
@@ -37,11 +40,6 @@
         </main>
 
         <?php require("templates/footer.php"); ?>
-
-        <!-- Rest Styles -->
-        <link rel="stylesheet" href="assets/css/libs.css.php">
-        <link rel="stylesheet" href="assets/css/app.css">
-        <link rel="stylesheet" href="assets/css/bottom.css">
 
         <!-- JS -->
         <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
