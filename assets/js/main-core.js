@@ -77,6 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 },
             });
+
+            singleDatepickerInput.addEventListener("input", function() {
+                let formattedDateInput = formatDateInput(singleDatepickerInput.value);
+                
+                singleDatepickerInput.value = formattedDateInput;
+            });
         });
     }
 

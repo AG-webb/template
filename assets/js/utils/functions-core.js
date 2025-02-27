@@ -13,6 +13,19 @@ function formatPhoneNumber(number) {
     return null;
 }
 
+function formatDateInput(number) {
+    let match = number.replaceAll("/", "").match(/^(\d{0,2})(\d{0,2})(\d{0,4})/);
+    let returningValue = [];
+
+    match.map((value, index) => {
+        if(index > 0 && value) {
+            returningValue = [...returningValue, value];
+        }
+    });
+    
+    return returningValue.join("/");
+}
+
 function numberWithSeparator(value, separator = ",") {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 }
