@@ -351,6 +351,25 @@ function popoverSlideInit(target) {
     }
 }
 
+function getOffset(elem) {
+    let offsetLeft = 0;
+    let offsetTop = 0;
+
+    do {
+      if (!isNaN(elem.offsetLeft)) {
+        offsetLeft += elem.offsetLeft;
+      }
+    } while(elem = elem.offsetParent);
+
+    do {
+        if (!isNaN(elem.offsetTop)) {
+          offsetTop += elem.offsetTop;
+        }
+    } while(elem = elem.offsetParent);
+
+    return { left: offsetLeft, top: offsetTop };
+}
+
 function headerFixed() {
     const scrollTop = document.documentElement.scrollTop;
     const headerWrapperElement = document.querySelector(".header__wrapper");
